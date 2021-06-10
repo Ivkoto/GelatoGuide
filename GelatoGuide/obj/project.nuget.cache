@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qtg7XyYQ7SttGs1LfY6n1r5Yp01eIBYV0vyeRtLqvt+RT+6yHtXL0X0GCscxnGygVzAKoO3QwPdd7LPynhBeHg==",
+  "dgSpecHash": "fwsrhRiW85gGhI196bG8h+axHrOws0GgB+fn06dPY26xS7rXTz76l7Pstnhu3oBN8OFL1Bhcoh3sSUH2lBZP6w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ikost\\Downloads\\GelatoGuide\\GelatoGuide\\GelatoGuide.csproj",
+  "projectFilePath": "C:\\Users\\ikost\\source\\repos\\Ivkoto\\GelatoGuide\\GelatoGuide\\GelatoGuide.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ikost\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\5.0.7\\microsoft.aspnetcore.mvc.razor.extensions.5.0.7.nupkg.sha512",
     "C:\\Users\\ikost\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\5.0.7\\microsoft.aspnetcore.mvc.razor.runtimecompilation.5.0.7.nupkg.sha512",
