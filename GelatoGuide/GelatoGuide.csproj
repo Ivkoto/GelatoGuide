@@ -6,11 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Views\About\About.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Views\About\About.cshtml" />
+    <None Include="Views\Home\About.cshtml" />
     <None Include="wwwroot\beforeTheLogo.jpg" />
   </ItemGroup>
 
@@ -21,14 +17,6 @@
   <ItemGroup>
     <Folder Include="Pages\" />
     <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <UpToDateCheckInput Remove="Views\About\About.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <_ContentIncludedByDefault Remove="Views\About\About.cshtml" />
   </ItemGroup>
 
 </Project>
