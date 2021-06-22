@@ -8,6 +8,12 @@
   <ItemGroup>
     <None Include="Views\Home\About.cshtml" />
     <None Include="wwwroot\beforeTheLogo.jpg" />
+    <None Include="wwwroot\images\blackCat.jpg" />
+    <None Include="wwwroot\images\IMG_20210501_174843 %28Small%29.jpg" />
+    <None Include="wwwroot\images\IMG_20210501_174909 %28Small%29.jpg" />
+    <None Include="wwwroot\images\IMG_20210501_175208 %28Small%29.jpg" />
+    <None Include="wwwroot\images\IMG_20210501_180542 %28Small%29.jpg" />
+    <None Include="wwwroot\images\IMG_20210501_184454 %28Small%29.jpg" />
   </ItemGroup>
 
   <ItemGroup>
