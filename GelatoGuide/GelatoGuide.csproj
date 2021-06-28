@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Views\Home\About.cshtml" />
+    <!--<None Include="Views\Home\About.cshtml" />-->
     <None Include="wwwroot\beforeTheLogo.jpg" />
     <None Include="wwwroot\images\blackCat.jpg" />
     <None Include="wwwroot\images\IMG_20210501_174843 %28Small%29.jpg" />
