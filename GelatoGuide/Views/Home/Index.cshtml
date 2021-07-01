@@ -13,36 +13,68 @@
     </p>
 
     <!-- Gallery -->
-    <div class="row">
+    <div class="row" onmouseover="enlargeImg" onmouseout="resetImg">
         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
             <img src="/images/IMG_20210501_174843 (Small).jpg"
                  class="w-100 shadow-1-strong rounded mb-4"
-                 alt="" />
+                 alt=""
+                 onmouseover="enlargeImg(this)"
+                 onmouseout="resetImg(this)" />
 
             <img src="/images/IMG_20210501_175208 (Small).jpg"
                  class="w-100 shadow-1-strong rounded mb-4"
-                 alt="" />
+                 alt=""
+                 onmouseover="enlargeImg(this)"
+                 onmouseout="resetImg(this)" />
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
             <img src="/images/IMG_20210501_180542 (Small).jpg"
                  class="w-100 shadow-1-strong rounded mb-4"
-                 alt="" />
+                 alt=""
+                 onmouseover="enlargeImg(this)"
+                 onmouseout="resetImg(this)" />
 
             <img src="/images/IMG_20210501_184454 (Small).jpg"
                  class="w-100 shadow-1-strong rounded mb-4"
-                 alt="" />
+                 alt=""
+                 onmouseover="enlargeImg(this)"
+                 onmouseout="resetImg(this)" />
         </div>
 
         <div class="col-lg-4 mb-4 mb-lg-0">
             <img src="/images/IMG_20210501_174909 (Small).jpg"
                  class="w-100 mb-4"
-                 alt="" />
+                 alt=""
+                 onmouseover="enlargeImg(this)"
+                 onmouseout="resetImg(this)" />
 
             <img src=""
                  class="w-100 shadow-1-strong rounded mb-4"
-                 alt="" />
+                 alt=""
+                 onmouseover="enlargeImg(this)"
+                 onmouseout="resetImg(this)" />
         </div>
     </div>
     <!-- Gallery -->
 </div>
+
+<!-- script to set display property -->
+<script>
+    //Get the img object using its Id
+    //img = document.getElementById("img1");
+
+    // Function to increase image size
+    function enlargeImg(img) {
+        // Set image size to 1.5 times original
+        img.style.transform = "scale(1.5)";
+        // Animation effect 
+        img.style.transition = "transform 0.25s ease";
+    }
+    // Function to reset image size
+    function resetImg(img) {
+        // Set image size to original
+        img.style.transform = "scale(1)";
+        img.style.transition = "transform 0.25s ease";
+    }
+</script>
