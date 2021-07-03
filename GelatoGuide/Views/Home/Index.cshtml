@@ -1,13 +1,11 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@{ ViewData["Title"] = "Home Page"; }
 
 <div class="text-center">
     <h1 class="display-4" style="margin-bottom: 50px">
         COMING SOON! :)
     </h1>
     <img src="beforeTheLogo.jpg" width="325" height="400" />
-    
+
     <p style="margin: 30px 0px 50px 0px">
         About: Still nothing here. Waiting for fishi's research.
     </p>
@@ -60,15 +58,14 @@
 </div>
 
 <!-- script to set display property -->
-<script>
-    //Get the img object using its Id
+<script>//Get the img object using its Id
     //img = document.getElementById("img1");
 
     // Function to increase image size
     function enlargeImg(img) {
         // Set image size to 1.5 times original
         img.style.transform = "scale(1.5)";
-        // Animation effect 
+        // Animation effect
         img.style.transition = "transform 0.25s ease";
     }
     // Function to reset image size
@@ -76,5 +73,4 @@
         // Set image size to original
         img.style.transform = "scale(1)";
         img.style.transition = "transform 0.25s ease";
-    }
-</script>
+    }</script>

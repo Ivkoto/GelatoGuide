@@ -2,22 +2,21 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>aspnet-GelatoGuide-5ED51DC4-0F42-4DED-AC99-8561D1FE304B</UserSecretsId>
     <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="Views\Home\About.cshtml" />
-    <None Include="wwwroot\beforeTheLogo.jpg" />
-    <None Include="wwwroot\images\blackCat.jpg" />
-    <None Include="wwwroot\images\IMG_20210501_174843 %28Small%29.jpg" />
-    <None Include="wwwroot\images\IMG_20210501_174909 %28Small%29.jpg" />
-    <None Include="wwwroot\images\IMG_20210501_175208 %28Small%29.jpg" />
-    <None Include="wwwroot\images\IMG_20210501_180542 %28Small%29.jpg" />
-    <None Include="wwwroot\images\IMG_20210501_184454 %28Small%29.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="5.0.7" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
   <ItemGroup>
