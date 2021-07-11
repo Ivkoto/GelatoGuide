@@ -1,18 +1,19 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace GelatoGuide.Controllers
 {
     public class MapController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IConfiguration config;
 
-        public MapController(ILogger<HomeController> logger)
+        public MapController(IConfiguration config)
         {
-            _logger = logger;
+            this.config = config;
         }
 
-
         public IActionResult Map() => View();
+        
     }
 }

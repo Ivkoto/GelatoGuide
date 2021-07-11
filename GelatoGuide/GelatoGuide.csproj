@@ -26,6 +26,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\GelatoGuide.Data\GelatoGuide.Data.csproj" />
+    <ProjectReference Include="..\GelatoGuide.Identity\GelatoGuide.Identity.csproj" />
   </ItemGroup>
 
 </Project>

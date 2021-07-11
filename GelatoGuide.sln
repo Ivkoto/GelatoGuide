@@ -5,7 +5,11 @@ VisualStudioVersion = 16.0.31424.327
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GelatoGuide", "GelatoGuide\GelatoGuide.csproj", "{266A5F5F-7115-4B53-B48A-3B9FAE4A585B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GelatoGuide.Data", "GelatoGuide.Data\GelatoGuide.Data.csproj", "{CA9FC77F-DDBC-4286-8BA9-EC0015ADC1D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GelatoGuide.Data", "GelatoGuide.Data\GelatoGuide.Data.csproj", "{CA9FC77F-DDBC-4286-8BA9-EC0015ADC1D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GelatoGuide.Identity", "GelatoGuide.Identity\GelatoGuide.Identity.csproj", "{1B16CE0A-B93A-417F-9DB6-852F53D7A07C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GelatoGuide.Services", "GelatoGuide.Services\GelatoGuide.Services.csproj", "{99816670-8938-4ABC-A747-4E25837ED086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{CA9FC77F-DDBC-4286-8BA9-EC0015ADC1D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA9FC77F-DDBC-4286-8BA9-EC0015ADC1D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA9FC77F-DDBC-4286-8BA9-EC0015ADC1D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B16CE0A-B93A-417F-9DB6-852F53D7A07C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B16CE0A-B93A-417F-9DB6-852F53D7A07C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B16CE0A-B93A-417F-9DB6-852F53D7A07C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B16CE0A-B93A-417F-9DB6-852F53D7A07C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{99816670-8938-4ABC-A747-4E25837ED086}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99816670-8938-4ABC-A747-4E25837ED086}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99816670-8938-4ABC-A747-4E25837ED086}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99816670-8938-4ABC-A747-4E25837ED086}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
