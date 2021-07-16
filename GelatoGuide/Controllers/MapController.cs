@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace GelatoGuide.Controllers
 {
@@ -9,11 +8,10 @@ namespace GelatoGuide.Controllers
         private readonly IConfiguration config;
 
         public MapController(IConfiguration config)
-        {
-            this.config = config;
-        }
+            => this.config = config;
 
-        public IActionResult Map() => View();
-        
+
+        public IActionResult Map()
+            => View();
     }
 }
