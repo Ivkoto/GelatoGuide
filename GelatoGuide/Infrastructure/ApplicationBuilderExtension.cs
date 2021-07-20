@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Enumerations;
 using Microsoft.AspNetCore.Builder;
@@ -31,9 +32,21 @@ namespace GelatoGuide.Infrastructure
 
             data.Roles.AddRange(new []
             {
-                new IdentityRole(RolesEnum.Admin.ToString()),
-                new IdentityRole(RolesEnum.Regular.ToString()),
-                new IdentityRole(RolesEnum.Premium.ToString())
+                new IdentityRole()
+                {
+                    Id = new Guid().ToString(),
+                    Name = RolesEnum.Admin.ToString()
+                },
+                new IdentityRole()
+                {
+                    Id = new Guid().ToString(),
+                    Name = RolesEnum.Regular.ToString()
+                },
+                new IdentityRole()
+                {
+                    Id = new Guid().ToString(),
+                    Name = RolesEnum.Premium.ToString()
+                }
             });
 
             data.SaveChanges();
