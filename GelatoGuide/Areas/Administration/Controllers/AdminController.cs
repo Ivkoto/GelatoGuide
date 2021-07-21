@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using GelatoGuide.Areas.Administration.Models.Admin;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
@@ -8,6 +10,11 @@ namespace GelatoGuide.Areas.Administration.Controllers
         public IActionResult Index()
         {
             return this.View();
+        }
+
+        public IActionResult AllUsers()
+        {
+            return View(new AllUsersViewModel());
         }
     }
 }

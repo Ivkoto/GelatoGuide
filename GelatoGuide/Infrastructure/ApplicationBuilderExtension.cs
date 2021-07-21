@@ -20,6 +20,8 @@ namespace GelatoGuide.Infrastructure
 
             data.Database.Migrate();
 
+            SeedRoles(data);
+
             return app;
         }
 
@@ -32,19 +34,22 @@ namespace GelatoGuide.Infrastructure
 
             data.Roles.AddRange(new []
             {
+                //seed Admin role
                 new IdentityRole()
                 {
-                    Id = new Guid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     Name = RolesEnum.Admin.ToString()
                 },
+                //seed Regular user role
                 new IdentityRole()
                 {
-                    Id = new Guid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     Name = RolesEnum.Regular.ToString()
                 },
+                //seed premium user Role
                 new IdentityRole()
                 {
-                    Id = new Guid().ToString(),
+                    Id = Guid.NewGuid().ToString(),
                     Name = RolesEnum.Premium.ToString()
                 }
             });
