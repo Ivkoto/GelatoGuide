@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Tasks;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Enumerations;
 using Microsoft.AspNetCore.Builder;
@@ -11,6 +12,7 @@ namespace GelatoGuide.Infrastructure
 {
     public static class ApplicationBuilderExtension
     {
+        
         public static IApplicationBuilder PrepareDatabase(
             this IApplicationBuilder app)
         {
