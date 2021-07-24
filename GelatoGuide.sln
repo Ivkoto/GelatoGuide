@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GelatoGuide.Data", "GelatoG
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GelatoGuide.Identity", "GelatoGuide.Identity\GelatoGuide.Identity.csproj", "{1B16CE0A-B93A-417F-9DB6-852F53D7A07C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GelatoGuide.Services", "GelatoGuide.Services\GelatoGuide.Services.csproj", "{99816670-8938-4ABC-A747-4E25837ED086}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GelatoGuide.Services", "GelatoGuide.Services\GelatoGuide.Services.csproj", "{99816670-8938-4ABC-A747-4E25837ED086}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

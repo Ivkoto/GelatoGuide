@@ -1,4 +1,7 @@
+using System;
 using System.Reflection.Metadata;
+using GelatoGuide.Areas.Administration.Models.Admin;
+using GelatoGuide.Areas.Administration.Services.Users;
 using GelatoGuide.Data;
 using GelatoGuide.Infrastructure;
 using Microsoft.AspNetCore.Builder;
@@ -25,9 +28,10 @@ namespace GelatoGuide
                     => options
                         .UseSqlServer(Configuration
                         .GetConnectionString("DefaultConnection")));
-
+            
             services
                 .AddDatabaseDeveloperPageExceptionFilter();
+            
 
             services
                 .AddDefaultIdentity<IdentityUser>(options 
@@ -37,9 +41,14 @@ namespace GelatoGuide
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                 })
+                .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<GelatoGuideDbContext>();
 
-            services.AddControllersWithViews();
+            services
+                .AddControllersWithViews();
+
+            services
+                .AddTransient<IUserService, UserService>();
         }
 
         
@@ -71,9 +80,14 @@ namespace GelatoGuide
                         pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
 
                     endpoints.MapControllerRoute(
+                        name: "roleRout",
+                        pattern: "{area:exists}/{controller=Role}/{action=Index}/{id?}");
+
+
+                    endpoints.MapControllerRoute(
                         name: "default",
                         pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                    
 
                     //remove if app didn't work for some point
                     endpoints.MapDefaultControllerRoute();

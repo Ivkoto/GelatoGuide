@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Identity;
 
 namespace GelatoGuide.Areas.Administration.Models.Admin
 {
-    public class AllUsersViewModel
+    public class AllUsersViewModel : IdentityUser
     {
         [Display(Name = "User Name")]
         public string Username { get; set; }

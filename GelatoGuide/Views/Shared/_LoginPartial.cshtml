@@ -10,10 +10,12 @@
             //ToDO make it working
             if (User.IsInRole("Admin"))
             {
-                <li class="nav-item">
-                    <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Admin" asp-action="Index">Admin</a>
-                </li>
+                
             }
+            <li class="nav-item">
+                <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Admin" asp-action="Index">Admin</a>
+            </li>
+
             <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name</a>
         </li>

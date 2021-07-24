@@ -1,7 +1,8 @@
-﻿@model AllUsersViewModel
+﻿ @model List<AllUsersViewModel>
 
 @{
     ViewData["Title"] = "All Users";
+    var counter = 1;
 }
 
 <h3 style="text-align: center">@ViewData["Title"]</h3>
@@ -16,11 +17,16 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark96</td>
-            <td>mark@gmail.com</td>
-            <td>+359885762835</td>
-        </tr>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <th scope="row">@counter</th>
+                <td>@user.Username</td>
+                <td>@user.Email</td>
+                <td>@user.PhoneNumber</td>
+            </tr>
+
+            counter++;
+        }
     </tbody>
 </table>
