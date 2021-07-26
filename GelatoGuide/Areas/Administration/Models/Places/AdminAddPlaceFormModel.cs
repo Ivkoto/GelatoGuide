@@ -5,7 +5,7 @@ using static GelatoGuide.Data.DataConstants;
 
 namespace GelatoGuide.Areas.Administration.Models.Places
 {
-    public class AddPlaceFormModel
+    public class AdminAddPlaceFormModel
     {
         [Required]
         [StringLength(PlaceNameMaxLength, MinimumLength = PlaceNameMinLength, 

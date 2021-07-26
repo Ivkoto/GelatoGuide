@@ -1,10 +1,10 @@
 using System;
 using System.Reflection.Metadata;
 using GelatoGuide.Areas.Administration.Models.Admin;
-using GelatoGuide.Areas.Administration.Services.Places;
 using GelatoGuide.Areas.Administration.Services.Users;
 using GelatoGuide.Data;
 using GelatoGuide.Infrastructure;
+using GelatoGuide.Services.Places;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;

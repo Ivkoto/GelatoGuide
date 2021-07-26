@@ -1,6 +1,6 @@
 ﻿namespace GelatoGuide.Areas.Administration.Models.Places
 {
-    public class ViewPlaceFormModel
+    public class AdminViewPlaceFormModel
     {
         public string Id { get; set; }
         public string Name { get; set; }
