@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace GelatoGuide.Areas.Administration.Models.Admin
 {
-    public class AllUsersViewModel : IdentityUser
+    public class ReadUsersViewModel : IdentityUser
     {
         [Display(Name = "User Name")]
         public string Username { get; set; }

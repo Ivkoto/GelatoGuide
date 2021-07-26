@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using GelatoGuide.Areas.Administration.Models.Admin;
 
-namespace GelatoGuide.Areas.Administration.Services.Users
+namespace GelatoGuide.Services.Users
 {
     public interface IUserService
     {
-        IEnumerable<AllUsersViewModel> GetAllUser();
+        IEnumerable<ReadUsersViewModel> ReadAllUser();
     }
 }

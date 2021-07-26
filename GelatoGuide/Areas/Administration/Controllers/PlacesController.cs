@@ -1,5 +1,5 @@
 ﻿using GelatoGuide.Areas.Administration.Models.Places;
-using GelatoGuide.Areas.Administration.Services.Places;
+using GelatoGuide.Services.Places;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Areas.Administration.Controllers
@@ -14,7 +14,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult All()
         {
-            var places = this.placeService.GetAllPlaces();
+            var places = this.placeService.ReadAllPlaces();
 
             return View(places);
         }
@@ -22,7 +22,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         public IActionResult Add() => View();
 
         [HttpPost]
-        public IActionResult Add(AddPlaceFormModel place)
+        public IActionResult Add(CreatePlaceFormModel place)
         {
             if (!ModelState.IsValid)
             {

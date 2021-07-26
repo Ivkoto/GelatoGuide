@@ -1,12 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GelatoGuide.Services.Places;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Controllers
 {
     public class PlacesController : Controller
     {
+        private readonly IPlaceService placeService;
+
+        public PlacesController(IPlaceService placeService)
+        {
+            this.placeService = placeService;
+        }
+
         public IActionResult All()
         {
-            return View();
+            var places = placeService.GetAllPlaces();
+
+            return View(places);
         }
     }
 }

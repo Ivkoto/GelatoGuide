@@ -1,25 +1,25 @@
-﻿using GelatoGuide.Areas.Administration.Models.Admin;
+﻿using System.Collections.Generic;
+using GelatoGuide.Areas.Administration.Models.Admin;
 using GelatoGuide.Data;
-using System.Collections.Generic;
 
-namespace GelatoGuide.Areas.Administration.Services.Users
+namespace GelatoGuide.Services.Users
 {
     public class UserService : IUserService
     {
         private readonly GelatoGuideDbContext data;
-        private readonly List<AllUsersViewModel> users;
+        private readonly List<ReadUsersViewModel> users;
 
         public UserService(GelatoGuideDbContext data)
         {
             this.data = data;
-            this.users = new List<AllUsersViewModel>();
+            this.users = new List<ReadUsersViewModel>();
         }
 
-        public IEnumerable<AllUsersViewModel> GetAllUser()
+        public IEnumerable<ReadUsersViewModel> ReadAllUser()
         {
             foreach (var user in this.data.Users)
             {
-                this.users.Add(new AllUsersViewModel()
+                this.users.Add(new ReadUsersViewModel()
                 {
                     Username = user.UserName,
                     Email = user.Email,

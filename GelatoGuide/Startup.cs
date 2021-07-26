@@ -1,10 +1,10 @@
 using System;
 using System.Reflection.Metadata;
 using GelatoGuide.Areas.Administration.Models.Admin;
-using GelatoGuide.Areas.Administration.Services.Places;
-using GelatoGuide.Areas.Administration.Services.Users;
 using GelatoGuide.Data;
 using GelatoGuide.Infrastructure;
+using GelatoGuide.Services.Places;
+using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -80,9 +80,9 @@ namespace GelatoGuide
                 endpoints =>
                 {
                     endpoints.MapControllerRoute(name: "areaRout",
-                        pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
-                    endpoints.MapControllerRoute(name: "rolesRout",
-                        pattern: "{area:exists}/{controller=Roles}/{action=Index}/{id?}");
+                        pattern: "{area:exists}/{controller=Users}/{action=Index}/{id?}");
+                    //endpoints.MapControllerRoute(name: "rolesRout",
+                    //    pattern: "{area:exists}/{controller=Roles}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
                     //remove if app didn't work for some point

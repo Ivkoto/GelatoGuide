@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using GelatoGuide.Areas.Administration.Models.Admin;
-using GelatoGuide.Areas.Administration.Services.Users;
+using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    public class AdminController : Controller
+    public class UsersController : Controller
     {
         private readonly IUserService userService;
 
-        public AdminController(IUserService userService)
+        public UsersController(IUserService userService)
         {
             this.userService = userService;
         }
@@ -22,7 +22,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult AllUsers()
         {
-            var users = (List<AllUsersViewModel>)userService.GetAllUser();
+            var users = (List<ReadUsersViewModel>)userService.ReadAllUser();
 
             return View(users);
         }
