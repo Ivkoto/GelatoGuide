@@ -5,6 +5,6 @@ namespace GelatoGuide.Areas.Administration.Services.Users
 {
     public interface IUserService
     {
-        IEnumerable<AdminAllUsersViewModel> GetAllUser();
+        IEnumerable<AllUsersViewModel> GetAllUser();
     }
 }

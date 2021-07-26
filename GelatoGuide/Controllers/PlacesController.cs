@@ -4,9 +4,9 @@ namespace GelatoGuide.Controllers
 {
     public class PlacesController : Controller
     {
-        //public IActionResult All()
-        //{
-        //    return View();
-        //}
+        public IActionResult All()
+        {
+            return View();
+        }
     }
 }

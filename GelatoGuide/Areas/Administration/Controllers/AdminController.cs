@@ -22,7 +22,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult AllUsers()
         {
-            var users = (List<AdminAllUsersViewModel>)userService.GetAllUser();
+            var users = (List<AllUsersViewModel>)userService.GetAllUser();
 
             return View(users);
         }

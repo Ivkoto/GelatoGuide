@@ -7,19 +7,19 @@ namespace GelatoGuide.Areas.Administration.Services.Users
     public class UserService : IUserService
     {
         private readonly GelatoGuideDbContext data;
-        private readonly List<AdminAllUsersViewModel> users;
+        private readonly List<AllUsersViewModel> users;
 
         public UserService(GelatoGuideDbContext data)
         {
             this.data = data;
-            this.users = new List<AdminAllUsersViewModel>();
+            this.users = new List<AllUsersViewModel>();
         }
 
-        public IEnumerable<AdminAllUsersViewModel> GetAllUser()
+        public IEnumerable<AllUsersViewModel> GetAllUser()
         {
             foreach (var user in this.data.Users)
             {
-                this.users.Add(new AdminAllUsersViewModel()
+                this.users.Add(new AllUsersViewModel()
                 {
                     Username = user.UserName,
                     Email = user.Email,
