@@ -4,14 +4,16 @@ using GelatoGuide.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace GelatoGuide.Data.Migrations
 {
     [DbContext(typeof(GelatoGuideDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210724211853_PlacesImagesTables")]
+    partial class PlacesImagesTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,16 +49,13 @@ namespace GelatoGuide.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FacebookUrl")
+                    b.Property<string>("FacebookLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FoodpandaUrl")
+                    b.Property<string>("FoodpandaLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("GlovoUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InstagramUrl")
+                    b.Property<string>("InstagramLink")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LogoUrl")
@@ -74,10 +73,10 @@ namespace GelatoGuide.Data.Migrations
                     b.Property<int>("SinceYear")
                         .HasColumnType("int");
 
-                    b.Property<string>("TakeawayUrl")
+                    b.Property<string>("TakeawayLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TwitterUrl")
+                    b.Property<string>("Twitter")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WebsiteLink")

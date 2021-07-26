@@ -6,18 +6,17 @@
 
 
     @if (SignInManager.IsSignedIn(User))
+    {
+        //ToDO make it working
+        if (User.IsInRole("Admin"))
         {
-            //ToDO make it working
-            if (User.IsInRole("Admin"))
-            {
                 
-            }
-            <li class="nav-item">
-                <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Admin" asp-action="Index">Admin</a>
-            </li>
-
-            <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name</a>
+        }
+        <li class="nav-item">
+            <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Admin" asp-action="Index">Admin</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">

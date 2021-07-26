@@ -1,6 +1,7 @@
 using System;
 using System.Reflection.Metadata;
 using GelatoGuide.Areas.Administration.Models.Admin;
+using GelatoGuide.Areas.Administration.Services.Places;
 using GelatoGuide.Areas.Administration.Services.Users;
 using GelatoGuide.Data;
 using GelatoGuide.Infrastructure;
@@ -17,7 +18,7 @@ namespace GelatoGuide
     public class Startup
     {
         public Startup(IConfiguration configuration)
-            => Configuration = configuration;
+            => this.Configuration = configuration;
 
         public IConfiguration Configuration { get; }
 
@@ -26,7 +27,7 @@ namespace GelatoGuide
             services
                 .AddDbContext<GelatoGuideDbContext>(options
                     => options
-                        .UseSqlServer(Configuration
+                        .UseSqlServer(this.Configuration
                         .GetConnectionString("DefaultConnection")));
             
             services
@@ -40,6 +41,7 @@ namespace GelatoGuide
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
+                    options.Password.RequireDigit = false;
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<GelatoGuideDbContext>();
@@ -48,7 +50,8 @@ namespace GelatoGuide
                 .AddControllersWithViews();
 
             services
-                .AddTransient<IUserService, UserService>();
+                .AddTransient<IUserService, UserService>()
+                .AddTransient<IPlaceService, PlaceService>();
         }
 
         
@@ -80,8 +83,8 @@ namespace GelatoGuide
                         pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
 
                     endpoints.MapControllerRoute(
-                        name: "roleRout",
-                        pattern: "{area:exists}/{controller=Role}/{action=Index}/{id?}");
+                        name: "rolesRout",
+                        pattern: "{area:exists}/{controller=Roles}/{action=Index}/{id?}");
 
 
                     endpoints.MapControllerRoute(

@@ -6,10 +6,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace GelatoGuide.Areas.Administration.Controllers
 {
     [Area("Administration")]
-    public class RoleController : Controller
+    public class RolesController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        public RoleController(RoleManager<IdentityRole> roleMgr)
+        public RolesController(RoleManager<IdentityRole> roleMgr)
         {
             roleManager = roleMgr;
         }
