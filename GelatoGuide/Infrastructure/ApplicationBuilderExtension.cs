@@ -1,18 +1,17 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GelatoGuide.Data;
+﻿using GelatoGuide.Data;
 using GelatoGuide.Data.Enumerations;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
 
 namespace GelatoGuide.Infrastructure
 {
     public static class ApplicationBuilderExtension
     {
-        
+
         public static IApplicationBuilder PrepareDatabase(
             this IApplicationBuilder app)
         {
@@ -34,7 +33,7 @@ namespace GelatoGuide.Infrastructure
                 return;
             }
 
-            data.Roles.AddRange(new []
+            data.Roles.AddRange(new[]
             {
                 //seed Admin role
                 new IdentityRole()

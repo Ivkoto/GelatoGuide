@@ -9,15 +9,13 @@ namespace GelatoGuide.Areas.Administration.Controllers
     {
 
         private readonly IPlaceService placeService;
-
-        public PlacesController(IPlaceService placeService)
-        {
-            this.placeService = placeService;
-        }
+        public PlacesController(IPlaceService placeService) 
+            => this.placeService = placeService;
 
         public IActionResult All()
         {
             var places = this.placeService.GetAllPlaces();
+
             return View(places);
         }
 

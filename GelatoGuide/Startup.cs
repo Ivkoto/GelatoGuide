@@ -76,25 +76,17 @@ namespace GelatoGuide
                 .UseRouting()
                 .UseAuthentication()
                 .UseAuthorization()
-                .UseEndpoints(endpoints =>
+                .UseEndpoints(
+                endpoints =>
                 {
-                    endpoints.MapControllerRoute(
-                        name: "areaRout",
+                    endpoints.MapControllerRoute(name: "areaRout",
                         pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
-
-                    endpoints.MapControllerRoute(
-                        name: "rolesRout",
+                    endpoints.MapControllerRoute(name: "rolesRout",
                         pattern: "{area:exists}/{controller=Roles}/{action=Index}/{id?}");
-
-
-                    endpoints.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller=Home}/{action=Index}/{id?}");
-                    
+                    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
                     //remove if app didn't work for some point
                     endpoints.MapDefaultControllerRoute();
-
                     endpoints.MapRazorPages();
                 });
         }

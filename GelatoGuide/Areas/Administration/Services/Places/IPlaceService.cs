@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using GelatoGuide.Areas.Administration.Models.Places;
-using GelatoGuide.Data.Models;
+﻿using GelatoGuide.Areas.Administration.Models.Places;
+using System.Collections.Generic;
 
 namespace GelatoGuide.Areas.Administration.Services.Places
 {
