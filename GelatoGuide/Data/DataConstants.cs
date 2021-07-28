@@ -11,5 +11,15 @@
         public const int MinSinceYear = 1800;
 
         public const int MaxSinceYear = 2100;
+
+        public const int ArticleTitleMinLength = 2;
+
+        public const int ArticleSubTitleMinLength = 2;
+
+        public const int ArticleTextMinLength = 20;
+
+        public const int ArticlePostedByNameMinLenght = 2;
+
+        public const int ArticleSourceNameMinLength = 2;
     }
 }

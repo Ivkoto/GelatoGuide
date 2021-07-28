@@ -1,0 +1,35 @@
+﻿@model IEnumerable<AllArticlesViewModel>
+
+@{
+    ViewData["Title"] = "All Articles";
+}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div>
+                <h1 class="display-4">Блог статии</h1>
+                <p class="lead">Тук може да намерите най-новите блог статии, полезни съвети, места които да посетите,</p>
+                <a class="btn btn-success" asp-controller="Blog" asp-action="CreateArticle">Или да създадете нова статия</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@foreach (var article in Model)
+{
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-8 offset-2">
+                <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="text-dark">
+                    <h3>@article.Title</h3>
+                    <h4>@article.SubTitle</h4>
+                </a>
+                <i>Побликувано от <strong>@article.PostedByName</strong> на <strong>@article.PostedByDate.ToShortDateString()</strong></i>
+            </div>
+        </div>
+        <hr/>
+    </div>
+}

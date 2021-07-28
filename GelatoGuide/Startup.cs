@@ -3,6 +3,7 @@ using System.Reflection.Metadata;
 using GelatoGuide.Areas.Administration.Models.Admin;
 using GelatoGuide.Data;
 using GelatoGuide.Infrastructure;
+using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Builder;
@@ -51,7 +52,8 @@ namespace GelatoGuide
 
             services
                 .AddTransient<IUserService, UserService>()
-                .AddTransient<IPlaceService, PlaceService>();
+                .AddTransient<IPlaceService, PlaceService>()
+                .AddTransient<IBlogService, BlogService>();
         }
 
         

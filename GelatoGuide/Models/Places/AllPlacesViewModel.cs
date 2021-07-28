@@ -5,29 +5,30 @@ namespace GelatoGuide.Models.Places
 {
     public class AllPlacesViewModel
     {
-        public string Name { get; set; }
+        public string Id { get; init; }
+        public string Name { get; init; }
         
-        public string Description { get; set; }
+        public string Description { get; init; }
         
-        public string MainImageUrl { get; set; }
+        public string MainImageUrl { get; init; }
         
-        public int SinceYear { get; set; }
+        public int SinceYear { get; init; }
 
-        public string LogoUrl { get; set; }
+        public string LogoUrl { get; init; }
 
-        public string WebsiteLink { get; set; }
+        public string WebsiteLink { get; init; }
 
-        public string TakeawayUrl { get; set; }
+        public string TakeawayUrl { get; init; }
 
-        public string FoodpandaUrl { get; set; }
+        public string FoodpandaUrl { get; init; }
 
-        public string GlovoUrl { get; set; }
+        public string GlovoUrl { get; init; }
 
-        public string FacebookUrl { get; set; }
+        public string FacebookUrl { get; init; }
 
-        public string InstagramUrl { get; set; }
+        public string InstagramUrl { get; init; }
 
-        public string TwitterUrl { get; set; }
+        public string TwitterUrl { get; init; }
 
         public IEnumerable<Image> Images { get; init; }
     }

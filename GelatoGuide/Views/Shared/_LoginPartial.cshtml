@@ -2,15 +2,22 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+
+<ul class="navbar-nav flex-grow-1">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-center text-dark font-italic" style="" asp-area="" asp-controller="Blog" asp-action="All">Blog</a>
+        </li>
+    }
+</ul>
 <ul class="navbar-nav">
-
-
     @if (SignInManager.IsSignedIn(User))
     {
         //ToDO make it working
         if (User.IsInRole("Admin"))
         {
-                
+
         }
         <li class="nav-item">
             <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Users" asp-action="Index">Admin</a>
