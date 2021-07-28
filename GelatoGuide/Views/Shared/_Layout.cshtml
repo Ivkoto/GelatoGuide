@@ -22,10 +22,10 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Map">Map</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Map">Gelato Map</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Places" asp-action="All">Gelato places</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Places" asp-action="All">All places</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -41,7 +41,9 @@
 
     <footer class="border-top footer text-muted">
         <div class="container-fluid">
-            &copy; 2021 - GelatoGuide - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row justify-content-center col-12">
+                &copy; @DateTime.Now.Year - GelatoGuide - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
