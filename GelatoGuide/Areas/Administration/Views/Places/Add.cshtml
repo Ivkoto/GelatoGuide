@@ -35,7 +35,7 @@
             <div class="col-5">
                 <div class="form-group" style="margin-bottom: 7%">
                     <label asp-for="LogoUrl">Logo</label>
-                    <input asp-for="LogoUrl" class="form-control" placeholder="Place logo image here...">
+                    <input asp-for="LogoUrl" class="form-control" placeholder="Place logo image URL here...">
                 </div>
             </div>
             <div class="col-5">
@@ -46,9 +46,28 @@
                 </div>
             </div>
             <div class="col-10">
-                <div class="form-group" style="margin-bottom: 7%">
+                <div class="form-group">
                     <label asp-for="WebsiteUrl">Website</label>
                     <input asp-for="WebsiteUrl" class="form-control" placeholder="Place main website here...">
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="Country">Country</label>
+                    <input asp-for="Country" class="form-control" style="background-color: #fffdf2" placeholder="">
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="City">CIty</label>
+                    <input asp-for="City" class="form-control" style="background-color: #fffdf2" placeholder="">
+                    <span asp-validation-for="City" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="col-10" style="margin-bottom: 7%">
+                <div class="form-group">
+                    <label asp-for="Location">Location</label>
+                    <input asp-for="Location" class="form-control" placeholder="Input Latitude and Longitude here...">
                 </div>
             </div>
             <div class="col-5">

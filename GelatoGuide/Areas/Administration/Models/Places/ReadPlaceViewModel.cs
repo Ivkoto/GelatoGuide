@@ -6,5 +6,7 @@
         public string Name { get; set; }
         public int SinceYear { get; set; }
         public string WebsiteLink { get; set; }
+        public string Country { get; set; }
+        public string City { get; set; }
     }
 }

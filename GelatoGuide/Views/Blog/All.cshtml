@@ -4,23 +4,36 @@
     ViewData["Title"] = "All Articles";
 }
 
+<style>
+    .jumbotron {
+        background-image: url("https://res.cloudinary.com/dmflbhinu/image/upload/o_80/v1627593182/GelatoGuide/Rafi_gelato_spuyt1.jpg");
+        background-size: cover;
+    }
+    .lead {
+        text-shadow: 2px 2px 4px white;
+    }
+    .display-4 {
+        text-shadow: 2px 2px 4px white;
+    }
+</style>
+
 <div class="jumbotron jumbotron-fluid">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div>
                 <h1 class="display-4">Блог статии</h1>
-                <p class="lead">Тук може да намерите най-новите блог статии, полезни съвети, места които да посетите,</p>
-                <a class="btn btn-success" asp-controller="Blog" asp-action="CreateArticle">Или да създадете нова статия</a>
+                <p class="lead font-weight-normal">Тук може да намерите най-новите блог статии, полезни съвети, места които да посетите,</p>
+                <a class="btn text-dark btn-outline-dark btn-sm font-weight-bold" asp-controller="Blog" asp-action="CreateArticle">Или да създадете нова статия</a>
             </div>
         </div>
     </div>
 </div>
 
 
+<div class="container col-sm-8 col-md-7 col-lg-6 col-xl-5">
+    @foreach (var article in Model)
+    {
 
-@foreach (var article in Model)
-{
-    <div class="container col-sm-8 col-md-7 col-lg-6 col-xl-5">
         <div class="row justify-content-center">
             <div class="col-12">
                 <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="text-dark">
@@ -30,9 +43,8 @@
                 <i>Побликувано от <strong>@article.PostedByName</strong> на <strong>@article.PostedByDate.ToShortDateString()</strong></i>
             </div>
             <div class="col-12">
-                <hr/>
+                <hr />
             </div>
         </div>
-        
-    </div>
-}
+    }
+</div>

@@ -10,6 +10,10 @@ namespace GelatoGuide.Services.Places
 
         IEnumerable<ReadPlaceViewModel> ReadAllPlaces();
 
-        IEnumerable<AllPlacesViewModel> GetAllPlaces();
+        IEnumerable<AllPlacesViewModel> GetAllPlaces(SearchPlaceViewModel searchModel);
+
+        IEnumerable<string> GetAllCities();
+
+        IEnumerable<string> GeatAllCountries();
     }
 }

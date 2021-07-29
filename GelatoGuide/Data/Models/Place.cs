@@ -29,6 +29,14 @@ namespace GelatoGuide.Data.Models
 
         public string WebsiteLink { get; set; }
 
+        [Required]
+        public string Country { get; set; }
+        
+        [Required]
+        public string City { get; set; }
+
+        public string Location { get; set; }
+
         public string TakeawayUrl { get; set; }
 
         public string FoodpandaUrl { get; set; }

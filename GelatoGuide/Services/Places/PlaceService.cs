@@ -31,7 +31,10 @@ namespace GelatoGuide.Services.Places
                 FacebookUrl = place.FacebookUrl,
                 InstagramUrl = place.InstagramUrl,
                 TwitterUrl = place.TwitterUrl,
-                WebsiteLink = place.WebsiteUrl
+                WebsiteLink = place.WebsiteUrl,
+                Country = place.Country,
+                City = place.City,
+                Location = place.Location
             });
 
             this.data.SaveChanges();
@@ -47,16 +50,47 @@ namespace GelatoGuide.Services.Places
                     Id = place.Id,
                     Name = place.Name,
                     WebsiteLink = place.WebsiteLink,
-                    SinceYear = place.SinceYear
+                    SinceYear = place.SinceYear,
+                    Country = place.Country,
+                    City = place.City
                 })
                 .ToList();
 
 
-        public IEnumerable<AllPlacesViewModel> GetAllPlaces()
-            =>
-            this.data
-                .Places
-                .OrderBy(p => p.Name)
+        public IEnumerable<AllPlacesViewModel> GetAllPlaces(SearchPlaceViewModel searchModel)
+        {
+            var placesQuery = this.data.Places.AsQueryable();
+
+            //filter query if any serach text have been imputed
+            if (!string.IsNullOrWhiteSpace(searchModel.SearchTerm))
+            {
+                placesQuery = placesQuery.Where(p =>
+                    p.Name.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
+                    p.Description.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
+                    p.SinceYear.ToString().Contains(searchModel.SearchTerm.ToLower())||
+                    p.City.ToLower().Contains(searchModel.SearchTerm.ToLower())||
+                    p.Country.ToLower().Contains(searchModel.SearchTerm.ToLower()));
+            }
+
+            //filter query if any countries have been selected
+            if (!string.IsNullOrWhiteSpace(searchModel.Country))
+            {
+                placesQuery = placesQuery.Where(p => 
+                    p.Country == searchModel.Country);
+            }
+
+            //filter query if any cities have been imputed
+            if (!string.IsNullOrWhiteSpace(searchModel.City))
+            {
+                placesQuery = placesQuery.Where(p => 
+                    p.City.ToLower() == searchModel.City.ToLower());
+            }
+
+            
+            var places = placesQuery
+                //.Skip((searchModel.CurrentPage - 1) * SearchPlaceViewModel.PlacesPerPage)
+                //.Take(SearchPlaceViewModel.PlacesPerPage)
+                .OrderByDescending(p => p)
                 .Select(p => new AllPlacesViewModel()
                 {
                     Name = p.Name,
@@ -76,8 +110,28 @@ namespace GelatoGuide.Services.Places
                     TwitterUrl = p.TwitterUrl,
                     GlovoUrl = p.GlovoUrl,
                     FoodpandaUrl = p.FoodpandaUrl,
-                    TakeawayUrl = p.TakeawayUrl
+                    TakeawayUrl = p.TakeawayUrl,
+                    Country = p.Country,
+                    City = p.City,
+                    Location = p.Location
                 })
+                .ToList();
+
+            return places;
+        }
+
+        public IEnumerable<string> GetAllCities()
+            => this.data.Places
+                .Select(p => p.City)
+                .Distinct()
+                .OrderBy(c => c)
+                .ToList();
+
+        public IEnumerable<string> GeatAllCountries()
+            => this.data.Places
+                .Select(p => p.Country)
+                .Distinct()
+                .OrderBy(c => c)
                 .ToList();
     }
 }

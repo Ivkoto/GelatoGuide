@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using GelatoGuide.Data.Models;
 using static GelatoGuide.Data.DataConstants;
 
 namespace GelatoGuide.Areas.Administration.Models.Places
 {
-    public class CreatePlaceFormModel
+    public class CreatePlaceFormModel : IValidatableObject
     {
         [Required]
         [StringLength(PlaceNameMaxLength, MinimumLength = PlaceNameMinLength, 
@@ -29,6 +30,14 @@ namespace GelatoGuide.Areas.Administration.Models.Places
         [Url]
         public string WebsiteUrl { get; init; }
 
+        [Required]
+        public string Country { get; set; }
+        
+        [Required]
+        public string City { get; set; }
+
+        public string Location { get; set; }
+
         [Url]
         public string TakeawayUrl { get; init; }
 
@@ -49,5 +58,20 @@ namespace GelatoGuide.Areas.Administration.Models.Places
 
         [Url]
         public IEnumerable<Image> Images { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+
+            if (this.Name != null && !this.Name.Any(char.IsLetter))
+            {
+                yield return 
+                    new ValidationResult
+                    ($@"{nameof(this.Name)} must contains at least 2 letters.",
+                        new []{"Name"}
+                    );
+
+                //ToDo more validations
+            }
+        }
     }
 }

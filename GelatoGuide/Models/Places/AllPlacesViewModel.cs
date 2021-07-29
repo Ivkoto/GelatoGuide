@@ -18,6 +18,12 @@ namespace GelatoGuide.Models.Places
 
         public string WebsiteLink { get; init; }
 
+        public string Country { get; set; }
+        
+        public string City { get; set; }
+
+        public string Location { get; set; }
+
         public string TakeawayUrl { get; init; }
 
         public string FoodpandaUrl { get; init; }
