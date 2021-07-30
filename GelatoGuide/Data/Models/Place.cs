@@ -50,5 +50,7 @@ namespace GelatoGuide.Data.Models
         public string TwitterUrl { get; set; }
 
         public IEnumerable<Image> Images { get; init; } = new List<Image>();
+
+        public DateTime DateCreated { get; set; }
     }
 }

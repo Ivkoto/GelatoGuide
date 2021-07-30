@@ -1,4 +1,6 @@
-﻿namespace GelatoGuide.Areas.Administration.Models.Places
+﻿using System;
+
+namespace GelatoGuide.Areas.Administration.Models.Places
 {
     public class ReadPlaceViewModel
     {
@@ -8,5 +10,7 @@
         public string WebsiteLink { get; set; }
         public string Country { get; set; }
         public string City { get; set; }
+
+        public DateTime DateCreated { get; set; }
     }
 }

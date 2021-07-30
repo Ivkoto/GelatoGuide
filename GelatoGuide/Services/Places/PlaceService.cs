@@ -1,4 +1,5 @@
-﻿using GelatoGuide.Areas.Administration.Models.Places;
+﻿using System;
+using GelatoGuide.Areas.Administration.Models.Places;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
 using GelatoGuide.Models.Places;
@@ -34,7 +35,8 @@ namespace GelatoGuide.Services.Places
                 WebsiteLink = place.WebsiteUrl,
                 Country = place.Country,
                 City = place.City,
-                Location = place.Location
+                Location = place.Location,
+                DateCreated = DateTime.Now
             });
 
             this.data.SaveChanges();
@@ -52,7 +54,8 @@ namespace GelatoGuide.Services.Places
                     WebsiteLink = place.WebsiteLink,
                     SinceYear = place.SinceYear,
                     Country = place.Country,
-                    City = place.City
+                    City = place.City,
+                    DateCreated = place.DateCreated
                 })
                 .ToList();
 
