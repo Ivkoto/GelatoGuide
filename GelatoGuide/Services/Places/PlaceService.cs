@@ -72,14 +72,14 @@ namespace GelatoGuide.Services.Places
                     p.Country.ToLower().Contains(searchModel.SearchTerm.ToLower()));
             }
 
-            //filter query if any countries have been selected
+            //filter query if country have been selected
             if (!string.IsNullOrWhiteSpace(searchModel.Country))
             {
                 placesQuery = placesQuery.Where(p => 
                     p.Country == searchModel.Country);
             }
 
-            //filter query if any cities have been imputed
+            //filter query if city have been imputed
             if (!string.IsNullOrWhiteSpace(searchModel.City))
             {
                 placesQuery = placesQuery.Where(p => 

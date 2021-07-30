@@ -13,11 +13,20 @@ namespace GelatoGuide.Controllers
             this.blogService = blogService;
         }
 
-        public IActionResult All()
+        public IActionResult All([FromQuery] SearchArticlesViewModel searchModel)
         {
-            var articles = blogService.GetAllArticles();
-
-            return View(articles);
+            var search = new SearchArticlesViewModel()
+            {
+                Articles = blogService.GetAllArticles(searchModel),
+                Names = blogService.GetAllPostedByNames(),
+                Years = blogService.GetAllYears(),
+                Months = blogService.GetAllMonths(),
+                PostedByName = searchModel.PostedByName,
+                PostedByYear = searchModel.PostedByYear,
+                PostedByMonth = searchModel.PostedByMonth
+            };
+            
+            return View(search);
         }
 
         public IActionResult CreateArticle() => View();

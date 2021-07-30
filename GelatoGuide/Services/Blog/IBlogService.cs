@@ -7,6 +7,12 @@ namespace GelatoGuide.Services.Blog
     {
         void CreateArticle(CreateArticleFormModel article);
 
-        IEnumerable<AllArticlesViewModel> GetAllArticles();
+        IEnumerable<AllArticlesViewModel> GetAllArticles(SearchArticlesViewModel searchModel);
+
+        IEnumerable<string> GetAllPostedByNames();
+
+        IEnumerable<string> GetAllYears();
+
+        IEnumerable<string> GetAllMonths();
     }
 }
