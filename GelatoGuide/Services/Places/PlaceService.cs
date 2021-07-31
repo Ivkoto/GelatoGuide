@@ -89,10 +89,15 @@ namespace GelatoGuide.Services.Places
                     p.City.ToLower() == searchModel.City.ToLower());
             }
 
-            
+            //if someone send query with value lower than 1
+            if (searchModel.CurrentPage < 1)
+            {
+                searchModel.CurrentPage = 1;
+            }
+
             var places = placesQuery
-                //.Skip((searchModel.CurrentPage - 1) * SearchPlaceViewModel.PlacesPerPage)
-                //.Take(SearchPlaceViewModel.PlacesPerPage)
+                .Skip((searchModel.CurrentPage - 1) * SearchPlaceViewModel.PlacesPerPage)
+                .Take(SearchPlaceViewModel.PlacesPerPage)
                 .OrderByDescending(p => p)
                 .Select(p => new AllPlacesViewModel()
                 {

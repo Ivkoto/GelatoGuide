@@ -22,7 +22,8 @@ namespace GelatoGuide.Controllers
                 Contries = placeService.GeatAllCountries(),
                 SearchTerm = searchModel.SearchTerm,
                 Country = searchModel.Country,
-                City = searchModel.City
+                City = searchModel.City,
+                CurrentPage = searchModel.CurrentPage++
             };
             
             return View(search);

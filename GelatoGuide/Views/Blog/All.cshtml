@@ -6,19 +6,26 @@
 
 
 <div class="jumbotron jumbotron-fluid" 
-     style="background-image: url(https://res.cloudinary.com/dmflbhinu/image/upload/o_80/v1627593182/GelatoGuide/Rafi_gelato_spuyt1.jpg);
-            background-size: cover">
+     style="background-image: url(https://res.cloudinary.com/dmflbhinu/image/upload/v1627593182/GelatoGuide/Rafi_gelato_spuyt1.jpg);
+            background-size: cover; 
+            opacity: 0.85">
     <div class="container">
         <div class="row justify-content-center text-center">
             <div>
-                <h1 class="display-3" style="text-shadow: 2px 2px 4px white">Блог статии</h1>
-                <p class="lead font-weight-normal" style="text-shadow: 2px 2px 4px white">Тук може да намерите най-новите блог статии, полезни съвети, места които да посетите,</p>
-                <a class="btn text-dark btn-outline-dark btn-sm font-weight-bold" asp-controller="Blog" asp-action="CreateArticle">Или да създадете нова статия</a>
+                <h1 class="display-3" style="text-shadow: 2px 2px 4px white; color: black">Блог статии</h1>
+                <p class="lead font-weight-normal" 
+                   style="text-shadow: 2px 2px 4px white; 
+                          color: black">Тук може да намерите най-новите блог статии, полезни съвети, места които да посетите
+                </p>
+                <a class="btn text-dark btn-outline-light btn-sm font-weight-bold" 
+                   style="background-color: white" 
+                   asp-controller="Blog" 
+                   asp-action="CreateArticle">Или да създадете нова статия
+                </a>
             </div>
         </div>
     </div>
 </div>
-
 <div class="row">
     <div class="col-6 offset-3">
         <div class="row col-12 justify-content-center">

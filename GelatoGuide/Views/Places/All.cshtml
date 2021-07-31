@@ -4,9 +4,14 @@
     ViewData["Title"] = "All places";
 }
 
-<div class="row">
+<div class="row text-center mt-5">
+    <div class="col">
+        <h2>Find a Gelateria</h2>
+    </div>
+</div>
+<div class="row mt-5">
+    <!-- Places gallery -->
     <div class="col-6 offset-3">
-        <h2 style="margin-bottom: 5%">Find a Gelateria</h2>
         <div class="row justify-content-center">
             @foreach (var place in Model.Places)
             {
@@ -25,12 +30,14 @@
             }
         </div>
     </div>
-    <div class="row col-3 justify-content-center" style="margin-top: 5%">
-        
+
+    <!--Search area-->
+    <div class="col col-3 justify-content-center">
         <form method="get">
             <div class="jumbotron" style="background-color: antiquewhite">
+                <h3 class="text-center">Търсене</h3>
                 <div class="form-group">
-                    <label style="font-size: 120%" asp-for="SearchTerm">Търси</label>
+                    @*<label style="font-size: 120%" asp-for="SearchTerm">Търси</label>*@
                     <input asp-for="SearchTerm" class="form-control" placeholder="Въведете текст тук..."/>
                 </div>
                 <div class="form-group">
@@ -54,10 +61,31 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <input type="submit" class="btn btn-light" value="Резултати"/>
+                    <input type="submit" class="btn btn-light" value="Търси"/>
                 </div>
             </div>
         </form>
+    </div>
+    
+    <!--Previous and next page buttons-->
+    @{
+        var previousPage = Model.CurrentPage - 1;
+        if (previousPage < 1)
+        {
+            previousPage = 1;
+        }
+        var nextPage = Model.CurrentPage + 1;
+    }
+    
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col col-auto">
+                <a class="btn btn-light" asp-controller="Places" asp-action="All" asp-route-CurrentPage="@(previousPage)">Предишна</a>
+            </div>
+            <div class="col col-auto">
+                <a class="btn btn-light" asp-controller="Places" asp-action="All" asp-route-CurrentPage="@nextPage">Следваща</a>
+            </div>
+        </div>
     </div>
 </div>
 
