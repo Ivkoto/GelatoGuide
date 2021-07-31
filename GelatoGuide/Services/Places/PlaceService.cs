@@ -89,11 +89,21 @@ namespace GelatoGuide.Services.Places
                     p.City.ToLower() == searchModel.City.ToLower());
             }
 
-            //if someone send query with value lower than 1
+            //restrict receiving query with value lower than 1
             if (searchModel.CurrentPage < 1)
             {
                 searchModel.CurrentPage = 1;
             }
+
+            //restrict viewing empty pages
+            var totalPlaces = placesQuery.Count();
+            var maxPagesCount = (int)Math.Ceiling((double)totalPlaces / SearchPlaceViewModel.PlacesPerPage);
+            if (searchModel.CurrentPage > maxPagesCount)
+            {
+                searchModel.CurrentPage = maxPagesCount;
+            }
+
+            searchModel.TotalPlaces = placesQuery.Count();
 
             var places = placesQuery
                 .Skip((searchModel.CurrentPage - 1) * SearchPlaceViewModel.PlacesPerPage)

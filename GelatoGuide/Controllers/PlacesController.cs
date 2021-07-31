@@ -20,6 +20,7 @@ namespace GelatoGuide.Controllers
                 Places = placeService.GetAllPlaces(searchModel),
                 Cities = placeService.GetAllCities(),
                 Contries = placeService.GeatAllCountries(),
+                TotalPlaces = searchModel.TotalPlaces,
                 SearchTerm = searchModel.SearchTerm,
                 Country = searchModel.Country,
                 City = searchModel.City,

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return View(name);
             }
 
-            IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
+            var result = await roleManager.CreateAsync(new IdentityRole(name));
 
             if (!result.Succeeded)
             {
@@ -64,7 +65,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         {
             foreach (IdentityError error in result.Errors)
             {
-                ModelState.AddModelError("", error.Description);
+                ModelState.AddModelError(string.Empty, error.Description);
             }
         }
     }
