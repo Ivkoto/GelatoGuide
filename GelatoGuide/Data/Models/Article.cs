@@ -1,6 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using static GelatoGuide.Data.DataConstants;
+using static GelatoGuide.Data.DataConstants.Articles;
 
 namespace GelatoGuide.Data.Models
 {
@@ -11,17 +11,17 @@ namespace GelatoGuide.Data.Models
 
 
         [Required]
-        [MinLength(ArticleTitleMinLength)]
+        [MinLength(TitleMinLength)]
         public string Title { get; set; }
 
 
-        [MinLength(ArticleSubTitleMinLength)]
+        [MinLength(SubTitleMinLength)]
         public string SubTitle { get; set; }
 
         public string Image { get; set; }
 
 
-        [MinLength(ArticleTextMinLength)]
+        [MinLength(TextMinLength)]
         public string ArticleText { get; set; }
 
         public string SourceName { get; set; }
@@ -29,7 +29,7 @@ namespace GelatoGuide.Data.Models
         public string SourceUrl { get; set; }
 
 
-        [MinLength(ArticlePostedByNameMinLenght)]
+        [MinLength(PostedByNameMinLength)]
         public string PostedByName { get; set; }
 
         public DateTime PostedByDate { get; set; }

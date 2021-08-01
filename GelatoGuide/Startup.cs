@@ -1,8 +1,7 @@
-using System;
-using System.Reflection.Metadata;
-using GelatoGuide.Areas.Administration.Models.Admin;
 using GelatoGuide.Data;
+using GelatoGuide.Data.Models;
 using GelatoGuide.Infrastructure;
+using GelatoGuide.Models;
 using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Users;
@@ -23,26 +22,27 @@ namespace GelatoGuide
 
         public IConfiguration Configuration { get; }
 
-       public void ConfigureServices(IServiceCollection services)  
+        public void ConfigureServices(IServiceCollection services)
         {
             services
                 .AddDbContext<GelatoGuideDbContext>(options
                     => options
                         .UseSqlServer(this.Configuration
                         .GetConnectionString("DefaultConnection")));
-            
-            services
-                .AddDatabaseDeveloperPageExceptionFilter();
-            
 
             services
-                .AddDefaultIdentity<IdentityUser>(options 
+                .AddDatabaseDeveloperPageExceptionFilter();
+
+
+            services
+                .AddDefaultIdentity<User>(options
                     =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireDigit = false;
+                    options.Password.RequireLowercase = false;
                 })
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<GelatoGuideDbContext>();
@@ -56,7 +56,7 @@ namespace GelatoGuide
                 .AddTransient<IBlogService, BlogService>();
         }
 
-        
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.PrepareDatabase();

@@ -2,14 +2,14 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using GelatoGuide.Data.Models;
-using static GelatoGuide.Data.DataConstants;
+using static GelatoGuide.Data.DataConstants.Place;
 
 namespace GelatoGuide.Areas.Administration.Models.Places
 {
     public class CreatePlaceFormModel : IValidatableObject
     {
         [Required]
-        [StringLength(PlaceNameMaxLength, MinimumLength = PlaceNameMinLength, 
+        [StringLength(NameMaxLength, MinimumLength = NameMinLength, 
             ErrorMessage = "The {0} length should be between {2} and {1} characters long.")]
         public string Name { get; init; }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static GelatoGuide.Data.DataConstants;
+using static GelatoGuide.Data.DataConstants.Place;
 
 namespace GelatoGuide.Data.Models
 {
@@ -11,11 +11,11 @@ namespace GelatoGuide.Data.Models
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
-        [MinLength(PlaceNameMinLength), MaxLength(PlaceNameMaxLength)]
+        [MinLength(NameMinLength), MaxLength(NameMaxLength)]
         public string Name { get; set; }
 
         [Required]
-        [MinLength(PlaceDescriptionMinLength)]
+        [MinLength(DescriptionMinLength)]
         public string Description { get; set; }
 
         [Required]

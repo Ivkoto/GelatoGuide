@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using static GelatoGuide.Data.DataConstants;
+using static GelatoGuide.Data.DataConstants.Articles;
 
 namespace GelatoGuide.Models.Blog
 {
@@ -38,7 +38,7 @@ namespace GelatoGuide.Models.Blog
             {
                 yield return 
                     new ValidationResult
-                        ($@"Title must contains at least {ArticleTitleMinLength} letters.",
+                        ($@"Title must contains at least {TitleMinLength} letters.",
                         new []{"Title"}
                         );
             }
@@ -48,7 +48,7 @@ namespace GelatoGuide.Models.Blog
                 yield return 
                     new ValidationResult
                     (
-                    $@"Sub-title must contains at least {ArticleSubTitleMinLength} letters.", 
+                    $@"Sub-title must contains at least {SubTitleMinLength} letters.", 
                     new []{"SubTitle"}
                     );
             }
@@ -57,7 +57,7 @@ namespace GelatoGuide.Models.Blog
             {
                 yield return 
                     new ValidationResult
-                        ($@"Article text must contains at least {ArticleTextMinLength} letters.",
+                        ($@"Article text must contains at least {TextMinLength} letters.",
                         new []{"ArticleText"}
                         );
             }
@@ -66,7 +66,7 @@ namespace GelatoGuide.Models.Blog
             {
                 yield return 
                     new ValidationResult
-                        ($@"Posted by name must contains at least {ArticlePostedByNameMinLenght} letters.", 
+                        ($@"Posted by name must contains at least {PostedByNameMinLength} letters.", 
                         new []{"PostedByName"}
                         );
             }
@@ -74,7 +74,7 @@ namespace GelatoGuide.Models.Blog
             if (this.SourceName != null && !this.SourceName.Any(char.IsLetter))
             {
                 yield return 
-                    new ValidationResult($@"Source name must contains at least {ArticleSourceNameMinLength} letters.", 
+                    new ValidationResult($@"Source name must contains at least {SourceNameMinLength} letters.", 
                         new []{"SourceName"}
                         );
             }

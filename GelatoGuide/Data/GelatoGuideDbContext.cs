@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace GelatoGuide.Data
 {
-    public class GelatoGuideDbContext : IdentityDbContext
+    public class GelatoGuideDbContext : IdentityDbContext<User>
     {
         public GelatoGuideDbContext(DbContextOptions<GelatoGuideDbContext> options)
             : base(options)
