@@ -52,5 +52,9 @@ namespace GelatoGuide.Data.Models
         public IEnumerable<Image> Images { get; init; } = new List<Image>();
 
         public DateTime DateCreated { get; set; }
+
+        public string UserId { get; init; }
+
+        public User User { get; init; }
     }
 }

@@ -8,27 +8,28 @@
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
-            <a class="nav-link text-center text-dark font-italic" style="" asp-area="" asp-controller="Blog" asp-action="All">Blog</a>
+            <a class="nav-link text-center text-dark font-italic" style="" asp-area="" asp-controller="Blog" asp-action="All">Блог</a>
         </li>
     }
 </ul>
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
-        //ToDO make it working
         if (User.IsInRole("Admin"))
         {
-
+            <li class="nav-item">
+                <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Admin" asp-action="Index">Admin</a>
+            </li>
         }
         <li class="nav-item">
-            <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Users" asp-action="Index">Admin</a>
+            <a class="nav-link text-danger" asp-area="" asp-controller="User" asp-action="CreatePremium">Стани Премиум</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Account</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Акаунт</a>
         </li>
         <li class="nav-item">
             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
-                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                <button type="submit" class="nav-link btn btn-link text-dark">Отпиши се</button>
             </form>
         </li>
     }

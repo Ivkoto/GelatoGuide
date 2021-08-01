@@ -51,7 +51,7 @@ namespace GelatoGuide.Infrastructure
             data.Roles.AddRange(new []
             {
                 new IdentityRole{Name = RegularUserRoleName, NormalizedName = RegularUserRoleName.ToUpper()},
-                new IdentityRole{Name = SuperUserRoleName, NormalizedName = SuperUserRoleName.ToUpper()},
+                new IdentityRole{Name = PremiumUserRoleName, NormalizedName = PremiumUserRoleName.ToUpper()},
                 new IdentityRole{Name = AdministratorRoleName, NormalizedName = AdministratorRoleName.ToUpper()}
                 
             });

@@ -34,5 +34,9 @@ namespace GelatoGuide.Data.Models
 
         public DateTime PostedByDate { get; set; }
 
+        public string UserId { get; init; }
+
+        public User User { get; init; }
+
     }
 }

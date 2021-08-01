@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
+using GelatoGuide.Data.Enumerations;
 using GelatoGuide.Data.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -23,17 +24,21 @@ namespace GelatoGuide.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
+
+        private readonly RoleManager<IdentityRole> roleManager;
         //private readonly ILogger<RegisterModel> _logger;
         //private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager/*,
+            SignInManager<User> signInManager, 
+            RoleManager<IdentityRole> roleManager /*,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender*/)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
             //_logger = logger;
             //_emailSender = emailSender;
         }
@@ -96,6 +101,8 @@ namespace GelatoGuide.Areas.Identity.Pages.Account
                 
                 if (result.Succeeded)
                 {
+                    await this.userManager.AddToRoleAsync(user, nameof(RolesEnum.Regular));
+
                     //remove this if un-comment the code below 
                     await this.signInManager.SignInAsync(user, isPersistent: false);
                     return LocalRedirect(returnUrl);

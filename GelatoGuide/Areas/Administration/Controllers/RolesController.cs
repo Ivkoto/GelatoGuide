@@ -1,12 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
     [Area("Administration")]
+    [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -18,10 +19,10 @@ namespace GelatoGuide.Areas.Administration.Controllers
         public IActionResult Index() => View(roleManager.Roles);
 
         public IActionResult Create() => View();
- 
+
 
         [HttpPost]
-        public async Task<IActionResult> Create([Required]string name)
+        public async Task<IActionResult> Create([Required] string name)
         {
             if (!ModelState.IsValid)
             {
@@ -46,7 +47,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
             if (role == null)
             {
-                ModelState.AddModelError(nameof(role),"No role found");
+                ModelState.AddModelError(nameof(role), "No role found");
 
                 return View("Index", roleManager.Roles);
             }
@@ -57,7 +58,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             {
                 Errors(result);
             }
-                
+
             return RedirectToAction("Index");
         }
 

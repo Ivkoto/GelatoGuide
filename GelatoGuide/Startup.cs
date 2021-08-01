@@ -1,7 +1,6 @@
 using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
 using GelatoGuide.Infrastructure;
-using GelatoGuide.Models;
 using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Users;
@@ -82,7 +81,7 @@ namespace GelatoGuide
                 endpoints =>
                 {
                     endpoints.MapControllerRoute(name: "areaRout",
-                        pattern: "{area:exists}/{controller=Users}/{action=Index}/{id?}");
+                        pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
                     //endpoints.MapControllerRoute(name: "rolesRout",
                     //    pattern: "{area:exists}/{controller=Roles}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
