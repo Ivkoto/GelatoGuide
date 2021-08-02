@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using GelatoGuide.Areas.Administration.Models.Roles;
+using GelatoGuide.Data.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using GelatoGuide.Data.Models;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
@@ -65,26 +67,70 @@ namespace GelatoGuide.Areas.Administration.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
         public async Task<IActionResult> Update(string id)
         {
             var role = await roleManager.FindByIdAsync(id);
+            var members = new List<User>();
+            var nonMembers = new List<User>();
 
-            if (role == null)
+            foreach (var user in userManager.Users)
             {
-                ModelState.AddModelError(nameof(role), "No role found");
-
-                return View("Index", roleManager.Roles);
+                var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
+                list.Add(user);
             }
 
-            var result = await this.roleManager.UpdateAsync(role);
-
-            if (!result.Succeeded)
+            var model = new UpdateRoleViewModel()
             {
-                Errors(result);
+                Role = role,
+                Members = members,
+                NonMembers = nonMembers
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(UpdateRoleFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await Update(model.RoleId);
+            }
+
+            IdentityResult result;
+
+            foreach (string userId in model.AddIds ?? new string[] { })
+            {
+                var user = await userManager.FindByIdAsync(userId);
+
+                if (user != null)
+                {
+                    result = await userManager.AddToRoleAsync(user, model.RoleName);
+
+                    if (!result.Succeeded)
+                    {
+                        Errors(result);
+                    }
+                }
+            }
+
+            foreach (string userId in model.RemoveIds ?? new string[] { })
+            {
+                var user = await userManager.FindByIdAsync(userId);
+
+                if (user != null)
+                {
+                    result = await userManager.RemoveFromRoleAsync(user, model.RoleName);
+
+                    if (!result.Succeeded)
+                    {
+                        Errors(result);
+                    }
+                }
             }
 
             return RedirectToAction("Index");
+
         }
 
         private void Errors(IdentityResult result)

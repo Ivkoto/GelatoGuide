@@ -37,8 +37,7 @@ namespace GelatoGuide.TagHelper
                     }
                 }
             }
-            //output.Content.SetContent(names.Count == 0 ? "No Users" : string.Join(", ", names));
-            output.Content.SetContent(names.Count == 0 ? "0" : names.Count.ToString());
+            output.Content.SetContent(names.Count == 0 ? "No Users" : string.Join(", ", names));
         }
     }
 }
