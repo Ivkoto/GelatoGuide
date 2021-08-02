@@ -16,11 +16,14 @@
                    style="text-shadow: 2px 2px 4px white; 
                           color: black">Тук може да намерите най-новите блог статии, полезни съвети, места които да посетите
                 </p>
-                <a class="btn text-dark btn-outline-light btn-sm font-weight-bold" 
-                   style="background-color: white" 
-                   asp-controller="Blog" 
-                   asp-action="CreateArticle">Или да създадете нова статия
-                </a>
+                @if (User.IsInRole("Admin") || User.IsInRole("Premium"))
+                {
+                    <a class="btn text-dark btn-outline-light btn-sm font-weight-bold" 
+                       style="background-color: white" 
+                       asp-controller="Blog"
+                       asp-action="CreateArticle">Или да създадете нова статия
+                    </a>
+                }
             </div>
         </div>
     </div>

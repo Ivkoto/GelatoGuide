@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using GelatoGuide.Data.Models;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
@@ -11,9 +12,11 @@ namespace GelatoGuide.Areas.Administration.Controllers
     public class RolesController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
-        public RolesController(RoleManager<IdentityRole> roleMgr)
+        private readonly UserManager<User> userManager;
+        public RolesController(RoleManager<IdentityRole> roleMgr, UserManager<User> userManager)
         {
             roleManager = roleMgr;
+            this.userManager = userManager;
         }
 
         public IActionResult Index() => View(roleManager.Roles);
@@ -43,7 +46,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
-            IdentityRole role = await roleManager.FindByIdAsync(id);
+            var role = await roleManager.FindByIdAsync(id);
 
             if (role == null)
             {
@@ -52,7 +55,29 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return View("Index", roleManager.Roles);
             }
 
-            IdentityResult result = await roleManager.DeleteAsync(role);
+            var result = await this.roleManager.DeleteAsync(role);
+
+            if (!result.Succeeded)
+            {
+                Errors(result);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                ModelState.AddModelError(nameof(role), "No role found");
+
+                return View("Index", roleManager.Roles);
+            }
+
+            var result = await this.roleManager.UpdateAsync(role);
 
             if (!result.Succeeded)
             {

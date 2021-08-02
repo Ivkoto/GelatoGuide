@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using GelatoGuide.Areas.Administration.Models.Admin;
+﻿using GelatoGuide.Areas.Administration.Models.Admin;
 using GelatoGuide.Data;
+using System.Collections.Generic;
 
 namespace GelatoGuide.Services.Users
 {

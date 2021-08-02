@@ -1,5 +1,6 @@
 ﻿using GelatoGuide.Models.Blog;
 using GelatoGuide.Services.Blog;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Controllers
@@ -29,8 +30,17 @@ namespace GelatoGuide.Controllers
             return View(search);
         }
 
-        public IActionResult CreateArticle() => View();
         
+        [Authorize]
+        public IActionResult CreateArticle()
+        {
+            if (!User.IsInRole("Premium") || !User.IsInRole("Admin"))
+            {
+                return RedirectToAction(nameof(UserController.CreatePremium), "User");
+            }
+            return View();
+        }
+
         [HttpPost]
         public IActionResult CreateArticle(CreateArticleFormModel article)
         {
