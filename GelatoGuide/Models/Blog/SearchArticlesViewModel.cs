@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using GelatoGuide.Services.Blog.Models;
 
 namespace GelatoGuide.Models.Blog
 {
@@ -16,7 +17,7 @@ namespace GelatoGuide.Models.Blog
 
         public string PostedByMonth { get; set; }
 
-        public IEnumerable<AllArticlesViewModel> Articles;
+        public IEnumerable<AllArticlesServiceModel> Articles;
 
         public IEnumerable<string> Names { get; set; }
 

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using GelatoGuide.Data;
+using GelatoGuide.Data.Models;
+using GelatoGuide.Services.Blog.Models;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using GelatoGuide.Data;
-using GelatoGuide.Data.Models;
-using GelatoGuide.Models.Blog;
 
 namespace GelatoGuide.Services.Blog
 {
@@ -15,63 +15,68 @@ namespace GelatoGuide.Services.Blog
         public BlogService(GelatoGuideDbContext data)
             => this.data = data;
 
-        public void CreateArticle(CreateArticleFormModel article)
+
+        public void CreateArticle(
+            string title, string subTitle, string image, string articleText,
+            string sourceName, string sourceUrl, string postedByName)
         {
 
             this.data.Add(new Article()
             {
-                Title = article.Title,
-                SubTitle = article.SubTitle,
-                Image = article.Image,
-                ArticleText = article.ArticleText,
-                PostedByName = article.PostedByName,
-                PostedByDate = DateTime.Now,
-                SourceName = article.SourceName,
-                SourceUrl = article.SourceUrl
+                Title = title,
+                SubTitle = subTitle,
+                Image = image,
+                ArticleText = articleText,
+                PostedByName = postedByName,
+                SourceName = sourceName,
+                SourceUrl = sourceUrl,
+                PostedByDate = DateTime.Now
             });
 
             this.data.SaveChanges();
         }
 
-        public IEnumerable<AllArticlesViewModel> GetAllArticles(SearchArticlesViewModel searchModel)
+        public IEnumerable<AllArticlesServiceModel> GetAllArticles(
+            string searchTerm, string postedByName,
+            string postedByYear, string postedByMonth)
         {
             var articlesQuery = this.data.Articles.AsQueryable();
 
-            //filter query if any serach text have been imputed
-            if (!string.IsNullOrWhiteSpace(searchModel.SearchTerm))
+            //filter query if any search text have been imputed
+            if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 articlesQuery = articlesQuery.Where(a =>
-                    a.ArticleText.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
-                    a.Title.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
-                    a.SubTitle.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
-                    a.PostedByName.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
-                    a.SourceName.ToLower().Contains(searchModel.SearchTerm.ToLower()));                
+                    a.ArticleText.ToLower().Contains(searchTerm.ToLower()) ||
+                    a.Title.ToLower().Contains(searchTerm.ToLower()) ||
+                    a.SubTitle.ToLower().Contains(searchTerm.ToLower()) ||
+                    a.PostedByName.ToLower().Contains(searchTerm.ToLower()) ||
+                    a.SourceName.ToLower().Contains(searchTerm.ToLower()));
             }
 
             //filter query if author name have been selected
-            if (!string.IsNullOrWhiteSpace(searchModel.PostedByName))
+            if (!string.IsNullOrWhiteSpace(postedByName))
             {
-                articlesQuery = articlesQuery.Where(a => 
-                    a.PostedByName == searchModel.PostedByName);
+                articlesQuery = articlesQuery.Where(a =>
+                    a.PostedByName == postedByName);
             }
 
             //filter query if year have been selected
-            if (!string.IsNullOrWhiteSpace(searchModel.PostedByYear))
+            if (!string.IsNullOrWhiteSpace(postedByYear))
             {
-                articlesQuery = articlesQuery.Where(a => 
-                    a.PostedByDate.Year.ToString() == searchModel.PostedByYear);
+                articlesQuery = articlesQuery.Where(a =>
+                    a.PostedByDate.Year.ToString() == postedByYear);
             }
 
             //filter query if month have been selected
-            if (!string.IsNullOrWhiteSpace(searchModel.PostedByMonth))
+            if (!string.IsNullOrWhiteSpace(postedByMonth))
             {
-                articlesQuery = articlesQuery.Where(a => 
-                    a.PostedByDate.Month == DateTime.ParseExact(searchModel.PostedByMonth, "MMMM", CultureInfo.CurrentCulture).Month);
+                articlesQuery = articlesQuery.Where(a =>
+                    a.PostedByDate.Month == DateTime.ParseExact(postedByMonth, "MMMM", CultureInfo.CurrentCulture).Month);
             }
 
             var articles = articlesQuery
                 .OrderByDescending(a => a.PostedByDate)
-                .Select(a => new AllArticlesViewModel()
+                .Select(a => new AllArticlesServiceModel()
                 {
                     Id = a.Id,
                     Title = a.Title,

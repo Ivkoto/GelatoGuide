@@ -17,7 +17,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             this.userService = userService;
         }
 
-        public IActionResult AllUsers()
+        public IActionResult All()
         {
             var users = (List<ReadUsersViewModel>)userService.ReadAllUser();
 

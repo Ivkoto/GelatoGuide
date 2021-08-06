@@ -1,4 +1,5 @@
-﻿using GelatoGuide.Models.Blog;
+﻿using GelatoGuide.Data.Enumerations;
+using GelatoGuide.Models.Blog;
 using GelatoGuide.Services.Blog;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +19,11 @@ namespace GelatoGuide.Controllers
         {
             var search = new SearchArticlesViewModel()
             {
-                Articles = blogService.GetAllArticles(searchModel),
+                Articles = blogService.GetAllArticles(
+                    searchModel.SearchTerm, 
+                    searchModel.PostedByName, 
+                    searchModel.PostedByYear, 
+                    searchModel.PostedByMonth),
                 Names = blogService.GetAllPostedByNames(),
                 Years = blogService.GetAllYears(),
                 Months = blogService.GetAllMonths(),
@@ -34,11 +39,12 @@ namespace GelatoGuide.Controllers
         [Authorize]
         public IActionResult CreateArticle()
         {
-            if (!User.IsInRole("Premium") || !User.IsInRole("Admin"))
+            if (User.IsInRole(nameof(RolesEnum.Admin)) || User.IsInRole(nameof(RolesEnum.Premium)))
             {
-                return RedirectToAction(nameof(UserController.CreatePremium), "User");
+                return View();
             }
-            return View();
+
+            return RedirectToAction(nameof(UserController.CreatePremium), "User");
         }
 
         [HttpPost]
@@ -49,7 +55,9 @@ namespace GelatoGuide.Controllers
                 return View(article);
             }
 
-            blogService.CreateArticle(article);
+            blogService.CreateArticle(
+                article.Title, article.SubTitle, article.Image, article.ArticleText, 
+                article.SourceName, article.SourceUrl, article.PostedByName);
 
             return RedirectToAction("All", "Blog");
         }

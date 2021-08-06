@@ -1,8 +1,7 @@
-﻿using System;
-using GelatoGuide.Areas.Administration.Models.Places;
-using GelatoGuide.Data;
+﻿using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
-using GelatoGuide.Models.Places;
+using GelatoGuide.Services.Places.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -16,7 +15,7 @@ namespace GelatoGuide.Services.Places
             => this.data = data;
 
 
-        public void CreatePlace(CreatePlaceFormModel place)
+        public void CreatePlace(CreatePlaceServiceModel place)
         {
             this.data.Add(new Place()
             {
@@ -42,12 +41,12 @@ namespace GelatoGuide.Services.Places
             this.data.SaveChanges();
         }
 
-        //only Administration area
-        public IEnumerable<ReadPlaceViewModel> ReadAllPlaces()
+        //for Administration area
+        public IEnumerable<AllPlacesServiceModel> GetAllPlaces()
             =>
             this.data
                 .Places
-                .Select(place => new ReadPlaceViewModel()
+                .Select(place => new AllPlacesServiceModel()
                 {
                     Id = place.Id,
                     Name = place.Name,
@@ -59,57 +58,57 @@ namespace GelatoGuide.Services.Places
                 })
                 .ToList();
 
-
-        public IEnumerable<AllPlacesViewModel> GetAllPlaces(SearchPlaceViewModel searchModel)
+        
+        public IEnumerable<AllPlacesServiceModel> GetAllPlaces(
+            string searchTerm, string country, string city,
+            int currentPage, int placesPerPage)
         {
             var placesQuery = this.data.Places.AsQueryable();
 
-            //filter query if any serach text have been imputed
-            if (!string.IsNullOrWhiteSpace(searchModel.SearchTerm))
+            //filter query if any search text have been imputed
+            if (!string.IsNullOrWhiteSpace(searchTerm))
             {
                 placesQuery = placesQuery.Where(p =>
-                    p.Name.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
-                    p.Description.ToLower().Contains(searchModel.SearchTerm.ToLower()) ||
-                    p.SinceYear.ToString().Contains(searchModel.SearchTerm.ToLower())||
-                    p.City.ToLower().Contains(searchModel.SearchTerm.ToLower())||
-                    p.Country.ToLower().Contains(searchModel.SearchTerm.ToLower()));
+                    p.Name.ToLower().Contains(searchTerm.ToLower()) ||
+                    p.Description.ToLower().Contains(searchTerm.ToLower()) ||
+                    p.SinceYear.ToString().Contains(searchTerm.ToLower()) ||
+                    p.City.ToLower().Contains(searchTerm.ToLower()) ||
+                    p.Country.ToLower().Contains(searchTerm.ToLower()));
             }
 
             //filter query if country have been selected
-            if (!string.IsNullOrWhiteSpace(searchModel.Country))
+            if (!string.IsNullOrWhiteSpace(country))
             {
-                placesQuery = placesQuery.Where(p => 
-                    p.Country == searchModel.Country);
+                placesQuery = placesQuery.Where(p =>
+                    p.Country == country);
             }
 
             //filter query if city have been imputed
-            if (!string.IsNullOrWhiteSpace(searchModel.City))
+            if (!string.IsNullOrWhiteSpace(city))
             {
-                placesQuery = placesQuery.Where(p => 
-                    p.City.ToLower() == searchModel.City.ToLower());
+                placesQuery = placesQuery.Where(p =>
+                    p.City.ToLower() == city.ToLower());
             }
 
             //restrict receiving query with value lower than 1
-            if (searchModel.CurrentPage < 1)
+            if (currentPage < 1)
             {
-                searchModel.CurrentPage = 1;
+                currentPage = 1;
             }
 
             //restrict viewing empty pages
             var totalPlaces = placesQuery.Count();
-            var maxPagesCount = (int)Math.Ceiling((double)totalPlaces / SearchPlaceViewModel.PlacesPerPage);
-            if (searchModel.CurrentPage > maxPagesCount)
+            var maxPagesCount = (int)Math.Ceiling((double)totalPlaces / placesPerPage);
+            if (currentPage > maxPagesCount)
             {
-                searchModel.CurrentPage = maxPagesCount;
+                currentPage = maxPagesCount;
             }
 
-            searchModel.TotalPlaces = placesQuery.Count();
-
             var places = placesQuery
-                .Skip((searchModel.CurrentPage - 1) * SearchPlaceViewModel.PlacesPerPage)
-                .Take(SearchPlaceViewModel.PlacesPerPage)
+                .Skip((currentPage - 1) * placesPerPage)
+                .Take(placesPerPage)
                 .OrderByDescending(p => p)
-                .Select(p => new AllPlacesViewModel()
+                .Select(p => new AllPlacesServiceModel()
                 {
                     Name = p.Name,
                     Description = p.Description,
@@ -131,7 +130,8 @@ namespace GelatoGuide.Services.Places
                     TakeawayUrl = p.TakeawayUrl,
                     Country = p.Country,
                     City = p.City,
-                    Location = p.Location
+                    Location = p.Location,
+                    TotalPlaces = totalPlaces
                 })
                 .ToList();
 
@@ -145,7 +145,7 @@ namespace GelatoGuide.Services.Places
                 .OrderBy(c => c)
                 .ToList();
 
-        public IEnumerable<string> GeatAllCountries()
+        public IEnumerable<string> GetAllCountries()
             => this.data.Places
                 .Select(p => p.Country)
                 .Distinct()

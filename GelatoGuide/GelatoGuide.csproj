@@ -22,6 +22,7 @@
   <ItemGroup>
     <Folder Include="Areas\Administration\Models\Admin\" />
     <Folder Include="Pages\" />
+    <Folder Include="Services\Users\Models\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 

@@ -21,7 +21,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             this.userManager = userManager;
         }
 
-        public IActionResult Index() => View(roleManager.Roles);
+        public IActionResult All() => View(roleManager.Roles);
 
         public IActionResult Create() => View();
 
@@ -41,7 +41,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 Errors(result);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("All");
         }
 
 
@@ -54,7 +54,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             {
                 ModelState.AddModelError(nameof(role), "No role found");
 
-                return View("Index", roleManager.Roles);
+                return View("All", roleManager.Roles);
             }
 
             var result = await this.roleManager.DeleteAsync(role);
@@ -64,7 +64,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 Errors(result);
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("All");
         }
 
         public async Task<IActionResult> Update(string id)
@@ -129,7 +129,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 }
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("All");
 
         }
 

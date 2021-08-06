@@ -44,7 +44,7 @@
                     <label style="font-size: 120%" asp-for="Country">Изберете държава</label>
                     <select asp-for="Country" class="form-control">
                         <option value="">Всички</option>
-                        @foreach (var country in Model.Contries)
+                        @foreach (var country in Model.Countries)
                         {
                             <option value="@country">@country</option>
                         }

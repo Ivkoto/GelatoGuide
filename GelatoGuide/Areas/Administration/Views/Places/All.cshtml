@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ReadPlaceViewModel>
+﻿@model IEnumerable<AllPlaceViewModel>
 
 @{
     ViewData["Title"] = "All added places";
@@ -11,7 +11,7 @@
             <h3>@ViewData["Title"]</h3>
         </div>
         <div class="col-4">
-            <a asp-controller="Places" asp-action="Add" class="btn btn-secondary">Create Role</a>
+            <a asp-controller="Places" asp-action="Create" class="btn btn-secondary">Create Place</a>
         </div>
     </div>
     <table class="table table-striped table-sm">

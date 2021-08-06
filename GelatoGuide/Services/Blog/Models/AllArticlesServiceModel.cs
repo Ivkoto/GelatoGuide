@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace GelatoGuide.Models.Blog
+namespace GelatoGuide.Services.Blog.Models
 {
-    public class AllArticlesViewModel
+    public class AllArticlesServiceModel
     {
         public string Id { get; init; }
         public string Title { get; init; }

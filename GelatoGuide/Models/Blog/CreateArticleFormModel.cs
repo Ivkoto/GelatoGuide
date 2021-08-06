@@ -25,8 +25,6 @@ namespace GelatoGuide.Models.Blog
 
         public string PostedByName { get; init; }
 
-        public DateTime PostedByDate { get; set; }
-
         
 
 

@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GelatoGuide.Data.Models;
 
-namespace GelatoGuide.Models.Places
+namespace GelatoGuide.Services.Places.Models
 {
-    public class AllPlacesViewModel
+    public class AllPlacesServiceModel
     {
         public string Id { get; init; }
         public string Name { get; init; }
@@ -37,5 +38,9 @@ namespace GelatoGuide.Models.Places
         public string TwitterUrl { get; init; }
 
         public IEnumerable<Image> Images { get; init; }
+
+        public int TotalPlaces { get; set; }
+
+        public DateTime DateCreated { get; set; }
     }
 }

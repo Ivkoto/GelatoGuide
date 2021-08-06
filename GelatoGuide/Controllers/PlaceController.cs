@@ -17,9 +17,10 @@ namespace GelatoGuide.Controllers
         {
             var search = new SearchPlaceViewModel
             {
-                Places = placeService.GetAllPlaces(searchModel),
+                Places = placeService.GetAllPlaces(searchModel.SearchTerm,searchModel.Country,searchModel.City,
+                    searchModel.CurrentPage, SearchPlaceViewModel.PlacesPerPage),
                 Cities = placeService.GetAllCities(),
-                Contries = placeService.GeatAllCountries(),
+                Countries = placeService.GetAllCountries(),
                 TotalPlaces = searchModel.TotalPlaces,
                 SearchTerm = searchModel.SearchTerm,
                 Country = searchModel.Country,
