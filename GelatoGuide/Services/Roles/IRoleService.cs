@@ -1,16 +1,21 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using GelatoGuide.Services.Roles.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace GelatoGuide.Services.Roles
 {
-    interface IRoleService
+    public interface IRoleService
     {
-        IEnumerable<IdentityRole> GetAllRoles();
+        public IEnumerable<IdentityRole> GetAllRoles();
 
-        void CreateRole();
+        public Task<IdentityResult> CreateRole(string roleName);
 
-        void DeleteRole();
+        public Task<IdentityRole> FindRole(string roleId);
+        public Task<IdentityResult> DeleteRole(IdentityRole role);
 
-        void UpdateRole();
+        public Task<UpdateRoleServiceModel> GetMembersByRole(string roleId);
+
+        public Task<List<IdentityResult>> UpdateRole(string roleName, string roleId, string[] addIds, string[] removeIds);
     }
 }

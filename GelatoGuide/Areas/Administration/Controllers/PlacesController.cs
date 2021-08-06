@@ -11,8 +11,8 @@ namespace GelatoGuide.Areas.Administration.Controllers
     [Authorize(Roles = "Admin")]
     public class PlacesController : Controller
     {
-
         private readonly IPlaceService placeService;
+
         public PlacesController(IPlaceService placeService) 
             => this.placeService = placeService;
 
@@ -64,7 +64,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 WebsiteUrl = curPlace.WebsiteUrl
             };
 
-            placeService.CreatePlace(place);
+            this.placeService.CreatePlace(place);
 
             return RedirectToAction("All", "Places");
         }

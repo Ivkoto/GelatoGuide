@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using GelatoGuide.Data.Models;
+﻿using GelatoGuide.Data.Models;
 using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 
-namespace GelatoGuide.Areas.Administration.Models.Roles
+namespace GelatoGuide.Services.Roles.Models
 {
-    public class UpdateRoleViewModel
+    public class UpdateRoleServiceModel
     {
         public IdentityRole Role { get; set; }
         public IEnumerable<User> Members { get; set; }

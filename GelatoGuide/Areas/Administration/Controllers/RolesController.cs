@@ -1,11 +1,9 @@
 ﻿using GelatoGuide.Areas.Administration.Models.Roles;
-using GelatoGuide.Data.Models;
+using GelatoGuide.Services.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
@@ -13,28 +11,27 @@ namespace GelatoGuide.Areas.Administration.Controllers
     [Authorize(Roles = "Admin")]
     public class RolesController : Controller
     {
-        private readonly RoleManager<IdentityRole> roleManager;
-        private readonly UserManager<User> userManager;
-        public RolesController(RoleManager<IdentityRole> roleMgr, UserManager<User> userManager)
+        private readonly IRoleService roleService;
+
+        public RolesController(IRoleService roleService)
         {
-            roleManager = roleMgr;
-            this.userManager = userManager;
+            this.roleService = roleService;
         }
 
-        public IActionResult All() => View(roleManager.Roles);
+        public IActionResult All() => View(this.roleService.GetAllRoles());
 
         public IActionResult Create() => View();
 
 
         [HttpPost]
-        public async Task<IActionResult> Create([Required] string name)
+        public IActionResult Create([Required] string roleName)
         {
             if (!ModelState.IsValid)
             {
-                return View(name);
+                return View(roleName);
             }
 
-            var result = await roleManager.CreateAsync(new IdentityRole(name));
+            var result = this.roleService.CreateRole(roleName).Result;
 
             if (!result.Succeeded)
             {
@@ -46,18 +43,18 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string id)
+        public IActionResult Delete(string id)
         {
-            var role = await roleManager.FindByIdAsync(id);
+            var role = this.roleService.FindRole(id).Result;
 
             if (role == null)
             {
                 ModelState.AddModelError(nameof(role), "No role found");
 
-                return View("All", roleManager.Roles);
+                return View("All", this.roleService.GetAllRoles());
             }
 
-            var result = await this.roleManager.DeleteAsync(role);
+            var result = this.roleService.DeleteRole(role).Result;
 
             if (!result.Succeeded)
             {
@@ -67,65 +64,30 @@ namespace GelatoGuide.Areas.Administration.Controllers
             return RedirectToAction("All");
         }
 
-        public async Task<IActionResult> Update(string id)
+        public IActionResult Update(string id)
         {
-            var role = await roleManager.FindByIdAsync(id);
-            var members = new List<User>();
-            var nonMembers = new List<User>();
+            var roleMembers = this.roleService.GetMembersByRole(id).Result;
 
-            foreach (var user in userManager.Users)
-            {
-                var list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
-                list.Add(user);
-            }
-
-            var model = new UpdateRoleViewModel()
-            {
-                Role = role,
-                Members = members,
-                NonMembers = nonMembers
-            };
-
-            return View(model);
+            return View(roleMembers);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(UpdateRoleFormModel model)
+        public IActionResult Update(UpdateRoleFormModel model)
         {
             if (!ModelState.IsValid)
             {
-                return await Update(model.RoleId);
+                return Update(model.RoleId);
             }
 
-            IdentityResult result;
+            var results = this.roleService
+                .UpdateRole(model.RoleName, model.RoleId, model.AddIds, model.RemoveIds);
 
-            foreach (string userId in model.AddIds ?? new string[] { })
+
+            foreach (var result in results.Result)
             {
-                var user = await userManager.FindByIdAsync(userId);
-
-                if (user != null)
+                if (!result.Succeeded)
                 {
-                    result = await userManager.AddToRoleAsync(user, model.RoleName);
-
-                    if (!result.Succeeded)
-                    {
-                        Errors(result);
-                    }
-                }
-            }
-
-            foreach (string userId in model.RemoveIds ?? new string[] { })
-            {
-                var user = await userManager.FindByIdAsync(userId);
-
-                if (user != null)
-                {
-                    result = await userManager.RemoveFromRoleAsync(user, model.RoleName);
-
-                    if (!result.Succeeded)
-                    {
-                        Errors(result);
-                    }
+                    Errors(result);
                 }
             }
 
