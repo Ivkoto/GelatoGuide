@@ -1,0 +1,52 @@
+﻿@model CreateUserFormModel
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<div class="container">
+    <div class="row justify-content-end text-center">
+        <div class="col-4">
+            <h3>@ViewData["Title"]</h3>
+        </div>
+        <div class="col-4">
+            <a asp-controller="Users" asp-action="All" class="btn btn-secondary">All Users</a>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+    </div>
+    <form asp-action="Create" method="post">
+        <div class="row col-10 offset-1 justify-content-md-center text-center">
+            <div class="form-group col-4">
+                <label asp-for="Username">Username</label>
+                <input asp-for="Username" class="form-control" style="background-color: #fffdf2">
+                <span asp-validation-for="Username" class="small text-danger"></span>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="Email">Email</label>
+                <input asp-for="Email" class="form-control" style="background-color: #fffdf2">
+                <span asp-validation-for="Email" class="small text-danger"></span>
+            </div>
+            <div class="form-group col-4">
+                <label asp-for="Password">Password</label>
+                <input asp-for="Password" class="form-control" style="background-color: #fffdf2">
+                <span asp-validation-for="Password" class="small text-danger"></span>
+            </div>
+        </div>
+        <div class="row col-10 offset-1 justify-content-md-center text-center">
+            <div class="form-group col-6">
+                <label asp-for="FullName">Full Name</label>
+                <input asp-for="FullName" class="form-control" style="background-color: #fffdf2">
+                <span asp-validation-for="FullName" class="small text-danger"></span>
+            </div>
+            <div class="form-group col-6">
+                <label asp-for="PhoneNumber">Phone Number</label>
+                <input asp-for="PhoneNumber" class="form-control" style="background-color: #fffdf2">
+                <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
+            </div>
+        </div>
+        <div class="row col-10 offset-1 justify-content-md-center text-center">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+        
+    </form>
+</div>

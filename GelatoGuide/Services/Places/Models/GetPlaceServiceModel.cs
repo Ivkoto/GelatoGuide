@@ -4,7 +4,7 @@ using GelatoGuide.Data.Models;
 
 namespace GelatoGuide.Services.Places.Models
 {
-    public class AllPlacesServiceModel
+    public class GetPlaceServiceModel
     {
         public string Id { get; init; }
         public string Name { get; init; }
@@ -38,8 +38,6 @@ namespace GelatoGuide.Services.Places.Models
         public string TwitterUrl { get; init; }
 
         public IEnumerable<Image> Images { get; init; }
-
-        public int TotalPlaces { get; set; }
 
         public DateTime DateCreated { get; set; }
     }

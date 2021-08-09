@@ -11,6 +11,5 @@ namespace GelatoGuide.Areas.Administration.Controllers
         {
             return this.View();
         }
-
     }
 }

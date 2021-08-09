@@ -7,11 +7,13 @@ namespace GelatoGuide.Services.Places
     {
         void CreatePlace(CreatePlaceServiceModel place);
 
-        IEnumerable<AllPlacesServiceModel> GetAllPlaces();
+        IEnumerable<GetPlaceServiceModel> GetAllPlaces();
 
-        IEnumerable<AllPlacesServiceModel> GetAllPlaces(
+        IEnumerable<GetPlaceServiceModel> GetAllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage);
+
+        int GetTotalPlacesCount();
 
         IEnumerable<string> GetAllCities();
 

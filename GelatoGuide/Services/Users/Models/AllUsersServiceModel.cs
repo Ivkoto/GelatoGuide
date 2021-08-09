@@ -2,6 +2,7 @@
 {
     public class AllUsersServiceModel
     {
+        public string Id { get; init; }
         public string Username { get; set; }
 
         public string Email { get; set; }

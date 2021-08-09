@@ -48,6 +48,7 @@ namespace GelatoGuide.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult CreateArticle(CreateArticleFormModel article)
         {
             if (!ModelState.IsValid)

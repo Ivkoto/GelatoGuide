@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using static GelatoGuide.Data.DataConstants.Articles;
@@ -25,7 +24,7 @@ namespace GelatoGuide.Models.Blog
 
         public string PostedByName { get; init; }
 
-        
+
 
 
 
@@ -34,46 +33,46 @@ namespace GelatoGuide.Models.Blog
 
             if (this.Title != null && !this.Title.Any(char.IsLetter))
             {
-                yield return 
+                yield return
                     new ValidationResult
                         ($@"Title must contains at least {TitleMinLength} letters.",
-                        new []{"Title"}
+                        new[] { "Title" }
                         );
             }
 
             if (this.SubTitle != null && !this.SubTitle.Any(char.IsLetter))
             {
-                yield return 
+                yield return
                     new ValidationResult
                     (
-                    $@"Sub-title must contains at least {SubTitleMinLength} letters.", 
-                    new []{"SubTitle"}
+                    $@"Sub-title must contains at least {SubTitleMinLength} letters.",
+                    new[] { "SubTitle" }
                     );
             }
 
             if (this.ArticleText != null && !this.ArticleText.Any(char.IsLetter))
             {
-                yield return 
+                yield return
                     new ValidationResult
                         ($@"Article text must contains at least {TextMinLength} letters.",
-                        new []{"ArticleText"}
+                        new[] { "ArticleText" }
                         );
             }
 
             if (this.PostedByName != null && !this.PostedByName.Any(char.IsLetter))
             {
-                yield return 
+                yield return
                     new ValidationResult
-                        ($@"Posted by name must contains at least {PostedByNameMinLength} letters.", 
-                        new []{"PostedByName"}
+                        ($@"Posted by name must contains at least {PostedByNameMinLength} letters.",
+                        new[] { "PostedByName" }
                         );
             }
 
             if (this.SourceName != null && !this.SourceName.Any(char.IsLetter))
             {
-                yield return 
-                    new ValidationResult($@"Source name must contains at least {SourceNameMinLength} letters.", 
-                        new []{"SourceName"}
+                yield return
+                    new ValidationResult($@"Source name must contains at least {SourceNameMinLength} letters.",
+                        new[] { "SourceName" }
                         );
             }
         }

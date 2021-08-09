@@ -36,6 +36,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             if (!result.Succeeded)
             {
                 Errors(result);
+                return View(roleName);
             }
 
             return RedirectToAction("All");
@@ -49,9 +50,9 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
             if (role == null)
             {
-                ModelState.AddModelError(nameof(role), "No role found");
+                ModelState.AddModelError(nameof(role), "Role not found!");
 
-                return View("All", this.roleService.GetAllRoles());
+                return View("All");
             }
 
             var result = this.roleService.DeleteRole(role).Result;
@@ -88,6 +89,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 if (!result.Succeeded)
                 {
                     Errors(result);
+                    return View(model.RoleId);
                 }
             }
 

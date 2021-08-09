@@ -8,6 +8,7 @@ using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -48,7 +49,10 @@ namespace GelatoGuide
                 .AddEntityFrameworkStores<GelatoGuideDbContext>();
 
             services
-                .AddControllersWithViews();
+                .AddControllersWithViews(options =>
+                {
+                    options.Filters.Add<AutoValidateAntiforgeryTokenAttribute>();
+                });
 
             services
                 .AddTransient<IUserService, UserService>()
@@ -86,8 +90,6 @@ namespace GelatoGuide
                 {
                     endpoints.MapControllerRoute(name: "areaRout",
                         pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
-                    //endpoints.MapControllerRoute(name: "rolesRout",
-                    //    pattern: "{area:exists}/{controller=Roles}/{action=Index}/{id?}");
                     endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
                     //remove if app didn't work for some point

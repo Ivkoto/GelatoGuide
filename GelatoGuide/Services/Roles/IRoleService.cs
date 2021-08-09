@@ -7,15 +7,16 @@ namespace GelatoGuide.Services.Roles
 {
     public interface IRoleService
     {
-        public IEnumerable<IdentityRole> GetAllRoles();
+        Task<IdentityRole> FindRole(string roleId);
 
-        public Task<IdentityResult> CreateRole(string roleName);
+        Task<UpdateRoleServiceModel> GetMembersByRole(string roleId);
 
-        public Task<IdentityRole> FindRole(string roleId);
-        public Task<IdentityResult> DeleteRole(IdentityRole role);
+        IEnumerable<IdentityRole> GetAllRoles();
 
-        public Task<UpdateRoleServiceModel> GetMembersByRole(string roleId);
+        Task<IdentityResult> CreateRole(string roleName);
 
-        public Task<List<IdentityResult>> UpdateRole(string roleName, string roleId, string[] addIds, string[] removeIds);
+        Task<List<IdentityResult>> UpdateRole(string roleName, string roleId, string[] addIds, string[] removeIds);
+
+        Task<IdentityResult> DeleteRole(IdentityRole role);
     }
 }

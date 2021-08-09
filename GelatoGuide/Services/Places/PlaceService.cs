@@ -42,11 +42,11 @@ namespace GelatoGuide.Services.Places
         }
 
         //for Administration area
-        public IEnumerable<AllPlacesServiceModel> GetAllPlaces()
+        public IEnumerable<GetPlaceServiceModel> GetAllPlaces()
             =>
             this.data
                 .Places
-                .Select(place => new AllPlacesServiceModel()
+                .Select(place => new GetPlaceServiceModel()
                 {
                     Id = place.Id,
                     Name = place.Name,
@@ -59,7 +59,7 @@ namespace GelatoGuide.Services.Places
                 .ToList();
 
         
-        public IEnumerable<AllPlacesServiceModel> GetAllPlaces(
+        public IEnumerable<GetPlaceServiceModel> GetAllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage)
         {
@@ -90,7 +90,7 @@ namespace GelatoGuide.Services.Places
                     p.City.ToLower() == city.ToLower());
             }
 
-            //restrict receiving query with value lower than 1
+            //restrict receiving query with page value lower than 1
             if (currentPage < 1)
             {
                 currentPage = 1;
@@ -108,7 +108,7 @@ namespace GelatoGuide.Services.Places
                 .Skip((currentPage - 1) * placesPerPage)
                 .Take(placesPerPage)
                 .OrderByDescending(p => p)
-                .Select(p => new AllPlacesServiceModel()
+                .Select(p => new GetPlaceServiceModel()
                 {
                     Name = p.Name,
                     Description = p.Description,
@@ -131,12 +131,15 @@ namespace GelatoGuide.Services.Places
                     Country = p.Country,
                     City = p.City,
                     Location = p.Location,
-                    TotalPlaces = totalPlaces
+                    DateCreated = DateTime.Now
                 })
                 .ToList();
 
             return places;
         }
+
+        public int GetTotalPlacesCount()
+            => this.data.Places.Count();
 
         public IEnumerable<string> GetAllCities()
             => this.data.Places
