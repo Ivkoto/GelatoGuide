@@ -8,6 +8,7 @@ using GelatoGuide.Services.Blog.Models;
 
 namespace GelatoGuide.Controllers
 {
+    [Authorize]
     public class BlogController : Controller
     {
         private readonly IBlogService blogService;
@@ -36,8 +37,7 @@ namespace GelatoGuide.Controllers
 
             return View(search);
         }
-
-        [Authorize]
+        
         public IActionResult CreateArticle()
         {
             if (User.IsInRole(nameof(RolesEnum.Admin)) || User.IsInRole(nameof(RolesEnum.Premium)))
@@ -64,8 +64,7 @@ namespace GelatoGuide.Controllers
 
             return RedirectToAction("All", "Blog");
         }
-
-        [Authorize]
+        
         public IActionResult MyArticles()
         {
             if (User.IsInRole(nameof(RolesEnum.Admin)) || User.IsInRole(nameof(RolesEnum.Premium)))
@@ -80,8 +79,7 @@ namespace GelatoGuide.Controllers
             return RedirectToAction("CreatePremium", "User");
             
         }
-
-        [Authorize]
+        
         public IActionResult Edit(string id)
         {
             var article = this.blogService.GetArticleById(id);
@@ -105,7 +103,6 @@ namespace GelatoGuide.Controllers
         }
 
         [HttpPost]
-        [Authorize]
         public IActionResult Edit(string id, ArticleFormModel model)
         {
             if (!ModelState.IsValid)
@@ -126,7 +123,7 @@ namespace GelatoGuide.Controllers
 
             this.blogService.Edit(id, serviceModel);
 
-            return RedirectToAction("All", "Blog");
+            return RedirectToAction("MyArticles", "Blog");
         }
     }
 }
