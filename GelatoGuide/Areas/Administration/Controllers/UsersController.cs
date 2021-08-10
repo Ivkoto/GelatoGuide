@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using GelatoGuide.Areas.Administration.Models.Users;
-using GelatoGuide.Services.Users.Models;
 using Microsoft.AspNetCore.Identity;
 
 namespace GelatoGuide.Areas.Administration.Controllers
@@ -22,7 +21,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult All()
         {
-            var users = (List<AllUsersServiceModel>)this.userService.GetAllUser();
+            var users = (List<UserServiceModel>)this.userService.GetAllUser();
 
             return View(users);
         }
@@ -38,7 +37,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return View(model);
             }
 
-            var serviceModel = new CreateUserServiceModel()
+            var serviceModel = new UserServiceModel()
             {
                 Username = model.Username,
                 Email = model.Email,
@@ -62,18 +61,20 @@ namespace GelatoGuide.Areas.Administration.Controllers
         {
             var user = this.userService.GetUserById(id).Result;
 
-            var model = new UpdateUserFormModel()
+            if (user == null)
             {
-                Id = id,
-                User = user
-            };
-
-            if (model.User != null)
-            {
-                return View(model);
+                return BadRequest();
             }
 
-            return RedirectToAction("All", "Users");
+            var model = new UpdateUserFormModel()
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                FullName = user.FullName,
+                PhoneNumber = user.PhoneNumber
+            };
+            
+            return View(model);
         }
 
         [HttpPost]
@@ -92,7 +93,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return View(model);
             }
 
-            var serviceModel = new UpdateUserServiceModel()
+            var serviceModel = new UserServiceModel()
             {
                 Username = model.Username,
                 Email = model.Email,

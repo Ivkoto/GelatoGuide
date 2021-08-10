@@ -1,7 +1,6 @@
 ﻿using GelatoGuide.Areas.Administration.Models.Admin;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
-using GelatoGuide.Services.Users.Models;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -13,7 +12,7 @@ namespace GelatoGuide.Services.Users
     public class UserService : IUserService
     {
         private readonly GelatoGuideDbContext data;
-        private readonly List<AllUsersServiceModel> users;
+        private readonly List<UserServiceModel> users;
         private readonly UserManager<User> userManager;
         private readonly IPasswordHasher<User> passwordHasher;
 
@@ -25,10 +24,10 @@ namespace GelatoGuide.Services.Users
             this.data = data;
             this.userManager = userManager;
             this.passwordHasher = passwordHasher;
-            this.users = new List<AllUsersServiceModel>();
+            this.users = new List<UserServiceModel>();
         }
 
-        public IEnumerable<AllUsersServiceModel> GetAllUser()
+        public IEnumerable<UserServiceModel> GetAllUser()
         {
             foreach (var user in this.data.Users)
             {
@@ -40,7 +39,7 @@ namespace GelatoGuide.Services.Users
                     firstRole = userRoles.First();
                 }
 
-                this.users.Add(new AllUsersServiceModel()
+                this.users.Add(new UserServiceModel()
                 {
                     Id = user.Id,
                     Username = user.UserName,
@@ -56,7 +55,7 @@ namespace GelatoGuide.Services.Users
         public async Task<User> GetUserById(string id)
             => await this.userManager.FindByIdAsync(id);
 
-        public async Task<IdentityResult> CreateUser(CreateUserServiceModel model)
+        public async Task<IdentityResult> CreateUser(UserServiceModel model)
         {
             var result = await this.userManager.CreateAsync(new User()
             {
@@ -70,7 +69,7 @@ namespace GelatoGuide.Services.Users
             return result;
         }
 
-        public async Task<IdentityResult> UpdateUser(UpdateUserServiceModel model)
+        public async Task<IdentityResult> UpdateUser(UserServiceModel model)
         {
             var curUser = model.User;
 
