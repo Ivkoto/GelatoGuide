@@ -17,7 +17,7 @@ namespace GelatoGuide.Models.Blog
 
         public string PostedByMonth { get; set; }
 
-        public IEnumerable<AllArticlesServiceModel> Articles;
+        public IEnumerable<ArticleServiceModel> Articles;
 
         public IEnumerable<string> Names { get; set; }
 

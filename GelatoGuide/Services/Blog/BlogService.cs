@@ -18,7 +18,7 @@ namespace GelatoGuide.Services.Blog
 
         public void CreateArticle(
             string title, string subTitle, string image, string articleText,
-            string sourceName, string sourceUrl, string postedByName)
+            string sourceName, string sourceUrl, string postedByName, string userId)
         {
 
             this.data.Add(new Article()
@@ -30,13 +30,14 @@ namespace GelatoGuide.Services.Blog
                 PostedByName = postedByName,
                 SourceName = sourceName,
                 SourceUrl = sourceUrl,
-                PostedByDate = DateTime.Now
+                PostedByDate = DateTime.Now,
+                UserId = userId
             });
 
             this.data.SaveChanges();
         }
 
-        public IEnumerable<AllArticlesServiceModel> GetAllArticles(
+        public IEnumerable<ArticleServiceModel> GetAllArticles(
             string searchTerm, string postedByName,
             string postedByYear, string postedByMonth)
         {
@@ -76,7 +77,7 @@ namespace GelatoGuide.Services.Blog
 
             var articles = articlesQuery
                 .OrderByDescending(a => a.PostedByDate)
-                .Select(a => new AllArticlesServiceModel()
+                .Select(a => new ArticleServiceModel()
                 {
                     Id = a.Id,
                     Title = a.Title,
@@ -87,6 +88,21 @@ namespace GelatoGuide.Services.Blog
                 .ToList();
 
             return articles;
+        }
+
+        public void Edit(string id, ArticleServiceModel model)
+        {
+            var curArticle = this.data.Articles.Find(id);
+            
+            curArticle.Title = model.Title;
+            curArticle.SubTitle = model.SubTitle;
+            curArticle.Image = model.Image;
+            curArticle.ArticleText = model.ArticleText;
+            curArticle.PostedByName = model.PostedByName;
+            curArticle.SourceName = model.SourceName;
+            curArticle.SourceUrl = model.SourceUrl;
+
+            this.data.SaveChanges();
         }
 
         public IEnumerable<string> GetAllPostedByNames()
@@ -109,5 +125,34 @@ namespace GelatoGuide.Services.Blog
                 .Select(a => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(a.PostedByDate.Month))
                 .Distinct()
                 .ToList();
+
+        public IEnumerable<ArticleServiceModel> GetAllByUserId(string id)
+            => this.data.Articles
+                .Where(a => a.UserId == id)
+                .Select(a => new ArticleServiceModel()
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    SubTitle = a.SubTitle,
+                    PostedByName = a.PostedByName,
+                    PostedByDate = a.PostedByDate
+                })
+                .ToList();
+
+        public ArticleServiceModel GetArticleById(string id)
+            => this.data.Articles
+                .Where(a => a.Id == id)
+                .Select(a => new ArticleServiceModel()
+                {
+                    Title = a.Title,
+                    SubTitle = a.SubTitle,
+                    Image = a.Image,
+                    ArticleText = a.ArticleText,
+                    SourceName = a.SourceName,
+                    SourceUrl = a.SourceUrl,
+                    PostedByName = a.PostedByName,
+                    UserId = a.UserId
+                })
+                .FirstOrDefault();
     }
 }

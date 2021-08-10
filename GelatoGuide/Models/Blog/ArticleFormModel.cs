@@ -5,7 +5,7 @@ using static GelatoGuide.Data.DataConstants.Articles;
 
 namespace GelatoGuide.Models.Blog
 {
-    public class CreateArticleFormModel : IValidatableObject
+    public class ArticleFormModel : IValidatableObject
     {
         [Required]
         public string Title { get; init; }
@@ -23,8 +23,6 @@ namespace GelatoGuide.Models.Blog
         public string SourceUrl { get; init; }
 
         public string PostedByName { get; init; }
-
-
 
 
 

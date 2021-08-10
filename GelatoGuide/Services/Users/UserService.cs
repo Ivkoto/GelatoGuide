@@ -18,8 +18,8 @@ namespace GelatoGuide.Services.Users
         private readonly IPasswordHasher<User> passwordHasher;
 
         public UserService(
-            GelatoGuideDbContext data, 
-            UserManager<User> userManager, 
+            GelatoGuideDbContext data,
+            UserManager<User> userManager,
             IPasswordHasher<User> passwordHasher)
         {
             this.data = data;

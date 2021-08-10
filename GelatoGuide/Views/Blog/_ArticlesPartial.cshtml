@@ -1,0 +1,27 @@
+﻿@model IEnumerable<ArticleServiceModel>
+
+<div class="row col-12 justify-content-center">
+    @foreach (var article in Model)
+    {
+        <div class="col-12">
+            <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="text-dark">
+                <h3>@article.Title</h3>
+                <h4>@article.SubTitle</h4>
+            </a>
+            <i>Побликувано от <strong>@article.PostedByName</strong> на <strong>@article.PostedByDate.ToShortDateString()</strong></i>
+            <br />
+            @if (ViewBag.AllowArticleEdit == true)
+            {
+                <div class="offset-2 offset-sm-4 offset-md-4 offset-xl-5 justify-content-md-center">
+                    <a class="btn-link text-info mr-4" asp-controller="Blog" asp-action="Edit" asp-route-id="@article.Id">Edit</a>
+                    <a class="btn-link text-danger" asp-controller="Blog" asp-action="Delete" asp-route-id="@article.Id">Delete</a>
+                </div>
+                
+            }
+        </div>
+        <div class="col-12">
+            <hr />
+        </div>
+        
+    }
+</div>

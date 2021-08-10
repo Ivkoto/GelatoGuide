@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ArticleServiceModel>
+
+@{
+    ViewBag.Title = "All Articles";
+    ViewBag.AllowArticleEdit = true;
+}
+
+@if (!Model.Any())
+{
+    <div class="row justify-content-md-center">
+        <div class="col-6 text-center">
+            <h3 class="mt-5 mb-5">Вие все още нямате публикувани статии.</h3>
+            <a class="text-danger" asp-controller="Blog" asp-action="CreateArticle">Създайте първата си статия тук</a>
+        </div>
+    </div>
+}
+@if (Model.Any())
+{
+    <div class="jumbotron jumbotron-fluid"
+         style="background-image: url(https://res.cloudinary.com/dmflbhinu/image/upload/v1627593182/GelatoGuide/Rafi_gelato_spuyt1.jpg);
+                background-size: cover;
+                opacity: 0.85">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div>
+                    <h1 class="display-3" style="text-shadow: 2px 2px 4px white; color: black">Моите статии</h1>
+                    <a class="btn text-dark btn-outline-light btn-sm font-weight-bold"
+                           style="background-color: white"
+                           asp-controller="Blog"
+                           asp-action="CreateArticle">
+                            Нова статия
+                        </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6 offset-3">
+        <partial name="_ArticlesPartial" model="Model" />
+    </div>
+}

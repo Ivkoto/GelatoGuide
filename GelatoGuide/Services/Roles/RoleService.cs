@@ -54,7 +54,8 @@ namespace GelatoGuide.Services.Roles
             return roleMembers;
         }
 
-        public async Task<List<IdentityResult>> UpdateRole(string roleName, string roleId, string[] addIds, string[] removeIds)
+        public async Task<List<IdentityResult>> UpdateRole(
+            string roleName, string roleId, string[] addIds, string[] removeIds)
         {
             var results = new List<IdentityResult>();
 

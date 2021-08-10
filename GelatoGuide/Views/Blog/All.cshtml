@@ -30,21 +30,7 @@
 </div>
 <div class="row">
     <div class="col-6 offset-3">
-        <div class="row col-12 justify-content-center">
-            @foreach (var article in Model.Articles)
-            {
-                <div class="col-12">
-                    <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id" class="text-dark">
-                        <h3>@article.Title</h3>
-                        <h4>@article.SubTitle</h4>
-                    </a>
-                    <i>Побликувано от <strong>@article.PostedByName</strong> на <strong>@article.PostedByDate.ToShortDateString()</strong></i>
-                </div>
-                <div class="col-12">
-                    <hr />
-                </div>
-            }
-        </div>
+        <partial name="_ArticlesPartial" model="Model.Articles"/>
     </div>
     <div class="row col-3 justify-content-center">
         <form method="get">

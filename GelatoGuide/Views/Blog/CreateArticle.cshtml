@@ -1,58 +1,11 @@
-﻿@model CreateArticleFormModel
+﻿@model ArticleFormModel
 @{
     ViewData["Title"] = "Create new article";
 }
 
 @Html.ValidationSummary(true)
 
-<form method="post">
-    <h2 class="text-center">@ViewData["Title"]</h2>
-    <div class="form-row justify-content-center">
-        <i style="margin: 0% 50% 0% 0%" class="text-black-50">The yellow boxes are required!</i>
-        <br />
-        <br />
-        <div class="container col-10 offset-2">
-            <div class="row col-12" style="text-align: center">
-                <div class="col-8 offset-1">
-                    <div class="form-group" style="margin-bottom: 5%">
-                        <label asp-for="Title">Title</label>
-                        <input asp-for="Title" class="form-control" style="background-color: #fffdf2" placeholder="Enter title name here...">
-                        <span asp-validation-for="Title" class="small text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-8 offset-1">
-                    <div class="form-group" style="margin-bottom: 5%">
-                        <label asp-for="SubTitle">Sub Title</label>
-                        <input asp-for="SubTitle" class="form-control" placeholder="Enter sub-title name here...">
-                        <span asp-validation-for="SubTitle" class="small text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-8 offset-1">
-                    <div class="form-group" style="margin-bottom: 5%">
-                        <label asp-for="ArticleText">Article text</label>
-                        <textarea asp-for="ArticleText" class="form-control" rows="6" placeholder="Start writing here..."></textarea>
-                        <span asp-validation-for="ArticleText" class="small text-danger"></span>
-                    </div>
-                </div>
-                <div class="row col-8 offset-1">
-                    <div class="form-group col-4" style="margin-bottom: 7%">
-                        <label asp-for="PostedByName">Posted by</label>
-                        <input asp-for="PostedByName" class="form-control" placeholder="Enter posted by name here...">
-                        <span asp-validation-for="PostedByName" class="small text-danger"></span>
-                    </div>
-                    <div class="form-group col-4" style="margin-bottom: 7%">
-                        <label asp-for="SourceName">Source Name</label>
-                        <input asp-for="SourceName" class="form-control" placeholder="Enter source name here...">
-                        <span asp-validation-for="SourceName" class="small text-danger"></span>
-                    </div>
-                    <div class="form-group col-4" style="margin-bottom: 7%">
-                        <label asp-for="SourceUrl">Source URL</label>
-                        <input asp-for="SourceUrl" class="form-control" placeholder="Enter source URL here...">
-                        <span asp-validation-for="SourceUrl" class="small text-danger"></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary">Save</button>
-    </div>
-</form>
+@* The form from _ArticleFormPartial should be here *@
+
+
+<partial name="_ArticleFormPartial" model="@Model"/>
