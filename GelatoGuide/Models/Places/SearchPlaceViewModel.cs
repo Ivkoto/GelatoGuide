@@ -15,7 +15,7 @@ namespace GelatoGuide.Models.Places
         public string City { get; set; }
         public int CurrentPage { get; set; } = 1;
         public int TotalPlaces { get; set; }
-        public IEnumerable<GetPlaceServiceModel> Places { get; set; }
+        public IEnumerable<PlaceServiceModel> Places { get; set; }
 
         public IEnumerable<string> Countries { get; set; }
 

@@ -14,3 +14,4 @@ namespace GelatoGuide.Areas.Administration.Models.Places
         public DateTime DateCreated { get; set; }
     }
 }
+ 

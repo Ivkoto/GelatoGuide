@@ -14,6 +14,8 @@ namespace GelatoGuide.Services.Users
 
         Task<IdentityResult> CreateUser(UserServiceModel model);
 
+        string GetInitialAdminId();
+
         Task<IdentityResult> UpdateUser(UserServiceModel model);
 
         Task<IdentityResult> DeleteUser(User user);

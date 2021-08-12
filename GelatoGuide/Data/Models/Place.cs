@@ -53,7 +53,7 @@ namespace GelatoGuide.Data.Models
 
         public DateTime DateCreated { get; set; }
 
-        public string UserId { get; init; }
+        public string UserId { get; set; }
 
         public User User { get; init; }
     }

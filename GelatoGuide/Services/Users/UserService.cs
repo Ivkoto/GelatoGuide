@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using static GelatoGuide.WebConstants;
 
 namespace GelatoGuide.Services.Users
 {
@@ -50,6 +52,17 @@ namespace GelatoGuide.Services.Users
             }
 
             return this.users;
+        }
+
+        public string GetInitialAdminId()
+        {
+            var admin = this.userManager.Users.FirstOrDefault(u => u.UserName == Admin.InitialUsername);
+
+            if (admin == null)
+            {
+                return string.Empty;
+            }
+            return admin.Id;
         }
 
         public async Task<User> GetUserById(string id)

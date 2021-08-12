@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Security.Claims;
 using GelatoGuide.Areas.Administration.Models.Places;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Places.Models;
@@ -44,6 +45,8 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return View(curPlace);
             }
 
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
             var place = new CreatePlaceServiceModel()
             {
                 Name = curPlace.Name,
@@ -61,10 +64,11 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 SinceYear = curPlace.SinceYear,
                 TakeawayUrl = curPlace.TakeawayUrl,
                 TwitterUrl = curPlace.TwitterUrl,
-                WebsiteUrl = curPlace.WebsiteUrl
+                WebsiteUrl = curPlace.WebsiteUrl,
+                UserId = userId
             };
 
-            this.placeService.CreatePlace(place);
+            this.placeService.CreatePlace(place, userId);
 
             return RedirectToAction("All", "Places");
         }

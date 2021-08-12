@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Threading.Tasks;
-using GelatoGuide.Data.Enumerations;
-using GelatoGuide.Data.Models;
-using Microsoft.AspNetCore.Authentication;
+﻿using GelatoGuide.Data.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Logging;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using static GelatoGuide.Data.DataConstants.User;
+using static GelatoGuide.WebConstants.Roles;
 
 namespace GelatoGuide.Areas.Identity.Pages.Account
 {
@@ -31,7 +22,7 @@ namespace GelatoGuide.Areas.Identity.Pages.Account
 
         public RegisterModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager, 
+            SignInManager<User> signInManager,
             RoleManager<IdentityRole> roleManager /*,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender*/)
@@ -92,16 +83,16 @@ namespace GelatoGuide.Areas.Identity.Pages.Account
             {
                 var user = new User()
                 {
-                    UserName = Input.Username, 
+                    UserName = Input.Username,
                     Email = Input.Email,
                     FullName = Input.FullName
                 };
 
                 var result = await this.userManager.CreateAsync(user, Input.Password);
-                
+
                 if (result.Succeeded)
                 {
-                    await this.userManager.AddToRoleAsync(user, nameof(RolesEnum.Regular));
+                    await this.userManager.AddToRoleAsync(user, RegularName);
 
                     //remove this if un-comment the code below 
                     await this.signInManager.SignInAsync(user, isPersistent: false);

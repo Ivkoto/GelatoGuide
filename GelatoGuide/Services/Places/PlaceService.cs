@@ -4,6 +4,7 @@ using GelatoGuide.Services.Places.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GelatoGuide.Models.Places;
 
 namespace GelatoGuide.Services.Places
 {
@@ -15,7 +16,7 @@ namespace GelatoGuide.Services.Places
             => this.data = data;
 
 
-        public void CreatePlace(CreatePlaceServiceModel place)
+        public void CreatePlace(CreatePlaceServiceModel place, string userId)
         {
             this.data.Add(new Place()
             {
@@ -35,18 +36,19 @@ namespace GelatoGuide.Services.Places
                 Country = place.Country,
                 City = place.City,
                 Location = place.Location,
-                DateCreated = DateTime.Now
+                DateCreated = DateTime.Now,
+                UserId = userId
             });
 
             this.data.SaveChanges();
         }
 
         //for Administration area
-        public IEnumerable<GetPlaceServiceModel> GetAllPlaces()
+        public IEnumerable<PlaceServiceModel> GetAllPlaces()
             =>
             this.data
                 .Places
-                .Select(place => new GetPlaceServiceModel()
+                .Select(place => new PlaceServiceModel()
                 {
                     Id = place.Id,
                     Name = place.Name,
@@ -59,11 +61,16 @@ namespace GelatoGuide.Services.Places
                 .ToList();
 
         
-        public IEnumerable<GetPlaceServiceModel> GetAllPlaces(
+        public SearchPlaceViewModel GetAllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage)
         {
             var placesQuery = this.data.Places.AsQueryable();
+            
+            if (!placesQuery.Any())
+            {
+                return null;
+            }
 
             //filter query if any search text have been imputed
             if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -104,11 +111,26 @@ namespace GelatoGuide.Services.Places
                 currentPage = maxPagesCount;
             }
 
+            if (!placesQuery.Any())
+            {
+                return new SearchPlaceViewModel()
+                {
+                    Places = new List<PlaceServiceModel>(),
+                    Cities = this.GetAllCities(),
+                    Countries = this.GetAllCountries(),
+                    TotalPlaces = totalPlaces,
+                    SearchTerm = searchTerm,
+                    Country = country,
+                    City = city,
+                    CurrentPage = currentPage
+                };
+            }
+
             var places = placesQuery
                 .Skip((currentPage - 1) * placesPerPage)
                 .Take(placesPerPage)
                 .OrderByDescending(p => p)
-                .Select(p => new GetPlaceServiceModel()
+                .Select(p => new PlaceServiceModel()
                 {
                     Name = p.Name,
                     Description = p.Description,
@@ -131,11 +153,23 @@ namespace GelatoGuide.Services.Places
                     Country = p.Country,
                     City = p.City,
                     Location = p.Location,
-                    DateCreated = DateTime.Now
+                    DateCreated = p.DateCreated
                 })
                 .ToList();
 
-            return places;
+            var result = new SearchPlaceViewModel()
+            {
+                Places = places,
+                Cities = this.GetAllCities(),
+                Countries = this.GetAllCountries(),
+                TotalPlaces = totalPlaces,
+                SearchTerm = searchTerm,
+                Country = country,
+                City = city,
+                CurrentPage = currentPage++
+            };
+
+            return result;
         }
 
         public int GetTotalPlacesCount()

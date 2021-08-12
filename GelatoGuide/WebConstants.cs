@@ -1,13 +1,25 @@
-﻿using GelatoGuide.Data.Enumerations;
-
-namespace GelatoGuide
+﻿namespace GelatoGuide
 {
     public class WebConstants
     {
-        public const string AdministratorRoleName = nameof(RolesEnum.Admin);
+        public class Roles
+        {
+            public const string AdminName = "Admin";
 
-        public const string RegularUserRoleName = nameof(RolesEnum.Regular);
+            public const string RegularName = "Regular";
 
-        public const string PremiumUserRoleName = nameof(RolesEnum.Premium);
+            public const string PremiumName = "Premium";
+        }
+        
+        public class Admin
+        {
+            public const string InitialUsername = "admin";
+
+            public const string InitialPassword = "root123";
+
+            public const string InitialEmail = "admin@gelatoguide.com";
+
+            public const string InitialFullName = "Administrator";
+        }
     }
 }

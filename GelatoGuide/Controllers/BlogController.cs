@@ -1,10 +1,10 @@
-﻿using GelatoGuide.Data.Enumerations;
-using GelatoGuide.Models.Blog;
+﻿using GelatoGuide.Models.Blog;
 using GelatoGuide.Services.Blog;
+using GelatoGuide.Services.Blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using GelatoGuide.Services.Blog.Models;
+using static GelatoGuide.WebConstants.Roles;
 
 namespace GelatoGuide.Controllers
 {
@@ -37,10 +37,10 @@ namespace GelatoGuide.Controllers
 
             return View(search);
         }
-        
+
         public IActionResult CreateArticle()
         {
-            if (User.IsInRole(nameof(RolesEnum.Admin)) || User.IsInRole(nameof(RolesEnum.Premium)))
+            if (User.IsInRole(AdminName) || User.IsInRole(PremiumName))
             {
                 return View();
             }
@@ -64,10 +64,10 @@ namespace GelatoGuide.Controllers
 
             return RedirectToAction("All", "Blog");
         }
-        
+
         public IActionResult MyArticles()
         {
-            if (User.IsInRole(nameof(RolesEnum.Admin)) || User.IsInRole(nameof(RolesEnum.Premium)))
+            if (User.IsInRole(AdminName) || User.IsInRole(PremiumName))
             {
                 var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
@@ -77,9 +77,9 @@ namespace GelatoGuide.Controllers
             }
 
             return RedirectToAction("CreatePremium", "User");
-            
+
         }
-        
+
         public IActionResult Edit(string id)
         {
             var article = this.blogService.GetArticleById(id);

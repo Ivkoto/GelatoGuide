@@ -1,5 +1,4 @@
 ﻿using GelatoGuide.Data;
-using GelatoGuide.Data.Enumerations;
 using GelatoGuide.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
@@ -8,15 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using GelatoGuide.Models;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Options;
 using static GelatoGuide.WebConstants;
 
 namespace GelatoGuide.Infrastructure
 {
     public static class ApplicationBuilderExtension
     {
+        private static TestSeedData testSeedData = new TestSeedData();
 
         public static IApplicationBuilder PrepareDatabase(
             this IApplicationBuilder app)
@@ -32,12 +29,15 @@ namespace GelatoGuide.Infrastructure
 
             SeedAdministrator(services, data);
 
+            SeedPlaces(data);
+
+            SeedArticles(data);
+
             return app;
         }
 
         private static void MigrateDatabase(IServiceProvider services, GelatoGuideDbContext data)
         {
-
             data.Database.Migrate();
         }
 
@@ -48,12 +48,12 @@ namespace GelatoGuide.Infrastructure
                 return;
             }
 
-            data.Roles.AddRange(new []
+            data.Roles.AddRange(new[]
             {
-                new IdentityRole{Name = RegularUserRoleName, NormalizedName = RegularUserRoleName.ToUpper()},
-                new IdentityRole{Name = PremiumUserRoleName, NormalizedName = PremiumUserRoleName.ToUpper()},
-                new IdentityRole{Name = AdministratorRoleName, NormalizedName = AdministratorRoleName.ToUpper()}
-                
+                new IdentityRole{Name = Roles.RegularName, NormalizedName = Roles.RegularName.ToUpper()},
+                new IdentityRole{Name = Roles.PremiumName, NormalizedName = Roles.PremiumName.ToUpper()},
+                new IdentityRole{Name = Roles.AdminName, NormalizedName = Roles.AdminName.ToUpper()}
+
             });
 
             data.SaveChanges();
@@ -67,38 +67,62 @@ namespace GelatoGuide.Infrastructure
             Task
                 .Run(async () =>
                 {
-                    if (await userManager.Users.AnyAsync(u => u.UserName == "Admin"))
+                    if (await userManager.Users.AnyAsync(u => u.UserName == Admin.InitialUsername))
                     {
                         return;
                     }
 
                     IdentityRole role;
 
-                    if (!await roleManager.RoleExistsAsync(AdministratorRoleName))
+                    if (!await roleManager.RoleExistsAsync(Roles.AdminName))
                     {
-                        role = new IdentityRole { Name = AdministratorRoleName };
+                        role = new IdentityRole { Name = Roles.AdminName };
 
                         await roleManager.CreateAsync(role);
                     }
                     else
                     {
-                        role = await data.Roles.FirstOrDefaultAsync(r => r.Name == AdministratorRoleName);
+                        role = await data.Roles.FirstOrDefaultAsync(r => r.Name == Roles.AdminName);
                     }
-                    
+
 
                     var user = new User
                     {
-                        UserName = "Admin" ,
-                        Email = "admin@gelatoguide.com",
-                        FullName = "Admin"
+                        UserName = Admin.InitialUsername,
+                        Email = Admin.InitialEmail,
+                        FullName = Admin.InitialFullName
                     };
 
-                    await userManager.CreateAsync(user, "root9406");
+                    await userManager.CreateAsync(user, Admin.InitialPassword);
 
                     await userManager.AddToRoleAsync(user, role.Name);
                 })
                 .GetAwaiter()
                 .GetResult();
+        }
+
+        private static void SeedPlaces(GelatoGuideDbContext data)
+        {
+            if (data.Places.Any())
+            {
+                return;
+            }
+
+            data.Places.AddRange(testSeedData.Places());
+
+            data.SaveChanges();
+        }
+
+        private static void SeedArticles(GelatoGuideDbContext data)
+        {
+            if (data.Articles.Any())
+            {
+                return;
+            }
+
+            data.Articles.AddRange(testSeedData.Articles());
+
+            data.SaveChanges();
         }
     }
 }

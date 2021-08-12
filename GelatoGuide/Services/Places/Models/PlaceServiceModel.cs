@@ -4,7 +4,7 @@ using GelatoGuide.Data.Models;
 
 namespace GelatoGuide.Services.Places.Models
 {
-    public class GetPlaceServiceModel
+    public class PlaceServiceModel
     {
         public string Id { get; init; }
         public string Name { get; init; }

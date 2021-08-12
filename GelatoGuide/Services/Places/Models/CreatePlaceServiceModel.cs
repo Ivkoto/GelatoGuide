@@ -21,6 +21,8 @@ namespace GelatoGuide.Services.Places.Models
         public string TwitterUrl { get; init; }
         public string GlovoUrl { get; init; }
 
+        public string UserId { get; set; }
+
         public IEnumerable<Image> Images { get; set; }
     }
 }

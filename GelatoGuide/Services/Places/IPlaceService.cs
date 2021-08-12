@@ -1,15 +1,17 @@
 ﻿using GelatoGuide.Services.Places.Models;
 using System.Collections.Generic;
+using GelatoGuide.Models.Places;
 
 namespace GelatoGuide.Services.Places
 {
     public interface IPlaceService
     {
-        void CreatePlace(CreatePlaceServiceModel place);
+        void CreatePlace(CreatePlaceServiceModel place, string userId);
 
-        IEnumerable<GetPlaceServiceModel> GetAllPlaces();
+        //Admin area
+        IEnumerable<PlaceServiceModel> GetAllPlaces();
 
-        IEnumerable<GetPlaceServiceModel> GetAllPlaces(
+        SearchPlaceViewModel GetAllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage);
 
