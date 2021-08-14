@@ -16,7 +16,7 @@ namespace GelatoGuide.Services.Places
             => this.data = data;
 
 
-        public void CreatePlace(CreatePlaceServiceModel place, string userId)
+        public void CreatePlace(PlaceServiceModel place, string userId)
         {
             this.data.Add(new Place()
             {
@@ -32,7 +32,7 @@ namespace GelatoGuide.Services.Places
                 FacebookUrl = place.FacebookUrl,
                 InstagramUrl = place.InstagramUrl,
                 TwitterUrl = place.TwitterUrl,
-                WebsiteLink = place.WebsiteUrl,
+                WebsiteLink = place.WebsiteLink,
                 Country = place.Country,
                 City = place.City,
                 Location = place.Location,
@@ -60,7 +60,39 @@ namespace GelatoGuide.Services.Places
                 })
                 .ToList();
 
-        
+        public Place GetPlaceById(string id)
+            => this.data.Places.First(p => p.Id == id);
+
+        public void UpdatePlace(PlaceServiceModel model)
+        {
+            var place = this.GetPlaceById(model.Id);
+
+            place.Name = model.Name;
+            place.Description = model.Description;
+            place.MainImageUrl = model.MainImageUrl;
+            place.SinceYear = model.SinceYear;
+            place.LogoUrl = model.LogoUrl;
+            place.WebsiteLink = model.WebsiteLink;
+            place.Country = model.Country;
+            place.City = model.City;
+            place.Location = model.Location;
+            place.TakeawayUrl = model.TakeawayUrl;
+            place.FoodpandaUrl = model.FoodpandaUrl;
+            place.GlovoUrl = model.GlovoUrl;
+            place.FacebookUrl = model.FacebookUrl;
+            place.InstagramUrl = model.InstagramUrl;
+            place.TwitterUrl = model.TwitterUrl;
+            place.Images = model.Images;
+
+            this.data.SaveChanges();
+        }
+
+        public void DeletePlace(Place place)
+        {
+            this.data.Places.Remove(place);
+            this.data.SaveChanges();
+        }
+
         public SearchPlaceViewModel GetAllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage)
@@ -127,9 +159,9 @@ namespace GelatoGuide.Services.Places
             }
 
             var places = placesQuery
+                .OrderByDescending(p => p.DateCreated)
                 .Skip((currentPage - 1) * placesPerPage)
                 .Take(placesPerPage)
-                .OrderByDescending(p => p)
                 .Select(p => new PlaceServiceModel()
                 {
                     Name = p.Name,
@@ -159,7 +191,7 @@ namespace GelatoGuide.Services.Places
 
             var result = new SearchPlaceViewModel()
             {
-                Places = places,
+                Places = places.OrderByDescending(p => p.DateCreated),
                 Cities = this.GetAllCities(),
                 Countries = this.GetAllCountries(),
                 TotalPlaces = totalPlaces,

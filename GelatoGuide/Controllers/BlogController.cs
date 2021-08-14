@@ -1,10 +1,11 @@
-﻿using GelatoGuide.Models.Blog;
+﻿using GelatoGuide.Infrastructure;
+using GelatoGuide.Models.Blog;
 using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using static GelatoGuide.WebConstants.Roles;
+using Microsoft.AspNetCore.Identity;
 
 namespace GelatoGuide.Controllers
 {
@@ -40,7 +41,7 @@ namespace GelatoGuide.Controllers
 
         public IActionResult CreateArticle()
         {
-            if (User.IsInRole(AdminName) || User.IsInRole(PremiumName))
+            if (this.User.IsAdmin() || this.User.IsPremium())
             {
                 return View();
             }
@@ -67,9 +68,9 @@ namespace GelatoGuide.Controllers
 
         public IActionResult MyArticles()
         {
-            if (User.IsInRole(AdminName) || User.IsInRole(PremiumName))
+            if (this.User.IsAdmin() || this.User.IsPremium())
             {
-                var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                var userId = this.User.Id();
 
                 var myArticles = this.blogService.GetAllByUserId(userId);
 
@@ -123,7 +124,38 @@ namespace GelatoGuide.Controllers
 
             this.blogService.Edit(id, serviceModel);
 
+            if (this.User.IsAdmin())
+            {
+                return RedirectToAction("All", "Blog");
+            }
+
             return RedirectToAction("MyArticles", "Blog");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(string id)
+        {
+            var article = this.blogService.GetArticleById(id);
+
+            if (article == null)
+            {
+                this.ModelState.AddModelError("", "Статията не съществува!");
+                return View("All");
+            }
+
+            this.blogService.Delete(article);
+
+            //return View("All");
+
+            return RedirectToAction("All", "Blog");
+        }
+
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
     }
 }

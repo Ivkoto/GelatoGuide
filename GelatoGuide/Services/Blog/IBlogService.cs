@@ -1,5 +1,6 @@
 ﻿using GelatoGuide.Services.Blog.Models;
 using System.Collections.Generic;
+using GelatoGuide.Data.Models;
 
 namespace GelatoGuide.Services.Blog
 {
@@ -13,6 +14,8 @@ namespace GelatoGuide.Services.Blog
 
         void Edit(string id, ArticleServiceModel model);
 
+        void Delete(Article article);
+
         IEnumerable<string> GetAllPostedByNames();
 
         IEnumerable<string> GetAllYears();
@@ -21,6 +24,6 @@ namespace GelatoGuide.Services.Blog
 
         IEnumerable<ArticleServiceModel> GetAllByUserId(string id);
 
-        ArticleServiceModel GetArticleById(string id);
+        Article GetArticleById(string id);
     }
 }

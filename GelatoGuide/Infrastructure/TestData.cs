@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GelatoGuide.Infrastructure
 {
-    public class TestSeedData
+    public class TestData
     {
         public IEnumerable<Place> Places()
         {

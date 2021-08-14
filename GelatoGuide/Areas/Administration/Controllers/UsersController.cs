@@ -1,16 +1,13 @@
 ﻿using GelatoGuide.Areas.Administration.Models.Admin;
+using GelatoGuide.Areas.Administration.Models.Users;
 using GelatoGuide.Services.Users;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using GelatoGuide.Areas.Administration.Models.Users;
-using Microsoft.AspNetCore.Identity;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
-    [Area("Administration")]
-    [Authorize(Roles = "Admin")]
-    public class UsersController : Controller
+    public class UsersController : AdminController
     {
         private readonly IUserService userService;
 
@@ -30,7 +27,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             => View();
 
         [HttpPost]
-        public IActionResult Create(CreateUserFormModel model)
+        public IActionResult Create(UserFormModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -66,19 +63,19 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return BadRequest();
             }
 
-            var model = new UpdateUserFormModel()
+            var model = new UserFormModel()
             {
                 Username = user.UserName,
                 Email = user.Email,
                 FullName = user.FullName,
                 PhoneNumber = user.PhoneNumber
             };
-            
+
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Update(UpdateUserFormModel model)
+        public IActionResult Update(UserFormModel model)
         {
             model.User = this.userService.GetUserById(model.Id).Result;
 

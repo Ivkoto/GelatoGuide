@@ -1,0 +1,105 @@
+﻿@model PlaceFormModel
+
+@{
+    ViewBag.Title = "Place Form";
+}
+
+<form method="post">
+    <i style="margin: 0% 0% 0% 18%">The yellow boxes are required!</i>
+    <br />
+    <br />
+    <br />
+    <div class="form-row justify-content-center">
+        <div class="row col-10 offset-2" style="text-align: center">
+            <div class="col-5">
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="Name">Place name</label>
+                    <input asp-for="Name" class="form-control" style="background-color: #fffdf2" placeholder="Enter place name here...">
+                    <span asp-validation-for="Name" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="MainImageUrl">Main image url:</label>
+                    <input asp-for="MainImageUrl" class="form-control" style="background-color: #fffdf2" placeholder="Main picture image URL...">
+                    <span asp-validation-for="MainImageUrl" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="Description">Description</label>
+                    <textarea asp-for="Description" class="form-control" rows="6" style="background-color: #fffdf2" placeholder="Describe the place here..."></textarea>
+                    <span asp-validation-for="Description" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="LogoUrl">Logo</label>
+                    <input asp-for="LogoUrl" class="form-control" placeholder="Place logo image URL here...">
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="SinceYear">Since from</label>
+                    <input asp-for="SinceYear" class="form-control" style="background-color: #fffdf2" placeholder="Enter since year here...">
+                    <span asp-validation-for="SinceYear" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="col-10">
+                <div class="form-group">
+                    <label asp-for="WebsiteUrl">Website</label>
+                    <input asp-for="WebsiteUrl" class="form-control" placeholder="Place main website here...">
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="Country">Country</label>
+                    <input asp-for="Country" class="form-control" style="background-color: #fffdf2" placeholder="">
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group">
+                    <label asp-for="City">CIty</label>
+                    <input asp-for="City" class="form-control" style="background-color: #fffdf2" placeholder="">
+                    <span asp-validation-for="City" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="col-10" style="margin-bottom: 7%">
+                <div class="form-group">
+                    <label asp-for="Location">Location</label>
+                    <input asp-for="Location" class="form-control" placeholder="Input Latitude and Longitude here...">
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="InstagramUrl">Instagram</label>
+                    <input asp-for="InstagramUrl" class="form-control" placeholder="Place Instagram url here...">
+                </div>
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="FacebookUrl">Facebook</label>
+                    <input asp-for="FacebookUrl" class="form-control" placeholder="Place Facebook url here...">
+                </div>
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="TwitterUrl">Tweeter</label>
+                    <input asp-for="TwitterUrl" class="form-control" placeholder="Place Twitter url here...">
+                </div>
+            </div>
+            <div class="col-5">
+
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="FoodpandaUrl">Foodpanda</label>
+                    <input asp-for="FoodpandaUrl" class="form-control" placeholder="Order link here....">
+                </div>
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="TakeawayUrl">Takeaway</label>
+                    <input asp-for="TakeawayUrl" class="form-control" placeholder="Order link here....">
+                </div>
+                <div class="form-group" style="margin-bottom: 7%">
+                    <label asp-for="GlovoUrl">Glovo</label>
+                    <input asp-for="GlovoUrl" class="form-control" placeholder="Order link here....">
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>

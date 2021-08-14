@@ -4,9 +4,11 @@ using static GelatoGuide.Data.DataConstants.User;
 
 namespace GelatoGuide.Areas.Administration.Models.Users
 {
-    public class UpdateUserFormModel
+    public class UserFormModel
     {
         public string Id { get; init; }
+
+        public User User { get; set; }
 
         [Required]
         [StringLength(UserNameMaxLength, MinimumLength = UserNameMinLength, 
@@ -33,6 +35,5 @@ namespace GelatoGuide.Areas.Administration.Models.Users
         [Display(Name = "Password")]
         public string Password { get; init; }
         
-        public User User { get; set; }
     }
 }

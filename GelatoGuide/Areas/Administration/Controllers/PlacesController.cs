@@ -1,27 +1,25 @@
-﻿using System.Linq;
-using System.Security.Claims;
-using GelatoGuide.Areas.Administration.Models.Places;
+﻿using GelatoGuide.Areas.Administration.Models.Places;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Places.Models;
-using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using System.Security.Claims;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
-    [Area("Administration")]
-    [Authorize(Roles = "Admin")]
-    public class PlacesController : Controller
+    public class PlacesController : AdminController
     {
         private readonly IPlaceService placeService;
 
-        public PlacesController(IPlaceService placeService) 
+        public PlacesController(IPlaceService placeService)
             => this.placeService = placeService;
 
         public IActionResult All()
         {
             var placesQuery = this.placeService.GetAllPlaces();
 
-            var places = placesQuery.Select(p => new AllPlaceViewModel()
+            var places = placesQuery.Select(p => new PlacesViewModel()
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -38,7 +36,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(CreatePlaceFormModel curPlace)
+        public IActionResult Create(PlaceFormModel curPlace)
         {
             if (!ModelState.IsValid)
             {
@@ -47,7 +45,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            var place = new CreatePlaceServiceModel()
+            var place = new PlaceServiceModel()
             {
                 Name = curPlace.Name,
                 City = curPlace.City,
@@ -64,13 +62,103 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 SinceYear = curPlace.SinceYear,
                 TakeawayUrl = curPlace.TakeawayUrl,
                 TwitterUrl = curPlace.TwitterUrl,
-                WebsiteUrl = curPlace.WebsiteUrl,
+                WebsiteLink = curPlace.WebsiteUrl,
                 UserId = userId
             };
 
             this.placeService.CreatePlace(place, userId);
 
             return RedirectToAction("All", "Places");
+        }
+
+        public IActionResult Update(string id)
+        {
+            var place = this.placeService.GetPlaceById(id);
+
+            if (place == null)
+            {
+                return RedirectToAction("All", "Places");
+            }
+
+            var model = new PlaceFormModel()
+            {
+                Name = place.Name,
+                Description = place.Description,
+                MainImageUrl = place.MainImageUrl,
+                City = place.City,
+                Country = place.Country,
+                SinceYear = place.SinceYear,
+                LogoUrl = place.LogoUrl,
+                Location = place.Location,
+                WebsiteUrl = place.WebsiteLink,
+                Images = place.Images,
+                InstagramUrl = place.InstagramUrl,
+                FacebookUrl = place.FacebookUrl,
+                TwitterUrl = place.TwitterUrl,
+                FoodpandaUrl = place.FoodpandaUrl,
+                GlovoUrl = place.GlovoUrl,
+                TakeawayUrl = place.TakeawayUrl
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Update(PlaceFormModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var serviceModel = new PlaceServiceModel()
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                MainImageUrl = model.MainImageUrl,
+                SinceYear = model.SinceYear,
+                LogoUrl = model.LogoUrl,
+                WebsiteLink = model.WebsiteUrl,
+                Country = model.Country,
+                City = model.City,
+                Location = model.Location,
+                TakeawayUrl = model.TakeawayUrl,
+                FoodpandaUrl = model.FoodpandaUrl,
+                FacebookUrl = model.FacebookUrl,
+                InstagramUrl = model.InstagramUrl,
+                TwitterUrl = model.TwitterUrl,
+                GlovoUrl = model.GlovoUrl,
+                Images = model.Images
+            };
+
+            this.placeService.UpdatePlace(serviceModel);
+
+            return RedirectToAction("All", "Places");
+        }
+
+        [HttpPost]
+        public IActionResult Delete(string id)
+        {
+            var place = this.placeService.GetPlaceById(id);
+
+            if (place == null)
+            {
+                this.ModelState.AddModelError("", "Place not found!");
+                return View("All");
+            }
+
+            this.placeService.DeletePlace(place);
+
+            return RedirectToAction("All", "Places");
+        }
+
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError(string.Empty, error.Description);
+            }
         }
     }
 }

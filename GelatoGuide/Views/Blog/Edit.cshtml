@@ -4,4 +4,9 @@
     ViewBag.Title = "Edit Article";
 }
 
-<partial name="_ArticleFormPartial" model="@Model"/>
+<partial name="_ArticleFormPartial" model="@Model" />
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

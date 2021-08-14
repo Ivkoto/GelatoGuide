@@ -1,6 +1,7 @@
 ﻿@model PlaceFormModel
+
 @{
-    ViewBag.Title = "Create Place";
+    ViewBag.Title = "Update Place";
 }
 
 <div class="container-fluid">
@@ -13,7 +14,7 @@
             <div asp-validation-summary="All" class="text-danger"></div>
         </div>
     </div>
-    <partial name="_PlaceFormPartial" model="Model"/>
+    <partial name="_PlaceFormPartial" model="Model" />
 </div>
 
 @section Scripts

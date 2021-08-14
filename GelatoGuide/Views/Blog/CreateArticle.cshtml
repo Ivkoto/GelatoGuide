@@ -1,11 +1,13 @@
 ﻿@model ArticleFormModel
 @{
-    ViewData["Title"] = "Create new article";
+    ViewBag.Title = "Create new article";
 }
 
 @Html.ValidationSummary(true)
 
-@* The form from _ArticleFormPartial should be here *@
-
-
 <partial name="_ArticleFormPartial" model="@Model"/>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}

@@ -105,6 +105,12 @@ namespace GelatoGuide.Services.Blog
             this.data.SaveChanges();
         }
 
+        public void Delete(Article article)
+        {
+            this.data.Articles.Remove(article);
+            this.data.SaveChanges();
+        }
+
         public IEnumerable<string> GetAllPostedByNames()
             => this.data.Articles
                 .Select(a => a.PostedByName)
@@ -139,20 +145,32 @@ namespace GelatoGuide.Services.Blog
                 })
                 .ToList();
 
-        public ArticleServiceModel GetArticleById(string id)
-            => this.data.Articles
-                .Where(a => a.Id == id)
-                .Select(a => new ArticleServiceModel()
-                {
-                    Title = a.Title,
-                    SubTitle = a.SubTitle,
-                    Image = a.Image,
-                    ArticleText = a.ArticleText,
-                    SourceName = a.SourceName,
-                    SourceUrl = a.SourceUrl,
-                    PostedByName = a.PostedByName,
-                    UserId = a.UserId
-                })
-                .FirstOrDefault();
+        //ToDo - delete if everything works
+        //public ArticleServiceModel GetArticleById(string id)
+        //    => this.data.Articles
+        //        .Where(a => a.Id == id)
+        //        .Select(a => new ArticleServiceModel()
+        //        {
+        //            Title = a.Title,
+        //            SubTitle = a.SubTitle,
+        //            Image = a.Image,
+        //            ArticleText = a.ArticleText,
+        //            SourceName = a.SourceName,
+        //            SourceUrl = a.SourceUrl,
+        //            PostedByName = a.PostedByName,
+        //            UserId = a.UserId
+        //        })
+        //        .FirstOrDefault();
+
+        public Article GetArticleById(string id)
+        {
+            var articles = this.data.Articles.ToList();
+
+            var places = this.data.Places.ToList();
+
+            var curArt = articles.First(a => a.Id == id);
+
+            return curArt;
+        }
     }
 }

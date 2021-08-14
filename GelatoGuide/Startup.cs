@@ -88,11 +88,7 @@ namespace GelatoGuide
                 .UseEndpoints(
                 endpoints =>
                 {
-                    endpoints.MapControllerRoute(name: "areaRout",
-                        pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
-                    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
-
-                    //remove if app didn't work for some point
+                    endpoints.MapDefaultAreaRoute();
                     endpoints.MapDefaultControllerRoute();
                     endpoints.MapRazorPages();
                 });

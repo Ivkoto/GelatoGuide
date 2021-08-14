@@ -6,8 +6,10 @@ using static GelatoGuide.Data.DataConstants.Place;
 
 namespace GelatoGuide.Areas.Administration.Models.Places
 {
-    public class CreatePlaceFormModel : IValidatableObject
+    public class PlaceFormModel : IValidatableObject
     {
+        public string Id { get; init;  }
+
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, 
             ErrorMessage = "The {0} length should be between {2} and {1} characters long.")]

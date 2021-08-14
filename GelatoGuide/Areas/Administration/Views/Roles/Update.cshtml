@@ -24,7 +24,7 @@
                 <p>Role Id:</p>
             </div>
             <div class="col-4">
-                <input class="input-group text-center" name="roleId" value="@Model.Role.Id"/>
+                <input class="input-group text-center" name="roleId" value="@Model.Role.Id" />
             </div>
         </div>
 
@@ -75,5 +75,7 @@
     </form>
 </div>
 
-
-
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

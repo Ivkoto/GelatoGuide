@@ -13,8 +13,10 @@
             @if (ViewBag.AllowArticleEdit == true)
             {
                 <div class="offset-2 offset-sm-4 offset-md-4 offset-xl-5 justify-content-md-center">
-                    <a class="btn-link text-info mr-4" asp-controller="Blog" asp-action="Edit" asp-route-id="@article.Id">Edit</a>
-                    <a class="btn-link text-danger" asp-controller="Blog" asp-action="Delete" asp-route-id="@article.Id">Delete</a>
+                    <a class="btn-link text-info mr-4" asp-controller="Blog" asp-action="Edit" asp-route-id="@article.Id">Редактирай</a>
+                    <form asp-controller="Blog" asp-action="Delete" asp-route-id="@article.Id" method="post">
+                        <button type="submit" class="btn text-danger">Изтрий</button>
+                    </form>
                 </div>
             }
         </div>

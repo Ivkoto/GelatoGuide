@@ -1,19 +1,24 @@
 ﻿@model string
-    <div class="container">
-        <div class="row justify-content-end text-center">
-            <div class="col-4">
-                <h3>Create a Role</h3>
-            </div>
-            <div class="col-4">
-                <a asp-action="All" class="btn btn-secondary">All Roles</a>
-                <div asp-validation-summary="All" class="text-danger"></div>
-            </div>
+<div class="container">
+    <div class="row justify-content-end text-center">
+        <div class="col-4">
+            <h3>Create a Role</h3>
         </div>
-        <form asp-action="Create" method="post">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input name="roleName" class="form-control" />
-            </div>
-            <button type="submit" class="btn btn-primary">Create</button>
-        </form>
+        <div class="col-4">
+            <a asp-action="All" class="btn btn-secondary">All Roles</a>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
     </div>
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input name="roleName" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

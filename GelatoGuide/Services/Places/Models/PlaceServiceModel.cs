@@ -7,6 +7,7 @@ namespace GelatoGuide.Services.Places.Models
     public class PlaceServiceModel
     {
         public string Id { get; init; }
+
         public string Name { get; init; }
         
         public string Description { get; init; }
@@ -37,8 +38,10 @@ namespace GelatoGuide.Services.Places.Models
 
         public string TwitterUrl { get; init; }
 
-        public IEnumerable<Image> Images { get; init; }
+        public IEnumerable<Image> Images { get; set; }
 
         public DateTime DateCreated { get; set; }
+
+        public string UserId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AllPlaceViewModel>
+﻿@model IEnumerable<PlacesViewModel>
 
 @{
     ViewData["Title"] = "All added places";
@@ -25,6 +25,8 @@
             <th scope="col">Country</th>
             <th scope="col">City</th>
             <th scope="col">Created on</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -41,6 +43,16 @@
                 <td>@place.Country</td>
                 <td>@place.City</td>
                 <td>@place.DateCreated</td>
+                <td>
+                    <a class="btn btn-sm text-primary"asp-controller="Places" asp-action="Update" asp-route-id="@place.Id">
+                        Update
+                    </a>
+                </td>
+                <td>
+                    <form asp-controller="Places" asp-action="Delete" asp-route-id="@place.Id" method="post">
+                        <button type="submit" class="btn btn-sm text-danger">DELETE</button>
+                    </form>
+                </td>
             </tr>
 
             counter++;

@@ -2,7 +2,7 @@
 
 namespace GelatoGuide.Areas.Administration.Models.Places
 {
-    public class AllPlaceViewModel
+    public class PlacesViewModel
     {
         public string Id { get; set; }
         public string Name { get; set; }

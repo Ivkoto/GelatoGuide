@@ -1,15 +1,12 @@
 ﻿using GelatoGuide.Areas.Administration.Models.Roles;
 using GelatoGuide.Services.Roles;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
-    [Area("Administration")]
-    [Authorize(Roles = "Admin")]
-    public class RolesController : Controller
+    public class RolesController : AdminController
     {
         private readonly IRoleService roleService;
 
