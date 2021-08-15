@@ -4,11 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Controllers
 {
-    public class PlaceController : Controller
+    public class PlacesController : Controller
     {
         private readonly IPlaceService placeService;
 
-        public PlaceController(IPlaceService placeService)
+        public PlacesController(IPlaceService placeService)
         {
             this.placeService = placeService;
         }

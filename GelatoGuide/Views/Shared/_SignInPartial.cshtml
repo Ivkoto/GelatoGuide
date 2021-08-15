@@ -1,0 +1,31 @@
+﻿@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
+
+@if (signInManager.IsSignedIn(User))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Map">Gelato Карта</a>
+    </li>
+    <li class="nav-item">
+        <div class="dropdown">
+            <a class="btn btn-link dropdown-toggle"
+               href="#"
+               role="button"
+               id="dropdownMenuLink"
+               data-toggle="dropdown"
+               aria-haspopup="True"
+               aria-expanded="False"
+               style="color: black">
+                Блог
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" asp-controller="Blog" asp-action="all">Всички статии</a>
+                <a class="dropdown-item" asp-controller="Blog" asp-action="MyArticles">Моите статии</a>
+                <a class="dropdown-item" asp-controller="Blog" asp-action="CreateArticle">Създай статия</a>
+            </div>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Shop" asp-action="Index">Онлайн Магазин</a>
+    </li>
+}

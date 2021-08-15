@@ -2,59 +2,38 @@
 @inject UserManager<User> userManager
 
 
-<ul class="navbar-nav flex-grow-1">
-    @if (signInManager.IsSignedIn(User))
+@if (signInManager.IsSignedIn(User))
+{
+    if (User.IsAdmin())
     {
-        <div class="dropdown">
-            <a class="btn btn-link dropdown-toggle"
-               href="#"
-               role="button"
-               id="dropdownMenuLink"
-               data-toggle="dropdown"
-               aria-haspopup="True"
-               aria-expanded="False"
-               style="color: black">
-                Блог
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                <a class="dropdown-item" asp-controller="Blog" asp-action="all">Всички статии</a>
-                <a class="dropdown-item" asp-controller="Blog" asp-action="MyArticles">Моите статии</a>
-                <a class="dropdown-item" asp-controller="Blog" asp-action="CreateArticle">Създай статия</a>
-            </div>
-        </div>
+        <li class="nav-item">
+            <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Home" asp-action="Index">Admin</a>
+        </li>
     }
-</ul>
-<ul class="navbar-nav">
-    @if (signInManager.IsSignedIn(User))
+    if (!User.IsPremium() && !User.IsAdmin())
     {
-        if (User.IsInRole("Admin"))
-        {
+        <li class="nav-item">
+            <a class="nav-link text-danger" asp-area="" asp-controller="User" asp-action="CreatePremium">Стани Премиум</a>
+        </li>
+    }
     <li class="nav-item">
-        <a class="nav-link text-center" style="color: blueviolet" asp-area="Administration" asp-controller="Home" asp-action="Index">Admin</a>
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Акаунт</a>
     </li>
-        }
-        if (User.IsInRole("Regular"))
-        {
-            <li class="nav-item">
-                <a class="nav-link text-danger" asp-area="" asp-controller="User" asp-action="CreatePremium">Стани Премиум</a>
-            </li>
-        }
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Акаунт</a>
-        </li>
-        <li class="nav-item">
-            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
-                <button type="submit" class="nav-link btn btn-link text-dark">Отпиши се</button>
-            </form>
-        </li>
-    }
-    else
-    {
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
-        </li>
-    }
-</ul>
+    <li class="nav-item">
+        <form class="form-inline" 
+              asp-area="Identity" 
+              asp-page="/Account/Logout" 
+              asp-route-returnUrl="@Url.Action("Index", "Home", new {area = ""})">
+            <button type="submit" class="nav-link btn btn-link text-dark">Отпиши се</button>
+        </form>
+    </li>
+}
+else
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+    </li>
+}
