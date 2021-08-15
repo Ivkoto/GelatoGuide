@@ -39,29 +39,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             return RedirectToAction("All");
         }
 
-
-        [HttpPost]
-        public IActionResult Delete(string id)
-        {
-            var role = this.roleService.FindRole(id).Result;
-
-            if (role == null)
-            {
-                ModelState.AddModelError(nameof(role), "Role not found!");
-
-                return View("All");
-            }
-
-            var result = this.roleService.DeleteRole(role).Result;
-
-            if (!result.Succeeded)
-            {
-                Errors(result);
-            }
-
-            return RedirectToAction("All");
-        }
-
+        
         public IActionResult Update(string id)
         {
             var roleMembers = this.roleService.GetMembersByRole(id).Result;
@@ -70,7 +48,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(UpdateRoleFormModel model)
+        public IActionResult Update(RoleFormModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -92,6 +70,28 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
             return RedirectToAction("All");
 
+        }
+
+        [HttpPost]
+        public IActionResult Delete(string id)
+        {
+            var role = this.roleService.FindRole(id).Result;
+
+            if (role == null)
+            {
+                ModelState.AddModelError(nameof(role), "Role not found!");
+
+                return View("All");
+            }
+
+            var result = this.roleService.DeleteRole(role).Result;
+
+            if (!result.Succeeded)
+            {
+                Errors(result);
+            }
+
+            return RedirectToAction("All", "Roles");
         }
 
         private void Errors(IdentityResult result)

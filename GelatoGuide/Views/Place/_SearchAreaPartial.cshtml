@@ -4,13 +4,12 @@
 <div class="col col-3 justify-content-center">
     <form method="get">
         <div class="jumbotron" style="background-color: antiquewhite">
-            <h3 class="text-center">Търсене</h3>
+            <h3 class="text-center font-italic">Търсене</h3>
             <div class="form-group">
-                @*<label style="font-size: 120%" asp-for="SearchTerm">Търси</label>*@
-                <input asp-for="SearchTerm" class="form-control" placeholder="Въведете текст тук..." />
+                <input asp-for="SearchTerm" class="form-control" placeholder="Ключова дума/думи..." />
             </div>
             <div class="form-group">
-                <label style="font-size: 120%" asp-for="Country">Изберете държава</label>
+                <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="Country">Изберете държава</label>
                 <select asp-for="Country" class="form-control">
                     <option value="">Всички</option>
                     @foreach (var country in Model.Countries)
@@ -20,7 +19,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label style="font-size: 120%" asp-for="City">Изберете град</label>
+                <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="City">Изберете град</label>
                 <select asp-for="City" class="form-control">
                     <option value="">Всички</option>
                     @foreach (var city in Model.Cities)
@@ -30,7 +29,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <input type="submit" class="btn btn-light" value="Търси" />
+                <input type="submit" class="btn btn-light" value="Резултати" />
             </div>
         </div>
     </form>

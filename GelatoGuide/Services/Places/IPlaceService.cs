@@ -10,21 +10,21 @@ namespace GelatoGuide.Services.Places
         void CreatePlace(PlaceServiceModel place, string userId);
 
         //Admin area
-        IEnumerable<PlaceServiceModel> GetAllPlaces();
+        IEnumerable<PlaceServiceModel> AllPlaces();
 
-        SearchPlaceViewModel GetAllPlaces(
+        SearchPlaceViewModel AllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage);
 
-        Place GetPlaceById(string id);
+        Place PlaceById(string id);
 
         void UpdatePlace(PlaceServiceModel model);
         void DeletePlace(Place place);
 
-        int GetTotalPlacesCount();
+        int TotalPlacesCount();
 
-        IEnumerable<string> GetAllCities();
+        IEnumerable<string> AllCities();
 
-        IEnumerable<string> GetAllCountries();
+        IEnumerable<string> AllCountries();
     }
 }

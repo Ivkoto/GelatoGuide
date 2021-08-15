@@ -8,9 +8,9 @@ namespace GelatoGuide.Services.Users
 {
     public interface IUserService
     {
-        IEnumerable<UserServiceModel> GetAllUser();
+        IEnumerable<UserServiceModel> AllUsers();
 
-        Task<User> GetUserById(string id);
+        Task<User> UserById(string id);
 
         Task<IdentityResult> CreateUser(UserServiceModel model);
 
@@ -19,5 +19,6 @@ namespace GelatoGuide.Services.Users
         Task<IdentityResult> UpdateUser(UserServiceModel model);
 
         Task<IdentityResult> DeleteUser(User user);
+        int TotalUsersCount();
     }
 }

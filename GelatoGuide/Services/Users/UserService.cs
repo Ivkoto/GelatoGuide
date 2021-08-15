@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
 using static GelatoGuide.WebConstants;
 
@@ -29,7 +28,7 @@ namespace GelatoGuide.Services.Users
             this.users = new List<UserServiceModel>();
         }
 
-        public IEnumerable<UserServiceModel> GetAllUser()
+        public IEnumerable<UserServiceModel> AllUsers()
         {
             foreach (var user in this.data.Users)
             {
@@ -65,7 +64,7 @@ namespace GelatoGuide.Services.Users
             return admin.Id;
         }
 
-        public async Task<User> GetUserById(string id)
+        public async Task<User> UserById(string id)
             => await this.userManager.FindByIdAsync(id);
 
         public async Task<IdentityResult> CreateUser(UserServiceModel model)
@@ -104,5 +103,8 @@ namespace GelatoGuide.Services.Users
 
         public async Task<IdentityResult> DeleteUser(User user)
             => await this.userManager.DeleteAsync(user);
+
+        public int TotalUsersCount()
+            => this.data.Users.Count();
     }
 }

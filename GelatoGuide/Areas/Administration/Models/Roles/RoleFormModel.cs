@@ -2,7 +2,7 @@
 
 namespace GelatoGuide.Areas.Administration.Models.Roles
 {
-    public class UpdateRoleFormModel
+    public class RoleFormModel
     {
         [Required]
         public string RoleName { get; set; }

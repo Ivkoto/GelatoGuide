@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace GelatoGuide.Services.Roles.Models
 {
-    public class UpdateRoleServiceModel
+    public class RoleServiceModel
     {
         public IdentityRole Role { get; set; }
         public IEnumerable<User> Members { get; set; }

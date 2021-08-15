@@ -32,7 +32,7 @@ namespace GelatoGuide.Services.Roles
          => await this.roleManager.DeleteAsync(role);
 
 
-        public async Task<UpdateRoleServiceModel> GetMembersByRole(string roleId)
+        public async Task<RoleServiceModel> GetMembersByRole(string roleId)
         {
             var role = await roleManager.FindByIdAsync(roleId);
             var members = new List<User>();
@@ -44,7 +44,7 @@ namespace GelatoGuide.Services.Roles
                 list.Add(user);
             }
 
-            var roleMembers = new UpdateRoleServiceModel()
+            var roleMembers = new RoleServiceModel()
             {
                 Role = role,
                 Members = members,

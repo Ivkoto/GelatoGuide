@@ -1,13 +1,13 @@
 ﻿ @model List<UserServiceModel>
 
 @{
-    ViewData["Title"] = "All Users";
+    ViewBag.Title = "All Users";
     var counter = 1;
 }
  <div class="container">
      <div class="row justify-content-end text-center mb-4">
          <div class="col-4">
-             <h3>@ViewData["Title"]</h3>
+             <h3>@ViewBag.Title</h3>
          </div>
          <div class="col-4">
              <a asp-controller="Users" asp-action="Create" class="btn btn-secondary">Create User</a>

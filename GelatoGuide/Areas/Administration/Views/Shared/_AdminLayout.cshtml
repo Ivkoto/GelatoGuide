@@ -1,0 +1,32 @@
+﻿@{
+    Layout = "_Layout";
+
+}
+    
+    <!-- Sidebar -->
+    <div class="row">
+        <div class="col-2">
+            <div class="col-12 mt-5 rounded">
+                <ul>
+                    <a class="btn btn-link" style="color: black" asp-area="Administration" asp-controller="Users" asp-action="All">All Users</a>
+                    <a class="btn btn-link" style="color: black" asp-area="Administration" asp-controller="Users" asp-action="Create">Create User</a>
+                    <a class="btn btn-link" style="color: blueviolet" asp-area="Administration" asp-controller="Places" asp-action="All">All Place</a>
+                    <a class="btn btn-link" style="color: blueviolet" asp-area="Administration" asp-controller="Places" asp-action="Create">Create Place</a>
+                    <a class="btn btn-link" style="color: darkgreen" asp-area="Administration" asp-controller="Roles" asp-action="All">All Roles</a>
+                    <a class="btn btn-link" style="color: darkgreen" asp-area="Administration" asp-controller="Roles" asp-action="Create">Create Role</a>
+                </ul>
+            </div>
+        </div>
+        <!-- Page Content -->
+        <div class="col-10">
+            <div class="container-fluid">
+                <main role="main" class="pb-3">
+                    @RenderBody()
+                </main>
+            </div>
+        </div>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)

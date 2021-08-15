@@ -27,13 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Administration\Models\Admin\" />
     <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\GelatoGuide.Data\GelatoGuide.Data.csproj" />
-    <ProjectReference Include="..\GelatoGuide.Identity\GelatoGuide.Identity.csproj" />
   </ItemGroup>
 
 </Project>

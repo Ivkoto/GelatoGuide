@@ -9,7 +9,7 @@ namespace GelatoGuide.Services.Roles
     {
         Task<IdentityRole> FindRole(string roleId);
 
-        Task<UpdateRoleServiceModel> GetMembersByRole(string roleId);
+        Task<RoleServiceModel> GetMembersByRole(string roleId);
 
         IEnumerable<IdentityRole> GetAllRoles();
 

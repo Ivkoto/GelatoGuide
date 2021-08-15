@@ -18,7 +18,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult All()
         {
-            var users = (List<UserServiceModel>)this.userService.GetAllUser();
+            var users = (List<UserServiceModel>)this.userService.AllUsers();
 
             return View(users);
         }
@@ -56,7 +56,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult Update(string id)
         {
-            var user = this.userService.GetUserById(id).Result;
+            var user = this.userService.UserById(id).Result;
 
             if (user == null)
             {
@@ -77,7 +77,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Update(UserFormModel model)
         {
-            model.User = this.userService.GetUserById(model.Id).Result;
+            model.User = this.userService.UserById(model.Id).Result;
 
             if (!ModelState.IsValid)
             {
@@ -114,7 +114,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            var user = this.userService.GetUserById(id).Result;
+            var user = this.userService.UserById(id).Result;
 
             if (user == null)
             {

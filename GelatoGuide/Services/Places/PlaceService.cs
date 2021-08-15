@@ -44,7 +44,7 @@ namespace GelatoGuide.Services.Places
         }
 
         //for Administration area
-        public IEnumerable<PlaceServiceModel> GetAllPlaces()
+        public IEnumerable<PlaceServiceModel> AllPlaces()
             =>
             this.data
                 .Places
@@ -60,12 +60,12 @@ namespace GelatoGuide.Services.Places
                 })
                 .ToList();
 
-        public Place GetPlaceById(string id)
+        public Place PlaceById(string id)
             => this.data.Places.First(p => p.Id == id);
 
         public void UpdatePlace(PlaceServiceModel model)
         {
-            var place = this.GetPlaceById(model.Id);
+            var place = this.PlaceById(model.Id);
 
             place.Name = model.Name;
             place.Description = model.Description;
@@ -93,7 +93,7 @@ namespace GelatoGuide.Services.Places
             this.data.SaveChanges();
         }
 
-        public SearchPlaceViewModel GetAllPlaces(
+        public SearchPlaceViewModel AllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage)
         {
@@ -148,8 +148,8 @@ namespace GelatoGuide.Services.Places
                 return new SearchPlaceViewModel()
                 {
                     Places = new List<PlaceServiceModel>(),
-                    Cities = this.GetAllCities(),
-                    Countries = this.GetAllCountries(),
+                    Cities = this.AllCities(),
+                    Countries = this.AllCountries(),
                     TotalPlaces = totalPlaces,
                     SearchTerm = searchTerm,
                     Country = country,
@@ -192,8 +192,8 @@ namespace GelatoGuide.Services.Places
             var result = new SearchPlaceViewModel()
             {
                 Places = places.OrderByDescending(p => p.DateCreated),
-                Cities = this.GetAllCities(),
-                Countries = this.GetAllCountries(),
+                Cities = this.AllCities(),
+                Countries = this.AllCountries(),
                 TotalPlaces = totalPlaces,
                 SearchTerm = searchTerm,
                 Country = country,
@@ -204,17 +204,17 @@ namespace GelatoGuide.Services.Places
             return result;
         }
 
-        public int GetTotalPlacesCount()
+        public int TotalPlacesCount()
             => this.data.Places.Count();
 
-        public IEnumerable<string> GetAllCities()
+        public IEnumerable<string> AllCities()
             => this.data.Places
                 .Select(p => p.City)
                 .Distinct()
                 .OrderBy(c => c)
                 .ToList();
 
-        public IEnumerable<string> GetAllCountries()
+        public IEnumerable<string> AllCountries()
             => this.data.Places
                 .Select(p => p.Country)
                 .Distinct()

@@ -1,11 +1,9 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using GelatoGuide.Data.Models
-@inject SignInManager<User> SignInManager
-@inject UserManager<User> UserManager
+﻿@inject SignInManager<User> signInManager
+@inject UserManager<User> userManager
 
 
 <ul class="navbar-nav flex-grow-1">
-    @if (SignInManager.IsSignedIn(User))
+    @if (signInManager.IsSignedIn(User))
     {
         <div class="dropdown">
             <a class="btn btn-link dropdown-toggle"
@@ -27,7 +25,7 @@
     }
 </ul>
 <ul class="navbar-nav">
-    @if (SignInManager.IsSignedIn(User))
+    @if (signInManager.IsSignedIn(User))
     {
         if (User.IsInRole("Admin"))
         {

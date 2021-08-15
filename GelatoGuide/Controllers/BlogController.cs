@@ -23,14 +23,14 @@ namespace GelatoGuide.Controllers
         {
             var search = new SearchArticlesViewModel()
             {
-                Articles = blogService.GetAllArticles(
+                Articles = blogService.AllArticles(
                 searchModel.SearchTerm,
                 searchModel.PostedByName,
                 searchModel.PostedByYear,
                 searchModel.PostedByMonth),
-                Names = blogService.GetAllPostedByNames(),
-                Years = blogService.GetAllYears(),
-                Months = blogService.GetAllMonths(),
+                Names = blogService.AllPostedByNames(),
+                Years = blogService.AllYears(),
+                Months = blogService.AllMonths(),
                 PostedByName = searchModel.PostedByName,
                 PostedByYear = searchModel.PostedByYear,
                 PostedByMonth = searchModel.PostedByMonth
@@ -72,7 +72,7 @@ namespace GelatoGuide.Controllers
             {
                 var userId = this.User.Id();
 
-                var myArticles = this.blogService.GetAllByUserId(userId);
+                var myArticles = this.blogService.AllByUserId(userId);
 
                 return View(myArticles);
             }
@@ -83,7 +83,7 @@ namespace GelatoGuide.Controllers
 
         public IActionResult Edit(string id)
         {
-            var article = this.blogService.GetArticleById(id);
+            var article = this.blogService.ArticleById(id);
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             if (article.UserId == userId || this.User.IsInRole("Admin"))
@@ -135,7 +135,7 @@ namespace GelatoGuide.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            var article = this.blogService.GetArticleById(id);
+            var article = this.blogService.ArticleById(id);
 
             if (article == null)
             {

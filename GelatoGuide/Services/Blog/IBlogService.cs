@@ -10,20 +10,22 @@ namespace GelatoGuide.Services.Blog
             string title, string subTitle, string image, string articleText,
             string sourceName, string sourceUrl, string postedByName, string userId);
 
-        IEnumerable<ArticleServiceModel> GetAllArticles(string searchTerm, string postedByName, string postedByYear, string postedByMonth);
+        IEnumerable<ArticleServiceModel> AllArticles(string searchTerm, string postedByName, string postedByYear, string postedByMonth);
 
         void Edit(string id, ArticleServiceModel model);
 
         void Delete(Article article);
 
-        IEnumerable<string> GetAllPostedByNames();
+        IEnumerable<string> AllPostedByNames();
 
-        IEnumerable<string> GetAllYears();
+        IEnumerable<string> AllYears();
 
-        IEnumerable<string> GetAllMonths();
+        IEnumerable<string> AllMonths();
 
-        IEnumerable<ArticleServiceModel> GetAllByUserId(string id);
+        IEnumerable<ArticleServiceModel> AllByUserId(string id);
 
-        Article GetArticleById(string id);
+        Article ArticleById(string id);
+
+        int TotalArticlesCount();
     }
 }

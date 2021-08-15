@@ -17,7 +17,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult All()
         {
-            var placesQuery = this.placeService.GetAllPlaces();
+            var placesQuery = this.placeService.AllPlaces();
 
             var places = placesQuery.Select(p => new PlacesViewModel()
             {
@@ -73,7 +73,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult Update(string id)
         {
-            var place = this.placeService.GetPlaceById(id);
+            var place = this.placeService.PlaceById(id);
 
             if (place == null)
             {
@@ -140,7 +140,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            var place = this.placeService.GetPlaceById(id);
+            var place = this.placeService.PlaceById(id);
 
             if (place == null)
             {

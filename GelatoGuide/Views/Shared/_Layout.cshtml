@@ -23,7 +23,7 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">Относно</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">За нас</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Map" asp-action="Map">Gelato Карта</a>
@@ -44,9 +44,10 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container-fluid">
-            <div class="row justify-content-center col-12">
-                &copy; @DateTime.Now.Year - GelatoGuide - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <div class="container">
+            <div class="row justify-content-center">
+                &copy; @DateTime.Now.Year - GelatoGuide
+                <a class="ml-3" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </div>
     </footer>

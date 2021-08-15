@@ -3,7 +3,7 @@
 
 @{
     ViewBag.Title = "All Articles";
-    if (this.User.IsAdmin())
+    if (User.IsAdmin())
     {
         ViewBag.AllowArticleEdit = true;
     }
@@ -17,12 +17,13 @@
         <div class="row justify-content-center text-center">
             <div>
                 <h1 class="display-3" style="text-shadow: 2px 2px 4px white; color: black">Блог статии</h1>
+                <hr style="background: black" />
                 <p class="lead font-weight-normal"
                    style="text-shadow: 2px 2px 4px white;
                           color: black">
                     Тук може да намерите най-новите блог статии, полезни съвети, места които да посетите
                 </p>
-                @if (User.IsInRole("Admin") || User.IsInRole("Premium"))
+                @if (User.IsAdmin() || User.IsPremium())
                 {
                     <a class="btn text-dark btn-outline-light btn-sm font-weight-bold"
                        style="background-color: white"
@@ -35,18 +36,19 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-6 offset-3">
         <partial name="_ArticlesPartial" model="Model.Articles" />
     </div>
 
-    @* Search area *@
-    <div class="row col-3 justify-content-center">
+    <!-- Search area -->
+    <div class="col col-3 justify-content-center">
         <form method="get">
-            <div class="jumbotron" style="background-color: antiquewhite; ">
+            <div class="jumbotron" style="background-color: antiquewhite;">
+                <h3 class="text-center font-italic">Търсене</h3>
                 <div class="form-group">
-                    <label class="font-weight-light font-italic" style="font-size: 120%" asp-for="SearchTerm">Търсене:</label>
-                    <input asp-for="SearchTerm" class="form-control" placeholder="Ключова дума..." />
+                    <input asp-for="SearchTerm" class="form-control" placeholder="Ключова дума/думи..." />
                 </div>
                 <div class="form-group">
                     <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByName">Автор</label>

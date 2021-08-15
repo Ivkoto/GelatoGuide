@@ -37,7 +37,7 @@ namespace GelatoGuide.Services.Blog
             this.data.SaveChanges();
         }
 
-        public IEnumerable<ArticleServiceModel> GetAllArticles(
+        public IEnumerable<ArticleServiceModel> AllArticles(
             string searchTerm, string postedByName,
             string postedByYear, string postedByMonth)
         {
@@ -111,14 +111,14 @@ namespace GelatoGuide.Services.Blog
             this.data.SaveChanges();
         }
 
-        public IEnumerable<string> GetAllPostedByNames()
+        public IEnumerable<string> AllPostedByNames()
             => this.data.Articles
                 .Select(a => a.PostedByName)
                 .Distinct()
                 .ToList();
 
 
-        public IEnumerable<string> GetAllYears()
+        public IEnumerable<string> AllYears()
             =>
             this.data.Articles
                 .Select(a => a.PostedByDate.Year.ToString())
@@ -126,13 +126,13 @@ namespace GelatoGuide.Services.Blog
                 .ToList();
 
 
-        public IEnumerable<string> GetAllMonths()
+        public IEnumerable<string> AllMonths()
             => this.data.Articles
                 .Select(a => CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(a.PostedByDate.Month))
                 .Distinct()
                 .ToList();
 
-        public IEnumerable<ArticleServiceModel> GetAllByUserId(string id)
+        public IEnumerable<ArticleServiceModel> AllByUserId(string id)
             => this.data.Articles
                 .Where(a => a.UserId == id)
                 .Select(a => new ArticleServiceModel()
@@ -146,7 +146,7 @@ namespace GelatoGuide.Services.Blog
                 .ToList();
 
         //ToDo - delete if everything works
-        //public ArticleServiceModel GetArticleById(string id)
+        //public ArticleServiceModel ArticleById(string id)
         //    => this.data.Articles
         //        .Where(a => a.Id == id)
         //        .Select(a => new ArticleServiceModel()
@@ -162,15 +162,18 @@ namespace GelatoGuide.Services.Blog
         //        })
         //        .FirstOrDefault();
 
-        public Article GetArticleById(string id)
+        public Article ArticleById(string id)
         {
             var articles = this.data.Articles.ToList();
 
-            var places = this.data.Places.ToList();
+            //var places = this.data.Places.ToList();
 
             var curArt = articles.First(a => a.Id == id);
 
             return curArt;
         }
+
+        public int TotalArticlesCount()
+            => this.data.Articles.Count();
     }
 }

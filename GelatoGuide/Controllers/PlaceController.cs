@@ -15,7 +15,7 @@ namespace GelatoGuide.Controllers
 
         public IActionResult All([FromQuery] SearchPlaceViewModel searchModel)
         {
-            var search = this.placeService.GetAllPlaces(
+            var search = this.placeService.AllPlaces(
                 searchModel.SearchTerm,
                 searchModel.Country,
                 searchModel.City,
