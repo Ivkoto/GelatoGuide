@@ -2,25 +2,7 @@
     ViewBag.Title = "Map page";
 }
 
-
-@*<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-10">
-            <h3>Our map page!</h3>
-            <p></p>
-            <p>Now responsible for all kind of devices!</p>
-            <br/>
-            <div class="container col-12">
-                <iframe class="embed-responsive" src="https://maps.google.com/maps?q=sofia&t=&z=9&ie=UTF8&iwloc=&output=embed"
-                        height="350"
-                        allowfullscreen="true"
-                        aria-hidden="true"
-                        tabindex="0">
-                </iframe>
-            </div>
-        </div>
-    </div>
-</div>*@
+@* ToDo finish the map. Now the places are visible with pins byt without proper names and details *@
 
 <!DOCTYPE html>
 <html>
@@ -28,42 +10,42 @@
         <style type="text/css">
             /* Set the size of the div element that contains the map */
             #map {
-                height: 600px;
+                height: 35vw;
                 /* The height is 400 pixels */
-                width: 80%;
+                width: 100vw;
                 /* The width is the width of the web page */
             }
         </style>
         <script>
             function initMap() {
-                const map = new google.maps.Map(document.getElementById("map"),
-                    {
-                        zoom: 4,
-                        center: { lat: 42.698334, lng: 23.319941}
-                    });
+                const sofia = { lat: 42.698334, lng: 23.319941 };
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    zoom: 10,
+                    center: sofia
+                });
                 const labels = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                 const markers = locations.map((location, i) => {
                     return new google.maps.Marker({
                         position: location,
                         label: labels[i % labels.length],
+                        map: map
                     });
                 });
-                new MarkerClusterer(map, markers, {
-                    imagePath:
-                        "https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m"
-                });
+
             }
             const locations = [
-                { lat: 42.687205, lng: 23.318174},
-                { lat: 42.698306, lng: 23.318543}
+                { lat: 42.687205, lng: 23.318174 },
+                { lat: 42.698306, lng: 23.318543 }
             ];
         </script>
     </head>
     <body>
-    <!--The div element for the map -->
-    <div id="map"></div>
-    
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4WU-FTJbqk5c9qmmDyiWAnLmkn6x4jgs&callback=initMap&libraries=&v=weekly" async></script>
+        <!--The div element for the map -->
+        <div class="row justify-content-center">
+            <div class="col-11" id="map"></div>
+        </div>
+
+        <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD4WU-FTJbqk5c9qmmDyiWAnLmkn6x4jgs&callback=initMap&libraries=&v=weekly" async></script>
     </body>
 </html>
