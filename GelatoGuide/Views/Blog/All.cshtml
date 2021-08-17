@@ -1,14 +1,15 @@
-﻿@using GelatoGuide.Infrastructure
-@model SearchArticlesViewModel
+﻿@model AllArticlesServiceModel
 
 @{
     ViewBag.Title = "All Articles";
+
     if (User.IsAdmin())
     {
         ViewBag.AllowArticleEdit = true;
     }
 }
 
+<!--Main Jumbotron bottom at the page-->
 <div class="jumbotron jumbotron-fluid"
      style="background-image: url(https://res.cloudinary.com/dmflbhinu/image/upload/v1627593182/GelatoGuide/Rafi_gelato_spuyt1.jpg);
             background-size: cover;
@@ -37,101 +38,135 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-6 offset-3">
-        <partial name="_ArticlesPartial" model="Model.Articles" />
+<!--if there is no articles added in the database-->
+@if (Model == null)
+{
+    <div class="row text-center">
+        <div class="col ">
+            <h3 class="col-12">Все още няма добавени места.</h3>
+            <br />
+            <h4 class="col-12">Върнете се отново по-късно.</h4>
+        </div>
 
-        <!--Previous and next page buttons-->
-        @{
-            var previousPage = Model.CurrentPage - 1;
-            if (previousPage < 1)
-            {
-                previousPage = 1;
+    </div>
+}
+
+<!--if there are no articles after search terms-->
+@if (Model != null)
+{
+    if (!Model.Articles.Any())
+    {
+        <div class="row text-center">
+            <div class="col ">
+                <h3 class="col-12">Няма резултати за показване.</h3>
+            </div>
+
+            <!--ToDo Add search area here-->
+        </div>
+    }
+}
+
+<!--Body-->
+@if (Model != null && Model.Articles.Any())
+{
+    <div class="row">
+        <div class="col-6 offset-3">
+            <!--preview all the articles-->
+            <partial name="_ArticlesPartial" model="Model.Articles" />
+
+            <!--Previous and next page buttons-->
+            @{
+                var previousPage = Model.CurrentPage - 1;
+                if (previousPage < 1)
+                {
+                    previousPage = 1;
+                }
+                var nextPage = Model.CurrentPage + 1;
+
+
+                var maxPagesCount = (int)Math.Ceiling((double)Model.TotalArticles / AllArticlesServiceModel.ArticlesPerPage);
+
+                maxPagesCount = maxPagesCount == 0 ? 1 : maxPagesCount;
+
             }
-            var nextPage = Model.CurrentPage + 1;
 
-            var maxPagesCount = (int)Math.Ceiling((double)Model.TotalPlaces / SearchPlaceViewModel.PlacesPerPage);
-
-            maxPagesCount = maxPagesCount == 0 ? 1 : maxPagesCount;
-        }
-
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col col-auto">
-                    <a class="btn btn-light @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
-                       asp-controller="Places"
-                       asp-action="All"
-                       asp-route-CurrentPage="@previousPage"
-                       asp-route-SearchTerm="@Model.SearchTerm"
-                       asp-route-PostedByName="@Model.PostedByName"
-                       asp-route-PostedByYear="@Model.PostedByYear"
-                       asp-route-PostedByMonth="@Model.PostedByYear"
-                       >
-                        Предишна
-                    </a>
-                </div>
-                <div class="col col-auto">
-                    <a class="btn btn-light @(Model.CurrentPage == maxPagesCount ? "disabled" : string.Empty)"
-                       asp-controller="Places"
-                       asp-action="All"
-                       asp-route-CurrentPage="@nextPage"    
-                       asp-route-SearchTerm="@Model.SearchTerm"
-                       asp-route-PostedByName="@Model.PostedByName"
-                       asp-route-PostedByYear="@Model.PostedByYear"
-                       asp-route-PostedByMonth="@Model.PostedByYear"
-                       >
-                        Следваща
-                    </a>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col col-auto">
+                        <a class="btn btn-light @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+                           asp-controller="Blog"
+                           asp-action="All"
+                           asp-route-CurrentPage="@previousPage"
+                           asp-route-SearchTerm="@Model.SearchTerm"
+                           asp-route-PostedByName="@Model.PostedByName"
+                           asp-route-PostedByYear="@Model.PostedByYear"
+                           asp-route-PostedByMonth="@Model.PostedByMonth">
+                            Предишна
+                        </a>
+                    </div>
+                    <div class="col col-auto">
+                        <a class="btn btn-light @(Model.CurrentPage == maxPagesCount ? "disabled" : string.Empty)"
+                           asp-controller="Blog"
+                           asp-action="All"
+                           asp-route-CurrentPage="@nextPage"
+                           asp-route-SearchTerm="@Model.SearchTerm"
+                           asp-route-PostedByName="@Model.PostedByName"
+                           asp-route-PostedByYear="@Model.PostedByYear"
+                           asp-route-PostedByMonth="@Model.PostedByMonth">
+                            Следваща
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Search area -->
-    <div class="col col-3 justify-content-center">
-        <form method="get">
-            <div class="jumbotron" style="background-color: antiquewhite;">
-                <h3 class="text-center font-italic">Търсене</h3>
-                <div class="form-group">
-                    <input asp-for="SearchTerm" class="form-control" placeholder="Ключова дума/думи..." />
+        <!-- Search area -->
+        <div class="col col-3 justify-content-center">
+            <form method="get">
+                <div class="jumbotron" style="background-color: antiquewhite;">
+                    <h3 class="text-center font-italic">Търсене</h3>
+                    <div class="form-group">
+                        <input asp-for="SearchTerm" class="form-control" placeholder="Ключова дума/думи..." />
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByName">Автор</label>
+                        <select asp-for="PostedByName" class="form-control">
+                            <option value="">Всички</option>
+                            @foreach (var name in Model.PostedByNames)
+                            {
+                                <option value="@name">@name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByYear">Година</label>
+                        <select asp-for="PostedByYear" class="form-control">
+                            <option value="">Всички</option>
+                            @foreach (var year in Model.Years)
+                            {
+                                <option value="@year">@year</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByMonth">Месец</label>
+                        <select asp-for="PostedByMonth" class="form-control">
+                            <option value="">Всички</option>
+                            @foreach (var month in Model.Months)
+                            {
+                                <option value="@month">@month</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-light" value="Резултати" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByName">Автор</label>
-                    <select asp-for="PostedByName" class="form-control">
-                        <option value="">Всички</option>
-                        @foreach (var name in Model.Names)
-                        {
-                            <option value="@name">@name</option>
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByYear">Година</label>
-                    <select asp-for="PostedByYear" class="form-control">
-                        <option value="">Всички</option>
-                        @foreach (var year in Model.Years)
-                        {
-                            <option value="@year">@year</option>
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByMonth">Месец</label>
-                    <select asp-for="PostedByMonth" class="form-control">
-                        <option value="">Всички</option>
-                        @foreach (var month in Model.Months)
-                        {
-                            <option value="@month">@month</option>
-                        }
-                    </select>
-                </div>
-                <div class="form-group">
-                    <input type="submit" class="btn btn-light" value="Резултати" />
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
+}
+
 
 @section Scripts
 {

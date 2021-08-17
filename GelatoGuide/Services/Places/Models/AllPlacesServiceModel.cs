@@ -1,14 +1,11 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using GelatoGuide.Services.Places.Models;
 
-namespace GelatoGuide.Models.Places
+namespace GelatoGuide.Services.Places.Models
 {
-    public class SearchPlaceViewModel
+    public class AllPlacesServiceModel
     {
         public const int PlacesPerPage = 4;
 
-        [Display(Name = "Search")]
         public string SearchTerm { get; init; }
 
         public string Country { get; set; }

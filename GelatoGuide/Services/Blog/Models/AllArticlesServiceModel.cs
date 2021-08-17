@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using GelatoGuide.Services.Blog.Models;
 
-namespace GelatoGuide.Models.Blog
+namespace GelatoGuide.Services.Blog.Models
 {
-    public class SearchArticlesViewModel
+    public class AllArticlesServiceModel
     {
-        public const int PlacesPerPage = 2;
+        // for prev and next buttons
+        public const int ArticlesPerPage = 2;
 
         public int CurrentPage { get; set; } = 1;
 
-        public int TotalPlaces { get; set; }
+        public int TotalArticles { get; set; } = 0;
 
+        //from post request from the search box
         [Display(Name = "Search")]
         public string SearchTerm { get; init; }
 
@@ -21,9 +22,11 @@ namespace GelatoGuide.Models.Blog
 
         public string PostedByMonth { get; set; }
 
+        //all the articles that will be visible in the page
         public IEnumerable<ArticleServiceModel> Articles;
 
-        public IEnumerable<string> Names { get; set; }
+        //for drop down menus in the search box
+        public IEnumerable<string> PostedByNames { get; set; }
 
         public IEnumerable<string> Years { get; set; }
 

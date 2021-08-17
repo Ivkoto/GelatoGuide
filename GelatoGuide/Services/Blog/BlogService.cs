@@ -37,11 +37,37 @@ namespace GelatoGuide.Services.Blog
             this.data.SaveChanges();
         }
 
-        public IEnumerable<ArticleServiceModel> AllArticles(
-            string searchTerm, string postedByName,
-            string postedByYear, string postedByMonth)
+        public AllArticlesServiceModel AllArticles(
+            string searchTerm, string postedByName, string postedByYear, 
+            string postedByMonth, int articlesPerPage, int currentPage)
         {
+
+            //validate data from the query
+            var allPostedByName = this.AllPostedByNames();
+            var allYears = this.AllYears();
+            var allMonts = this.AllMonths();
+            if (!allPostedByName.Contains(postedByName) && postedByName != null)
+            {
+                return null;
+            }
+
+            if (!allYears.Contains(postedByYear) && postedByYear != null)
+            {
+                return null;
+            }
+
+            if (!allMonts.Contains(postedByMonth) && postedByMonth != null)
+            {
+                return null;
+            }
+
             var articlesQuery = this.data.Articles.AsQueryable();
+
+            if (!articlesQuery.Any())
+            {
+                return null;
+            }
+            
 
             //filter query if any search text have been imputed
             if (!string.IsNullOrWhiteSpace(searchTerm))
@@ -53,7 +79,7 @@ namespace GelatoGuide.Services.Blog
                     a.PostedByName.ToLower().Contains(searchTerm.ToLower()) ||
                     a.SourceName.ToLower().Contains(searchTerm.ToLower()));
             }
-
+                
             //filter query if author name have been selected
             if (!string.IsNullOrWhiteSpace(postedByName))
             {
@@ -75,19 +101,58 @@ namespace GelatoGuide.Services.Blog
                     a.PostedByDate.Month == DateTime.ParseExact(postedByMonth, "MMMM", CultureInfo.CurrentCulture).Month);
             }
 
-            var articles = articlesQuery
-                .OrderByDescending(a => a.PostedByDate)
-                .Select(a => new ArticleServiceModel()
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    SubTitle = a.SubTitle,
-                    PostedByName = a.PostedByName,
-                    PostedByDate = a.PostedByDate
-                })
-                .ToList();
+            //restrict receiving query with page value lower than 1
+            if (currentPage < 1)
+            {
+                currentPage = 1;
+            }
 
-            return articles;
+            //restrict viewing empty pages and non existing pages
+            var totalArticles = articlesQuery.Count();
+            var maxPageCount = (int)Math.Ceiling((double)totalArticles / articlesPerPage);
+            if (currentPage > maxPageCount)
+            {
+                currentPage = maxPageCount;
+            }
+
+            List<ArticleServiceModel> articles;
+
+            if (!articlesQuery.Any())
+            {
+                articles = new List<ArticleServiceModel>();
+            }
+            else
+            {
+                articles = articlesQuery
+                    .OrderByDescending(a => a.PostedByDate)
+                    .Skip((currentPage - 1) * articlesPerPage)
+                    .Take(articlesPerPage)
+                    .Select(a => new ArticleServiceModel()
+                    {
+                        Id = a.Id,
+                        Title = a.Title,
+                        SubTitle = a.SubTitle,
+                        PostedByName = a.PostedByName,
+                        PostedByDate = a.PostedByDate
+                    })
+                    .ToList();
+            }
+
+            var result = new AllArticlesServiceModel()
+            {
+                CurrentPage = currentPage,
+                TotalArticles = totalArticles,
+                SearchTerm = searchTerm,
+                PostedByName = postedByName,
+                PostedByYear = postedByYear,
+                PostedByMonth = postedByMonth,
+                Articles = articles,
+                Months = this.AllMonths(),
+                Years = this.AllYears(),
+                PostedByNames = this.AllPostedByNames()
+            };
+
+            return result;
         }
 
         public void Edit(string id, ArticleServiceModel model)
@@ -165,8 +230,6 @@ namespace GelatoGuide.Services.Blog
         public Article ArticleById(string id)
         {
             var articles = this.data.Articles.ToList();
-
-            //var places = this.data.Places.ToList();
 
             var curArt = articles.First(a => a.Id == id);
 

@@ -1,9 +1,10 @@
-﻿@model SearchPlaceViewModel
+﻿@model AllPlacesServiceModel
 
 @{
     ViewBag.Title = "All Places";
 }
 
+<!--main Jumbotron at the bottom of the page-->
 <div class="jumbotron jumbotron-fluid"
      style="background-image: url(https://res.cloudinary.com/dmflbhinu/image/upload/v1628994269/GelatoGuide/worldMap_igereh.jpg);
             background-size: cover;
@@ -21,7 +22,7 @@
     </div>
 </div>
 
-@* if there is no places added in the database *@
+<!--if there is no places added in the database-->
 @if (Model == null)
 {
     <div class="row text-center">
@@ -34,19 +35,22 @@
     </div>
 }
 
-@*if there are no places after search terms*@
-@if (!Model.Places.Any())
+<!--if there are no places after search terms-->
+@if (Model != null)
 {
-    <div class="row text-center">
-        <div class="col ">
-            <h3 class="col-12">Няма резултати за показване.</h3>
-        </div>
+    if (!Model.Places.Any())
+    {
+        <div class="row text-center">
+            <div class="col ">
+                <h3 class="col-12">Няма резултати за показване.</h3>
+            </div>
 
-        <partial name="_SearchAreaPartial" model="Model" />
-    </div>
+            <partial name="_SearchAreaPartial" model="Model" />
+        </div>
+    }
 }
 
-
+<!--Body-->
 @if (Model != null && Model.Places.Any())
 {
     <div class="row">
@@ -83,15 +87,15 @@
             }
             var nextPage = Model.CurrentPage + 1;
 
-            var maxPagesCount = (int)Math.Ceiling((double)Model.TotalPlaces / SearchPlaceViewModel.PlacesPerPage);
+            var maxPagesCount = (int)Math.Ceiling((double)Model.TotalPlaces / AllPlacesServiceModel.PlacesPerPage);
 
-            maxPagesCount = maxPagesCount == 0 ? 1 : maxPagesCount;
+            maxPagesCount = maxPagesCount < 1 ? 1 : maxPagesCount;
         }
 
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col col-auto">
-                    <a class="btn btn-light @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+                    <a class="btn btn-light @(Model.CurrentPage == 1 ? " disabled" : string.Empty)"
                        asp-controller="Places"
                        asp-action="All"
                        asp-route-CurrentPage="@previousPage"
@@ -102,7 +106,7 @@
                     </a>
                 </div>
                 <div class="col col-auto">
-                    <a class="btn btn-light @(Model.CurrentPage == maxPagesCount ? "disabled" : string.Empty)"
+                    <a class="btn btn-light @(Model.CurrentPage == maxPagesCount ? " disabled" : string.Empty)"
                        asp-controller="Places"
                        asp-action="All"
                        asp-route-CurrentPage="@nextPage"

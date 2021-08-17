@@ -10,7 +10,9 @@ namespace GelatoGuide.Services.Blog
             string title, string subTitle, string image, string articleText,
             string sourceName, string sourceUrl, string postedByName, string userId);
 
-        IEnumerable<ArticleServiceModel> AllArticles(string searchTerm, string postedByName, string postedByYear, string postedByMonth);
+        AllArticlesServiceModel AllArticles(
+            string searchTerm, string postedByName, string postedByYear, 
+            string postedByMonth, int articlesPerPage, int currentPage);
 
         void Edit(string id, ArticleServiceModel model);
 

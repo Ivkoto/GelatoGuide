@@ -4,7 +4,6 @@ using GelatoGuide.Services.Places.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GelatoGuide.Models.Places;
 
 namespace GelatoGuide.Services.Places
 {
@@ -92,18 +91,19 @@ namespace GelatoGuide.Services.Places
             this.data.Places.Remove(place);
             this.data.SaveChanges();
         }
-
-        public SearchPlaceViewModel AllPlaces(
+        
+        public AllPlacesServiceModel AllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage)
         {
             var placesQuery = this.data.Places.AsQueryable();
-            
+
+            //if no places in the database
             if (!placesQuery.Any())
             {
                 return null;
             }
-
+            
             //filter query if any search text have been imputed
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
@@ -122,7 +122,7 @@ namespace GelatoGuide.Services.Places
                     p.Country == country);
             }
 
-            //filter query if city have been imputed
+            //filter query if city have been selected
             if (!string.IsNullOrWhiteSpace(city))
             {
                 placesQuery = placesQuery.Where(p =>
@@ -135,7 +135,7 @@ namespace GelatoGuide.Services.Places
                 currentPage = 1;
             }
 
-            //restrict viewing empty pages
+            //restrict viewing empty pages and non existing pages
             var totalPlaces = placesQuery.Count();
             var maxPagesCount = (int)Math.Ceiling((double)totalPlaces / placesPerPage);
             if (currentPage > maxPagesCount)
@@ -143,62 +143,57 @@ namespace GelatoGuide.Services.Places
                 currentPage = maxPagesCount;
             }
 
+            List<PlaceServiceModel> places;
+
+            //if no results after search
             if (!placesQuery.Any())
             {
-                return new SearchPlaceViewModel()
-                {
-                    Places = new List<PlaceServiceModel>(),
-                    Cities = this.AllCities(),
-                    Countries = this.AllCountries(),
-                    TotalPlaces = totalPlaces,
-                    SearchTerm = searchTerm,
-                    Country = country,
-                    City = city,
-                    CurrentPage = currentPage
-                };
+                places = new List<PlaceServiceModel>();
+            }
+            else
+            {
+                places = placesQuery
+                    .OrderByDescending(p => p.DateCreated)
+                    .Skip((currentPage - 1) * placesPerPage)
+                    .Take(placesPerPage)
+                    .Select(p => new PlaceServiceModel()
+                    {
+                        Name = p.Name,
+                        Description = p.Description,
+                        MainImageUrl = p.MainImageUrl,
+                        WebsiteLink = p.WebsiteLink,
+                        SinceYear = p.SinceYear,
+                        LogoUrl = p.LogoUrl,
+                        Images = p.Images
+                            .Select(img => new Image()
+                            {
+                                Url = img.Url,
+                                PlaceId = img.PlaceId
+                            }).ToList(),
+                        FacebookUrl = p.FacebookUrl,
+                        InstagramUrl = p.InstagramUrl,
+                        TwitterUrl = p.TwitterUrl,
+                        GlovoUrl = p.GlovoUrl,
+                        FoodpandaUrl = p.FoodpandaUrl,
+                        TakeawayUrl = p.TakeawayUrl,
+                        Country = p.Country,
+                        City = p.City,
+                        Location = p.Location,
+                        DateCreated = p.DateCreated
+                    })
+                    .ToList();
             }
 
-            var places = placesQuery
-                .OrderByDescending(p => p.DateCreated)
-                .Skip((currentPage - 1) * placesPerPage)
-                .Take(placesPerPage)
-                .Select(p => new PlaceServiceModel()
-                {
-                    Name = p.Name,
-                    Description = p.Description,
-                    MainImageUrl = p.MainImageUrl,
-                    WebsiteLink = p.WebsiteLink,
-                    SinceYear = p.SinceYear,
-                    LogoUrl = p.LogoUrl,
-                    Images = p.Images
-                        .Select(img => new Image()
-                        {
-                            Url = img.Url,
-                            PlaceId = img.PlaceId
-                        }).ToList(),
-                    FacebookUrl = p.FacebookUrl,
-                    InstagramUrl = p.InstagramUrl,
-                    TwitterUrl = p.TwitterUrl,
-                    GlovoUrl = p.GlovoUrl,
-                    FoodpandaUrl = p.FoodpandaUrl,
-                    TakeawayUrl = p.TakeawayUrl,
-                    Country = p.Country,
-                    City = p.City,
-                    Location = p.Location,
-                    DateCreated = p.DateCreated
-                })
-                .ToList();
-
-            var result = new SearchPlaceViewModel()
+            var result = new AllPlacesServiceModel()
             {
-                Places = places.OrderByDescending(p => p.DateCreated),
+                Places = places,
                 Cities = this.AllCities(),
                 Countries = this.AllCountries(),
                 TotalPlaces = totalPlaces,
                 SearchTerm = searchTerm,
                 Country = country,
                 City = city,
-                CurrentPage = currentPage++
+                CurrentPage = currentPage
             };
 
             return result;

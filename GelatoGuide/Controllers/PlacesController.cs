@@ -1,5 +1,5 @@
-﻿using GelatoGuide.Models.Places;
-using GelatoGuide.Services.Places;
+﻿using GelatoGuide.Services.Places;
+using GelatoGuide.Services.Places.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Controllers
@@ -13,14 +13,14 @@ namespace GelatoGuide.Controllers
             this.placeService = placeService;
         }
 
-        public IActionResult All([FromQuery] SearchPlaceViewModel searchModel)
+        public IActionResult All([FromQuery] AllPlacesServiceModel searchModel)
         {
             var search = this.placeService.AllPlaces(
                 searchModel.SearchTerm,
                 searchModel.Country,
                 searchModel.City,
                 searchModel.CurrentPage,
-                SearchPlaceViewModel.PlacesPerPage);
+                AllPlacesServiceModel.PlacesPerPage);
 
             return View(search);
         }

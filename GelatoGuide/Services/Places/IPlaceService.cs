@@ -1,7 +1,6 @@
 ﻿using GelatoGuide.Services.Places.Models;
 using System.Collections.Generic;
 using GelatoGuide.Data.Models;
-using GelatoGuide.Models.Places;
 
 namespace GelatoGuide.Services.Places
 {
@@ -12,7 +11,7 @@ namespace GelatoGuide.Services.Places
         //Admin area
         IEnumerable<PlaceServiceModel> AllPlaces();
 
-        SearchPlaceViewModel AllPlaces(
+        AllPlacesServiceModel AllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage);
 
