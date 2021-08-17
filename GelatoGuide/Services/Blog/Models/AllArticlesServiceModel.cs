@@ -5,12 +5,9 @@ namespace GelatoGuide.Services.Blog.Models
 {
     public class AllArticlesServiceModel
     {
-        // for prev and next buttons
-        public const int ArticlesPerPage = 2;
-
         public int CurrentPage { get; set; } = 1;
 
-        public int TotalArticles { get; set; } = 0;
+        public int TotalArticles { get; set; }
 
         //from post request from the search box
         [Display(Name = "Search")]

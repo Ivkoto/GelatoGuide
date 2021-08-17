@@ -84,7 +84,7 @@
                 var nextPage = Model.CurrentPage + 1;
 
 
-                var maxPagesCount = (int)Math.Ceiling((double)Model.TotalArticles / AllArticlesServiceModel.ArticlesPerPage);
+                var maxPagesCount = (int)Math.Ceiling((double)Model.TotalArticles / DataConstants.Blog.ArticlesPerPage);
 
                 maxPagesCount = maxPagesCount == 0 ? 1 : maxPagesCount;
 

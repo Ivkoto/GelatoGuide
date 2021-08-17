@@ -4,8 +4,6 @@ namespace GelatoGuide.Services.Places.Models
 {
     public class AllPlacesServiceModel
     {
-        public const int PlacesPerPage = 4;
-
         public string SearchTerm { get; init; }
 
         public string Country { get; set; }

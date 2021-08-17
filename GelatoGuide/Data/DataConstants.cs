@@ -41,6 +41,17 @@
             public const int PostedByNameMinLength = 2;
 
             public const int SourceNameMinLength = 2;
+
+        }
+
+        public class Blog
+        {
+            public const int ArticlesPerPage = 3;
+        }
+
+        public class Places
+        {
+            public const int PlacesPerPage = 5;
         }
     }
 }

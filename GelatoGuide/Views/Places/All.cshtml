@@ -87,7 +87,7 @@
             }
             var nextPage = Model.CurrentPage + 1;
 
-            var maxPagesCount = (int)Math.Ceiling((double)Model.TotalPlaces / AllPlacesServiceModel.PlacesPerPage);
+            var maxPagesCount = (int)Math.Ceiling((double)Model.TotalPlaces / DataConstants.Places.PlacesPerPage);
 
             maxPagesCount = maxPagesCount < 1 ? 1 : maxPagesCount;
         }

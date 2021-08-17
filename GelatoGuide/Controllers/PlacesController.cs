@@ -1,6 +1,7 @@
 ﻿using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Places.Models;
 using Microsoft.AspNetCore.Mvc;
+using static GelatoGuide.Data.DataConstants;
 
 namespace GelatoGuide.Controllers
 {
@@ -20,7 +21,7 @@ namespace GelatoGuide.Controllers
                 searchModel.Country,
                 searchModel.City,
                 searchModel.CurrentPage,
-                AllPlacesServiceModel.PlacesPerPage);
+                Places.PlacesPerPage);
 
             return View(search);
         }

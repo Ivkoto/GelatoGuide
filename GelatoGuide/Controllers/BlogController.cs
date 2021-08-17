@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using static GelatoGuide.Data.DataConstants;
 
 namespace GelatoGuide.Controllers
 {
@@ -24,7 +25,7 @@ namespace GelatoGuide.Controllers
             var search = this.blogService.AllArticles(
                 searchModel.SearchTerm, searchModel.PostedByName,
                 searchModel.PostedByYear, searchModel.PostedByMonth,
-                AllArticlesServiceModel.ArticlesPerPage, searchModel.CurrentPage);
+                Blog.ArticlesPerPage, searchModel.CurrentPage);
 
             return View(search);
         }
@@ -134,8 +135,6 @@ namespace GelatoGuide.Controllers
             }
 
             this.blogService.Delete(article);
-
-            //return View("All");
 
             return RedirectToAction("All", "Blog");
         }

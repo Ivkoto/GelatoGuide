@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Services.Blog
 {
@@ -41,26 +42,6 @@ namespace GelatoGuide.Services.Blog
             string searchTerm, string postedByName, string postedByYear, 
             string postedByMonth, int articlesPerPage, int currentPage)
         {
-
-            //validate data from the query
-            var allPostedByName = this.AllPostedByNames();
-            var allYears = this.AllYears();
-            var allMonts = this.AllMonths();
-            if (!allPostedByName.Contains(postedByName) && postedByName != null)
-            {
-                return null;
-            }
-
-            if (!allYears.Contains(postedByYear) && postedByYear != null)
-            {
-                return null;
-            }
-
-            if (!allMonts.Contains(postedByMonth) && postedByMonth != null)
-            {
-                return null;
-            }
-
             var articlesQuery = this.data.Articles.AsQueryable();
 
             if (!articlesQuery.Any())
@@ -68,7 +49,6 @@ namespace GelatoGuide.Services.Blog
                 return null;
             }
             
-
             //filter query if any search text have been imputed
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
@@ -84,7 +64,7 @@ namespace GelatoGuide.Services.Blog
             if (!string.IsNullOrWhiteSpace(postedByName))
             {
                 articlesQuery = articlesQuery.Where(a =>
-                    a.PostedByName == postedByName);
+                    a.PostedByName.ToLower() == postedByName.ToLower());
             }
 
             //filter query if year have been selected
@@ -97,8 +77,12 @@ namespace GelatoGuide.Services.Blog
             //filter query if month have been selected
             if (!string.IsNullOrWhiteSpace(postedByMonth))
             {
+                Enum.TryParse(postedByMonth, out MonthsEnum searchedMonth);
+
+                var filteredMonth = searchedMonth.GetHashCode();
+
                 articlesQuery = articlesQuery.Where(a =>
-                    a.PostedByDate.Month == DateTime.ParseExact(postedByMonth, "MMMM", CultureInfo.CurrentCulture).Month);
+                    a.PostedByDate.Month == filteredMonth);
             }
 
             //restrict receiving query with page value lower than 1
@@ -108,7 +92,7 @@ namespace GelatoGuide.Services.Blog
             }
 
             //restrict viewing empty pages and non existing pages
-            var totalArticles = articlesQuery.Count();
+            var totalArticles = articlesQuery.Any()? articlesQuery.Count() : 0;
             var maxPageCount = (int)Math.Ceiling((double)totalArticles / articlesPerPage);
             if (currentPage > maxPageCount)
             {
@@ -117,6 +101,7 @@ namespace GelatoGuide.Services.Blog
 
             List<ArticleServiceModel> articles;
 
+            //if no results after search
             if (!articlesQuery.Any())
             {
                 articles = new List<ArticleServiceModel>();
@@ -209,23 +194,6 @@ namespace GelatoGuide.Services.Blog
                     PostedByDate = a.PostedByDate
                 })
                 .ToList();
-
-        //ToDo - delete if everything works
-        //public ArticleServiceModel ArticleById(string id)
-        //    => this.data.Articles
-        //        .Where(a => a.Id == id)
-        //        .Select(a => new ArticleServiceModel()
-        //        {
-        //            Title = a.Title,
-        //            SubTitle = a.SubTitle,
-        //            Image = a.Image,
-        //            ArticleText = a.ArticleText,
-        //            SourceName = a.SourceName,
-        //            SourceUrl = a.SourceUrl,
-        //            PostedByName = a.PostedByName,
-        //            UserId = a.UserId
-        //        })
-        //        .FirstOrDefault();
 
         public Article ArticleById(string id)
         {
