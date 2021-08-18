@@ -4,14 +4,15 @@ namespace GelatoGuide.Areas.Administration.Models.Places
 {
     public class PlacesViewModel
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public int SinceYear { get; set; }
-        public string WebsiteLink { get; set; }
-        public string Country { get; set; }
-        public string City { get; set; }
+        public string Id { get; init; }
+        public string Name { get; init; }
+        public int SinceYear { get; init; }
+        public string WebsiteLink { get; init; }
+        public string Country { get; init; }
+        public string City { get; init; }
 
-        public DateTime DateCreated { get; set; }
+        public string Address { get; init; }
+        public DateTime DateCreated { get; init; }
     }
 }
  

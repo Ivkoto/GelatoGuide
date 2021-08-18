@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using GelatoGuide.Data.Models;
 
-namespace GelatoGuide.Services.Places.Models
+namespace GelatoGuide.Models.Places
 {
-    public class PlaceServiceModel
+    public class PlaceDetailsVewModel
     {
-        public string Id { get; init; }
-
         public string Name { get; init; }
         
         public string Description { get; init; }
@@ -28,22 +26,20 @@ namespace GelatoGuide.Services.Places.Models
 
         public string Location { get; set; }
 
-        public string TakeawayUrl { get; init; }
+        public string TakeawayUrl { get; set; }
 
-        public string FoodpandaUrl { get; init; }
+        public string FoodpandaUrl { get; set; }
 
-        public string GlovoUrl { get; init; }
+        public string GlovoUrl { get; set; }
 
-        public string FacebookUrl { get; init; }
+        public string FacebookUrl { get; set; }
 
-        public string InstagramUrl { get; init; }
+        public string InstagramUrl { get; set; }
 
-        public string TwitterUrl { get; init; }
+        public string TwitterUrl { get; set; }
 
         public IEnumerable<Image> Images { get; set; }
 
         public DateTime DateCreated { get; set; }
-
-        public string UserId { get; set; }
     }
 }

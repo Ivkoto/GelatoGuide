@@ -4,6 +4,7 @@ using GelatoGuide.Services.Places.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Services.Places
 {
@@ -34,6 +35,7 @@ namespace GelatoGuide.Services.Places
                 WebsiteLink = place.WebsiteLink,
                 Country = place.Country,
                 City = place.City,
+                Address = place.Address,
                 Location = place.Location,
                 DateCreated = DateTime.Now,
                 UserId = userId
@@ -55,12 +57,22 @@ namespace GelatoGuide.Services.Places
                     SinceYear = place.SinceYear,
                     Country = place.Country,
                     City = place.City,
+                    Address = place.Address,
                     DateCreated = place.DateCreated
                 })
                 .ToList();
 
         public Place PlaceById(string id)
-            => this.data.Places.First(p => p.Id == id);
+        {
+            var idExist = this.data.Places.Any(p => p.Id == id);
+
+            if (!idExist)
+            {
+                return null;
+            }
+            
+            return this.data.Places.First(p => p.Id == id);
+        }
 
         public void UpdatePlace(PlaceServiceModel model)
         {
@@ -75,6 +87,7 @@ namespace GelatoGuide.Services.Places
             place.Country = model.Country;
             place.City = model.City;
             place.Location = model.Location;
+            place.Address = model.Address;
             place.TakeawayUrl = model.TakeawayUrl;
             place.FoodpandaUrl = model.FoodpandaUrl;
             place.GlovoUrl = model.GlovoUrl;
@@ -158,6 +171,7 @@ namespace GelatoGuide.Services.Places
                     .Take(placesPerPage)
                     .Select(p => new PlaceServiceModel()
                     {
+                        Id = p.Id,
                         Name = p.Name,
                         Description = p.Description,
                         MainImageUrl = p.MainImageUrl,
@@ -178,6 +192,7 @@ namespace GelatoGuide.Services.Places
                         TakeawayUrl = p.TakeawayUrl,
                         Country = p.Country,
                         City = p.City,
+                        Address = p.Address,
                         Location = p.Location,
                         DateCreated = p.DateCreated
                     })

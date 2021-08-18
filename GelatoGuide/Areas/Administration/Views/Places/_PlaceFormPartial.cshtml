@@ -26,7 +26,7 @@
                 </div>
             </div>
             <div class="col-10">
-                <div class="form-group" style="margin-bottom: 7%">
+                <div class="form-group" style="margin-bottom: 3%">
                     <label asp-for="Description">Description</label>
                     <textarea asp-for="Description" class="form-control" rows="6" style="background-color: #fffdf2" placeholder="Describe the place here..."></textarea>
                     <span asp-validation-for="Description" class="small text-danger"></span>
@@ -40,16 +40,19 @@
             </div>
             <div class="col-5">
                 <div class="form-group" style="margin-bottom: 7%">
-                    <label asp-for="SinceYear">Since from</label>
-                    <input asp-for="SinceYear" class="form-control" style="background-color: #fffdf2" placeholder="Enter since year here...">
+                    <label asp-for="SinceYear">Since</label>
+                    <input asp-for="SinceYear" class="form-control" style="background-color: #fffdf2" placeholder="Year...">
                     <span asp-validation-for="SinceYear" class="small text-danger"></span>
                 </div>
             </div>
             <div class="col-10">
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 3%">
                     <label asp-for="WebsiteUrl">Website</label>
                     <input asp-for="WebsiteUrl" class="form-control" placeholder="Place main website here...">
                 </div>
+            </div>
+            <div class="col-10">
+                <hr />
             </div>
             <div class="col-5">
                 <div class="form-group">
@@ -64,11 +67,21 @@
                     <span asp-validation-for="City" class="small text-danger"></span>
                 </div>
             </div>
-            <div class="col-10" style="margin-bottom: 7%">
+            <div class="col-5" style="margin-bottom: 3%">
                 <div class="form-group">
                     <label asp-for="Location">Location</label>
                     <input asp-for="Location" class="form-control" placeholder="Input Latitude and Longitude here...">
                 </div>
+            </div>
+            <div class="col-5" style="margin-bottom: 3%">
+                <div class="form-group">
+                    <label asp-for="Address">Address</label>
+                    <input asp-for="Address" class="form-control" style="background-color: #fffdf2" placeholder="Street, number, etc...">
+                    <span asp-validation-for="Address" class="small text-danger"></span>
+                </div>
+            </div>
+            <div class="col-10">
+                <hr />
             </div>
             <div class="col-5">
                 <div class="form-group" style="margin-bottom: 7%">
@@ -80,23 +93,22 @@
                     <input asp-for="FacebookUrl" class="form-control" placeholder="Place Facebook url here...">
                 </div>
                 <div class="form-group" style="margin-bottom: 7%">
-                    <label asp-for="TwitterUrl">Tweeter</label>
+                    <label asp-for="TwitterUrl">Twitter</label>
                     <input asp-for="TwitterUrl" class="form-control" placeholder="Place Twitter url here...">
                 </div>
             </div>
             <div class="col-5">
-
                 <div class="form-group" style="margin-bottom: 7%">
                     <label asp-for="FoodpandaUrl">Foodpanda</label>
-                    <input asp-for="FoodpandaUrl" class="form-control" placeholder="Order link here....">
+                    <input asp-for="FoodpandaUrl" class="form-control" placeholder="Place link here....">
                 </div>
                 <div class="form-group" style="margin-bottom: 7%">
                     <label asp-for="TakeawayUrl">Takeaway</label>
-                    <input asp-for="TakeawayUrl" class="form-control" placeholder="Order link here....">
+                    <input asp-for="TakeawayUrl" class="form-control" placeholder="Place link here....">
                 </div>
                 <div class="form-group" style="margin-bottom: 7%">
                     <label asp-for="GlovoUrl">Glovo</label>
-                    <input asp-for="GlovoUrl" class="form-control" placeholder="Order link here....">
+                    <input asp-for="GlovoUrl" class="form-control" placeholder="Place link here....">
                 </div>
             </div>
         </div>

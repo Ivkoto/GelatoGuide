@@ -38,6 +38,9 @@ namespace GelatoGuide.Areas.Administration.Models.Places
         [Required]
         public string City { get; set; }
 
+        [Required]
+        public string Address { get; set; }
+
         public string Location { get; set; }
 
         [Url]

@@ -45,7 +45,7 @@
                 <h3 class="col-12">Няма резултати за показване.</h3>
             </div>
 
-            <partial name="_SearchAreaPartial" model="Model" />
+            <partial name="_SearchPartial" model="Model" />
         </div>
     }
 }
@@ -65,8 +65,7 @@
                                 <img class="card-img-top" src="@place.MainImageUrl" alt="Card image cap">
                                 <div class="card-body">
                                     <h5 class="card-title">@place.Name</h5>
-                                    <p class="card-text">@place.Description</p>
-                                    <i>Базирано в @place.Country, @place.City</i>
+                                    <i>Базирано в @place.City, @place.Country</i>
                                 </div>
                             </div>
                         </a>
@@ -76,7 +75,7 @@
         </div>
 
         <!--search area-->
-        <partial name="_SearchAreaPartial" model="Model" />
+        <partial name="_SearchPartial" model="Model" />
 
         <!--Previous and next page buttons-->
         @{

@@ -61,7 +61,7 @@
                 <h3 class="col-12">Няма резултати за показване.</h3>
             </div>
 
-            <!--ToDo Add search area here-->
+            <partial name="_SearchPartial" model="Model"/>
         </div>
     }
 }
@@ -120,50 +120,7 @@
             </div>
         </div>
 
-        <!-- Search area -->
-        <div class="col col-3 justify-content-center">
-            <form method="get">
-                <div class="jumbotron" style="background-color: antiquewhite;">
-                    <h3 class="text-center font-italic">Търсене</h3>
-                    <div class="form-group">
-                        <input asp-for="SearchTerm" class="form-control" placeholder="Ключова дума/думи..." />
-                    </div>
-                    <div class="form-group">
-                        <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByName">Автор</label>
-                        <select asp-for="PostedByName" class="form-control">
-                            <option value="">Всички</option>
-                            @foreach (var name in Model.PostedByNames)
-                            {
-                                <option value="@name">@name</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByYear">Година</label>
-                        <select asp-for="PostedByYear" class="form-control">
-                            <option value="">Всички</option>
-                            @foreach (var year in Model.Years)
-                            {
-                                <option value="@year">@year</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="font-weight-lighter font-italic" style="font-size: 110%" asp-for="PostedByMonth">Месец</label>
-                        <select asp-for="PostedByMonth" class="form-control">
-                            <option value="">Всички</option>
-                            @foreach (var month in Model.Months)
-                            {
-                                <option value="@month">@month</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-light" value="Резултати" />
-                    </div>
-                </div>
-            </form>
-        </div>
+        <partial name="_SearchPartial" model="Model"/>
     </div>
 }
 

@@ -26,6 +26,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 SinceYear = p.SinceYear,
                 Country = p.Country,
                 City = p.City,
+                Address = p.Address,
                 DateCreated = p.DateCreated,
                 WebsiteLink = p.WebsiteLink
             });
@@ -50,6 +51,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 Name = curPlace.Name,
                 City = curPlace.City,
                 Country = curPlace.Country,
+                Address = curPlace.Address,
                 Description = curPlace.Description,
                 FacebookUrl = curPlace.FacebookUrl,
                 FoodpandaUrl = curPlace.FoodpandaUrl,
@@ -87,6 +89,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 MainImageUrl = place.MainImageUrl,
                 City = place.City,
                 Country = place.Country,
+                Address = place.Address,
                 SinceYear = place.SinceYear,
                 LogoUrl = place.LogoUrl,
                 Location = place.Location,
@@ -122,6 +125,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 WebsiteLink = model.WebsiteUrl,
                 Country = model.Country,
                 City = model.City,
+                Address = model.Address,
                 Location = model.Location,
                 TakeawayUrl = model.TakeawayUrl,
                 FoodpandaUrl = model.FoodpandaUrl,

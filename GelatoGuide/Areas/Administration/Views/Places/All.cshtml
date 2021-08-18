@@ -24,6 +24,7 @@
             <th scope="col">Since Year</th>
             <th scope="col">Country</th>
             <th scope="col">City</th>
+            <th scope="col">Address</th>
             <th scope="col">Created on</th>
             <th scope="col"></th>
             <th scope="col"></th>
@@ -42,9 +43,10 @@
                 <td>@place.SinceYear</td>
                 <td>@place.Country</td>
                 <td>@place.City</td>
+                <td>@place.Address</td>
                 <td>@place.DateCreated</td>
                 <td>
-                    <a class="btn btn-sm text-primary"asp-controller="Places" asp-action="Update" asp-route-id="@place.Id">
+                    <a class="btn btn-sm text-primary" asp-controller="Places" asp-action="Update" asp-route-id="@place.Id">
                         Update
                     </a>
                 </td>
