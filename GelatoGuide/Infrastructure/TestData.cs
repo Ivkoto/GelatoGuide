@@ -165,5 +165,10 @@ namespace GelatoGuide.Infrastructure
             };
 
         }
+
+        //public IEnumerable<ShopItems> ShopItems()
+        //{
+        //    yield return new Shop
+        //};
     }
 }

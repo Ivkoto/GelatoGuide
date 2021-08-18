@@ -44,6 +44,13 @@
 
         }
 
+        public class ShopItems
+        {
+            public const int NameMinLength = 3;
+
+            public const int DescriptionMinLength = 6;
+        }
+
         public class Blog
         {
             public const int ArticlesPerPage = 4;

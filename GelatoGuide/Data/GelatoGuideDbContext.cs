@@ -17,6 +17,8 @@ namespace GelatoGuide.Data
 
         public DbSet<Article> Articles { get; set; }
 
+        public DbSet<ShopItems> ShopItems { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

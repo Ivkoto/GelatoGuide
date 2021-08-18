@@ -62,22 +62,21 @@
                     <span class="sr-only">Next</span>
                 </a>
             </div>
+        </div>
+    </div>
+    <!--Last articles area-->
+    <div class="row col-12 mt-5 mb-5 justify-content-md-center">
+        <hr class="col-11"/>
+        <h3 class="col-12 text-center mb-5">Последни статии</h3>
+        @foreach (var article in Model.Articles)
+        {
+            <div class="col-4">
+                <h5>
+                    <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id">@article.Title</a>
+                </h5>
+                <i>@article.PostedByDate.ToString("dddd, dd MMMM yyyy")</i>
+                <i>by: @article.PostedByName</i>
             </div>
-        </div>
-        <!--Last articles area-->
-        <div class="row col-12 mt-5 mb-5 justify-content-md-center">
-            <hr class="col-11"/>
-            <h3 class="col-12 text-center mb-5">Последни статии</h3>
-            @foreach (var article in Model.Articles)
-            {
-                <div class="col-4">
-                    <h5>
-                        <a asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id">@article.Title</a>
-                    </h5>
-                    <i>@article.PostedByDate.ToString("dddd, dd MMMM yyyy")</i>
-                    <i>by: @article.PostedByName</i>
-                </div>
-            }
-        </div>
+        }
     </div>
 </div>
