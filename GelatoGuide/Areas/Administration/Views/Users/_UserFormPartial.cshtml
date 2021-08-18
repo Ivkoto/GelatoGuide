@@ -5,6 +5,10 @@
 }
 
 <form method="post">
+    <i style="margin: 0% 0% 0% 18%">The yellow boxes are required!</i>
+    <br />
+    <br />
+    <br />
     <div class="row col-10 offset-1 justify-content-md-center text-center">
         <div class="form-group col-4">
             <label asp-for="Username">Username</label>
@@ -25,12 +29,12 @@
     <div class="row col-10 offset-1 justify-content-md-center text-center">
         <div class="form-group col-6">
             <label asp-for="FullName">Full Name</label>
-            <input asp-for="FullName" class="form-control" style="background-color: #fffdf2">
+            <input asp-for="FullName" class="form-control">
             <span asp-validation-for="FullName" class="small text-danger"></span>
         </div>
         <div class="form-group col-6">
             <label asp-for="PhoneNumber">Phone Number</label>
-            <input asp-for="PhoneNumber" class="form-control" style="background-color: #fffdf2">
+            <input asp-for="PhoneNumber" class="form-control">
             <span asp-validation-for="PhoneNumber" class="small text-danger"></span>
         </div>
     </div>

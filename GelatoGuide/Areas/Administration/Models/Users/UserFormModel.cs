@@ -1,10 +1,13 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using GelatoGuide.Data.Models;
 using static GelatoGuide.Data.DataConstants.User;
 
 namespace GelatoGuide.Areas.Administration.Models.Users
 {
-    public class UserFormModel
+    public class UserFormModel : IValidatableObject
     {
         public string Id { get; init; }
 
@@ -29,11 +32,21 @@ namespace GelatoGuide.Areas.Administration.Models.Users
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; init; }
 
-        
+        [Required]
         [StringLength(PasswordMaxLength, MinimumLength = PasswordMinLength, 
             ErrorMessage = "The {0} length should be between {2} and {1} characters long.")]
         [Display(Name = "Password")]
         public string Password { get; init; }
-        
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!this.PhoneNumber.All(char.IsDigit))
+            {
+                yield return new ValidationResult
+                (
+                    $"The {nameof(this.PhoneNumber)} must contains only digits."
+                );
+            }
+        }
     }
 }

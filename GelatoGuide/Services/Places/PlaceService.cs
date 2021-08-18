@@ -4,7 +4,6 @@ using GelatoGuide.Services.Places.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
 
 namespace GelatoGuide.Services.Places
 {
@@ -51,7 +50,7 @@ namespace GelatoGuide.Services.Places
                 .Places
                 .Select(place => new PlaceServiceModel()
                 {
-                    Id = place.Id,
+                    //Id = place.Id,
                     Name = place.Name,
                     WebsiteLink = place.WebsiteLink,
                     SinceYear = place.SinceYear,
@@ -70,7 +69,7 @@ namespace GelatoGuide.Services.Places
             {
                 return null;
             }
-            
+
             return this.data.Places.First(p => p.Id == id);
         }
 
@@ -104,7 +103,7 @@ namespace GelatoGuide.Services.Places
             this.data.Places.Remove(place);
             this.data.SaveChanges();
         }
-        
+
         public AllPlacesServiceModel AllPlaces(
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage)
@@ -116,7 +115,7 @@ namespace GelatoGuide.Services.Places
             {
                 return null;
             }
-            
+
             //filter query if any search text have been imputed
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {

@@ -206,5 +206,23 @@ namespace GelatoGuide.Services.Blog
 
         public int TotalArticlesCount()
             => this.data.Articles.Count();
+
+        public IEnumerable<ArticleServiceModel> GetLastThreeArticles()
+            => this.data.Articles
+                .OrderByDescending(a => a.PostedByDate)
+                .Take(3)
+                .Select(a => new ArticleServiceModel()
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    SubTitle = a.SubTitle,
+                    Image = a.Image,
+                    ArticleText = a.ArticleText,
+                    SourceName = a.SourceName,
+                    SourceUrl = a.SourceUrl,
+                    PostedByName = a.PostedByName,
+                    PostedByDate = a.PostedByDate
+                })
+                .ToList();
     }
 }

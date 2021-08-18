@@ -1,4 +1,5 @@
-﻿using GelatoGuide.Models.Places;
+﻿using System;
+using GelatoGuide.Models.Places;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Places.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -33,8 +34,8 @@ namespace GelatoGuide.Controllers
 
             if (place == null)
             {
+                return StatusCode(400, "Bad Request!");
                 //TODO make bad request custom page
-                return RedirectToAction("Index", "Shop");
             }
 
             var viewModel = new PlaceDetailsVewModel()

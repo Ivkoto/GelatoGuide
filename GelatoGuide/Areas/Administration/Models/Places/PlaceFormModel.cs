@@ -23,7 +23,7 @@ namespace GelatoGuide.Areas.Administration.Models.Places
         [Display(Name = "Main image URL")]
         public string MainImageUrl { get; init; }
         
-        
+        [Required]
         public int SinceYear { get; set; }
 
         [Url]
@@ -72,10 +72,27 @@ namespace GelatoGuide.Areas.Administration.Models.Places
                 yield return 
                     new ValidationResult
                     ($@"{nameof(this.Name)} must contains at least 2 letters.",
-                        new []{"Name"}
+                        new []{"All"}
                     );
+            }
 
-                //ToDo more validations
+            if (this.Description.Length < DescriptionMinLength)
+            {
+                yield return
+                    new ValidationResult
+                    ($"{nameof(this.Description)} must be at least 6 letters long.",
+                        new []{"All"}
+                    );
+            }
+
+            if (this.SinceYear < MinSinceYear || this.SinceYear > MaxSinceYear)
+            {
+                yield return
+                    new ValidationResult
+                    (
+                        $"{nameof(this.SinceYear)} value must be betwee {MinSinceYear} and {MaxSinceYear}",
+                        new []{"All"}
+                    );
             }
         }
     }

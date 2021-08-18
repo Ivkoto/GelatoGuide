@@ -36,7 +36,8 @@
                 <div class="form-group" style="margin-bottom: 7%">
                     <label asp-for="LogoUrl">Logo</label>
                     <input asp-for="LogoUrl" class="form-control" placeholder="Place logo image URL here...">
-                </div>
+                    <span asp-validation-for="LogoUrl" class="small text-danger"></span>
+                 </div>
             </div>
             <div class="col-5">
                 <div class="form-group" style="margin-bottom: 7%">
@@ -49,6 +50,7 @@
                 <div class="form-group" style="margin-bottom: 3%">
                     <label asp-for="WebsiteUrl">Website</label>
                     <input asp-for="WebsiteUrl" class="form-control" placeholder="Place main website here...">
+                    <span asp-validation-for="WebsiteUrl" class="small text-danger"></span>
                 </div>
             </div>
             <div class="col-10">
@@ -58,6 +60,7 @@
                 <div class="form-group">
                     <label asp-for="Country">Country</label>
                     <input asp-for="Country" class="form-control" style="background-color: #fffdf2" placeholder="">
+                    <span asp-validation-for="Country" class="small text-danger"></span>
                 </div>
             </div>
             <div class="col-5">

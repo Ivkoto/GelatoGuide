@@ -30,6 +30,27 @@ namespace GelatoGuide.Controllers
             return View(search);
         }
 
+        public IActionResult Details(string id)
+        {
+            var article = this.blogService.ArticleById(id);
+            var articles = this.blogService.GetLastThreeArticles();
+
+            var articleModel = new ArticleDetailsViewModel()
+            {
+                Title = article.Title,
+                SubTitle = article.SubTitle,
+                Image = article.Image,
+                ArticleText = article.ArticleText,
+                SourceName = article.SourceName,
+                SourceUrl = article.SourceUrl,
+                PostedByName = article.PostedByName,
+                PostedByDate = article.PostedByDate,
+                Articles = articles
+            };
+
+            return View(articleModel);
+        }
+
         public IActionResult CreateArticle()
         {
             if (this.User.IsAdmin() || this.User.IsPremium())

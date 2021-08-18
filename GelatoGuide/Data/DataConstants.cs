@@ -46,7 +46,7 @@
 
         public class Blog
         {
-            public const int ArticlesPerPage = 3;
+            public const int ArticlesPerPage = 4;
         }
 
         public class Places

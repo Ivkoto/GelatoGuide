@@ -8,10 +8,10 @@
     <div class="row justify-content-end text-center">
         <div class="col-4">
             <h3>@ViewData["Title"]</h3>
+            <div asp-validation-summary="All" class="text-danger"></div>
         </div>
         <div class="col-4">
             <a asp-controller="Users" asp-action="All" class="btn btn-secondary">All Users</a>
-            <div asp-validation-summary="All" class="text-danger"></div>
         </div>
     </div>
     <partial name="_UserFormPartial" model="Model"/>

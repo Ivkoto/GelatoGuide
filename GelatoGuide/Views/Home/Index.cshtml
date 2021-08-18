@@ -1,13 +1,11 @@
-﻿@{
-    ViewBag.Title = "Home Page";
-}
+﻿@{ ViewBag.Title = "Home Page"; }
 
 <div class="text-center">
     <h1 class="display-4" style="margin-bottom: 50px">
         COMING SOON! :)
     </h1>
     <img src="beforeTheLogo.jpg" width="325" height="400" style="margin-bottom: 5% " />
-    
+
     <!-- Gallery -->
     <div class="row" onmouseover="enlargeImg" onmouseout="resetImg">
         <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
@@ -56,7 +54,8 @@
 </div>
 
 <!-- script to set display property -->
-<script>//Get the img object using its Id
+<script>
+    //Get the img object using its Id
     //img = document.getElementById("img1");
 
     // Function to increase image size
@@ -71,4 +70,5 @@
         // Set image size to original
         img.style.transform = "scale(1)";
         img.style.transition = "transform 0.25s ease";
-    }</script>
+    }
+</script>

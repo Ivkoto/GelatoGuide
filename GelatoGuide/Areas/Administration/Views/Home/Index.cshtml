@@ -4,13 +4,88 @@
     ViewBag.Title = "Admin page";
 }
 
+<style>
+    .card-counter{
+        box-shadow: 2px 2px 10px #DADADA;
+        margin: 5px;
+        padding: 20px 10px;
+        background-color: #fff;
+        height: 100px;
+        border-radius: 5px;
+        transition: .3s linear all;
+    }
+
+    .card-counter.info{
+        background-color: #26c6da;
+        color: #FFF;
+    }
+
+    .card-counter .count-numbers {
+        position: absolute;
+        right: 35px;
+        top: 20px;
+        font-size: 32px;
+        display: block;
+    }
+
+    .card-counter .count-name {
+        position: absolute;
+        right: 35px;
+        top: 65px;
+        font-style: italic;
+        text-transform: capitalize;
+        opacity: 0.8;
+        display: block;
+        font-size: 18px;
+    }
+        .card-counter.primary {
+            background-color: #00CCD9;
+            color: #FFF;
+        }
+    .card-counter.danger{
+        background-color: #ef5350;
+        color: #FFF;
+    }
+        .card-counter.success {
+            background-color: #00CA69;
+            color: #FFF;
+        }
+
+    .card-counter i{
+        font-size: 5em;
+        opacity: 0.5;
+    }
+</style>
+
+
 <div class="text-center">
     <h2>@ViewBag.Title</h2>
     <hr style="background-color: blueviolet" />
 </div>
 <br/>
-<div class="row justify-content-md-center">
-    <h4 class="col-4 text-center">Total Users: @Model.TotalUsers</h4>
-    <h4 class="col-4 text-center">Total Places: @Model.TotalPlaces</h4>
-    <h4 class="col-4 text-center">Total Articles: @Model.TotalArticles</h4>
+
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-3 mr-5">
+            <div class="card-counter primary">
+                <i class="fa fa-user"></i>
+                <span class="count-numbers">@Model.TotalUsers</span>
+                <span class="count-name">Total Users</span>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card-counter success">
+                <i class="fa fa-map"></i>
+                <span class="count-numbers">@Model.TotalPlaces</span>
+                <span class="count-name">Total Places</span>
+            </div>
+        </div>
+        <div class="col-md-3 ml-5">
+            <div class="card-counter danger">
+                <i class="fa fa-database"></i>
+                <span class="count-numbers">@Model.TotalArticles</span>
+                <span class="count-name">Total Articles</span>
+            </div>
+        </div>
+    </div>
 </div>

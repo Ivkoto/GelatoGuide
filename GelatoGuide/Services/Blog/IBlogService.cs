@@ -29,5 +29,7 @@ namespace GelatoGuide.Services.Blog
         Article ArticleById(string id);
 
         int TotalArticlesCount();
+
+        IEnumerable<ArticleServiceModel> GetLastThreeArticles();
     }
 }
