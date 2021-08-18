@@ -37,34 +37,34 @@ namespace GelatoGuide.Areas.Administration.Controllers
         public IActionResult Create() => View();
 
         [HttpPost]
-        public IActionResult Create(PlaceFormModel curPlace)
+        public IActionResult Create(PlaceFormModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(curPlace);
+                return View(model);
             }
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
             var place = new PlaceServiceModel()
             {
-                Name = curPlace.Name,
-                City = curPlace.City,
-                Country = curPlace.Country,
-                Address = curPlace.Address,
-                Description = curPlace.Description,
-                FacebookUrl = curPlace.FacebookUrl,
-                FoodpandaUrl = curPlace.FoodpandaUrl,
-                GlovoUrl = curPlace.GlovoUrl,
-                Images = curPlace.Images,
-                InstagramUrl = curPlace.InstagramUrl,
-                Location = curPlace.Location,
-                LogoUrl = curPlace.LogoUrl,
-                MainImageUrl = curPlace.MainImageUrl,
-                SinceYear = curPlace.SinceYear,
-                TakeawayUrl = curPlace.TakeawayUrl,
-                TwitterUrl = curPlace.TwitterUrl,
-                WebsiteLink = curPlace.WebsiteUrl,
+                Name = model.Name,
+                City = model.City,
+                Country = model.Country,
+                Address = model.Address,
+                Description = model.Description,
+                FacebookUrl = model.FacebookUrl,
+                FoodpandaUrl = model.FoodpandaUrl,
+                GlovoUrl = model.GlovoUrl,
+                Images = model.Images,
+                InstagramUrl = model.InstagramUrl,
+                Location = model.Location,
+                LogoUrl = model.LogoUrl,
+                MainImageUrl = model.MainImageUrl,
+                SinceYear = model.SinceYear,
+                TakeawayUrl = model.TakeawayUrl,
+                TwitterUrl = model.TwitterUrl,
+                WebsiteLink = model.WebsiteUrl,
                 UserId = userId
             };
 

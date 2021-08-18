@@ -1,0 +1,55 @@
+﻿@model ShopItemFormModel
+
+@{
+    ViewBag.Title = "Create Item";
+}
+
+<div class="container-fluid">
+    <div class="row justify-content-end text-center mt-4">
+        <div class="col-4">
+            <h3>@ViewBag.Title</h3>
+            <div asp-validation-summary="All" class="text-danger"></div>
+        </div>
+        <div class="col-4">
+            <a asp-action="All" class="btn btn-secondary">All Places</a>
+        </div>
+    </div>
+    <!--Create form-->
+    <form method="post">
+        <i style="margin: 0% 0% 0% 18%">The yellow boxes are required!</i>
+        <br />
+        <br />
+        <br />
+        <div class="form-row justify-content-center">
+            <div class="row col-10 offset-2" style="text-align: center">
+                <div class="col-5">
+                    <div class="form-group" style="margin-bottom: 7%">
+                        <label asp-for="Name">Place name</label>
+                        <input asp-for="Name" class="form-control" style="background-color: #fffdf2" placeholder="Enter place name here...">
+                        <span asp-validation-for="Name" class="small text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="form-group" style="margin-bottom: 7%">
+                        <label asp-for="MainImageUrl">Main image url:</label>
+                        <input asp-for="MainImageUrl" class="form-control" style="background-color: #fffdf2" placeholder="Main picture image URL...">
+                        <span asp-validation-for="MainImageUrl" class="small text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-10">
+                    <div class="form-group" style="margin-bottom: 3%">
+                        <label asp-for="Price">Description</label>
+                        <textarea asp-for="Price" class="form-control" rows="6" style="background-color: #fffdf2" placeholder="Describe the place here..."></textarea>
+                        <span asp-validation-for="Price" class="small text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
