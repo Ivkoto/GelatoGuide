@@ -4,7 +4,7 @@ using static GelatoGuide.Data.DataConstants.ShopItems;
 
 namespace GelatoGuide.Data.Models
 {
-    public class ShopItems
+    public class ShopItem
     {
         [Required]
         public string Id { get; init; } = Guid.NewGuid().ToString();

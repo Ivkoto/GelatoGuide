@@ -33,6 +33,8 @@ namespace GelatoGuide.Infrastructure
 
             SeedArticles(data);
 
+            SeedShopItems(data);
+
             return app;
         }
 
@@ -121,6 +123,18 @@ namespace GelatoGuide.Infrastructure
             }
 
             data.Articles.AddRange(testSeedData.Articles());
+
+            data.SaveChanges();
+        }
+
+        private static void SeedShopItems(GelatoGuideDbContext data)
+        {
+            if (data.ShopItems.Any())
+            {
+                return;
+            }
+
+            data.ShopItems.AddRange(testSeedData.ShopItems());
 
             data.SaveChanges();
         }

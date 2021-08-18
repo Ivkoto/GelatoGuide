@@ -4,6 +4,7 @@ using GelatoGuide.Infrastructure;
 using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Roles;
+using GelatoGuide.Services.Shop;
 using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -57,7 +58,8 @@ namespace GelatoGuide
             services
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IPlaceService, PlaceService>()
-                .AddTransient<IBlogService, BlogService>();
+                .AddTransient<IBlogService, BlogService>()
+                .AddTransient<IShopService, ShopService>();
 
             services
                 .AddTransient<IRoleService, RoleService>();

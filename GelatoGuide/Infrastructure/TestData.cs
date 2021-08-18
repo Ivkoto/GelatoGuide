@@ -166,9 +166,78 @@ namespace GelatoGuide.Infrastructure
 
         }
 
-        //public IEnumerable<ShopItems> ShopItems()
-        //{
-        //    yield return new Shop
-        //};
+        public IEnumerable<ShopItem> ShopItems()
+        {
+            yield return new ShopItem()
+            {
+                Name = "Соева свещ (Ice cream truck)",
+                Description = "Ръчно излята; Материал: 100% органичен соев восък; Височина: 10см.",
+                Price = 25.99m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_fit,h_600,w_900/v1629308054/GelatoGuide/Item_1_wmbb0m.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Унисекс тениска",
+                Description = "Ръчно правена; Материал: 100% памук; Размери: S-XL",
+                Price = 20.99m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_crop,h_600,w_900/v1629308055/GelatoGuide/Item_2_iegi8f.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Луксозен восък",
+                Description = "Луксозен восък за горене в арома лампи; Ръчно правен; Материал: 100% соев восък с аромат на шоколад и карамел",
+                Price = 5.99m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_thumb,h_600,w_900/v1629308055/GelatoGuide/Item_3_ynv8yj.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Соева свещ",
+                Description = "Свещ с аромат на бисквитки и сладолед; Ръчно излята; Материал: 100% соев восък",
+                Price = 15.49m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_fill,h_600,w_900/v1629308055/GelatoGuide/Item_4_mbqyf2.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Декоративна подложка",
+                Description = "Ръано правена; Материал: Jesmonite; Размер: М (10см)",
+                Price = 20.99m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_scale,h_600,w_900/v1629308055/GelatoGuide/Item_5_zhlzc9.webp"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Свещ",
+                Description = "Свещ с форма на сладолед; Ръчно правена; Височина: 8,3см; Ширина: 3,6см.; Материал: 100% Соев восък; Налична в 3 цвята: бял (с аромат на ванилия), розов (с аромат на ягода), кафяв(с аромат на шоколад)",
+                Price = 12.60m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_thumb,h_600,w_900/v1629308055/GelatoGuide/Item_6_xogmos.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Сапун",
+                Description = "Сапун с форма на сладолед във фунийка; Ръчно правен; Материал: 100% соев восък",
+                Price = 5.00m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_thumb,h_600,w_900/v1629308054/GelatoGuide/Item_7_m0vr4c.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Декоративна подложка",
+                Description = "Ръано правена; Материали: Jesmonite, корк; Размер: М (18см)",
+                Price = 25.97m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_thumb,h_600,w_900/v1629308054/GelatoGuide/Item_8_jzfkh0.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Свещ",
+                Description = "Ароматна свещ под формата на сладолед; Височина: 10см",
+                Price = 12.50m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_thumb,h_600,w_900/v1629308054/GelatoGuide/Item_9_zxniab.jpg"
+            };
+            yield return new ShopItem()
+            {
+                Name = "Месингово колие",
+                Description = "Рециклирано месингово колие под формата на сладолед; Ръчно правено; Размери: фунийка 3см., колие 45см дължина",
+                Price = 45.99m,
+                MainImageUrl = "https://res.cloudinary.com/dmflbhinu/image/upload/c_thumb,h_600,w_900/v1629308054/GelatoGuide/Item_10_q74kfr.jpg"
+            };
+        }
     }
 }

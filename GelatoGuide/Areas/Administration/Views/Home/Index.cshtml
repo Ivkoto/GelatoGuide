@@ -38,16 +38,21 @@
         display: block;
         font-size: 18px;
     }
-        .card-counter.primary {
-            background-color: #00CCD9;
-            color: #FFF;
-        }
+    .card-counter.primary {
+        background-color: #00CCD9;
+        color: #FFF;
+    }
     .card-counter.danger{
         background-color: #ef5350;
         color: #FFF;
     }
-        .card-counter.success {
-            background-color: #00CA69;
+    .card-counter.success {
+        background-color: #00CA69;
+        color: #FFF;
+    }
+
+        .card-counter.alert {
+            background-color: #ffcba4;
             color: #FFF;
         }
 
@@ -66,25 +71,38 @@
 
 <div class="container">
     <div class="row justify-content-md-center">
-        <div class="col-md-3 mr-5">
-            <div class="card-counter primary">
-                <i class="fa fa-user"></i>
-                <span class="count-numbers">@Model.TotalUsers</span>
-                <span class="count-name">Total Users</span>
-            </div>
+        <div class="col-md-3 mx-0">
+            <a asp-controller="Users" asp-action="All">
+                <div class="card-counter primary">
+                    <i class="fa fa-user"></i>
+                    <span class="count-numbers">@Model.TotalUsers</span>
+                    <span class="count-name">Total Users</span>
+                </div>
+            </a>
         </div>
-        <div class="col-md-3">
-            <div class="card-counter success">
-                <i class="fa fa-map"></i>
-                <span class="count-numbers">@Model.TotalPlaces</span>
-                <span class="count-name">Total Places</span>
-            </div>
+        <div class="col-md-3 mx-0">
+            <a asp-controller="Places" asp-action="All">
+                <div class="card-counter success">
+                    <i class="fa fa-map"></i>
+                    <span class="count-numbers">@Model.TotalPlaces</span>
+                    <span class="count-name">Total Places</span>
+                </div>
+            </a>
         </div>
-        <div class="col-md-3 ml-5">
-            <div class="card-counter danger">
-                <i class="fa fa-database"></i>
-                <span class="count-numbers">@Model.TotalArticles</span>
-                <span class="count-name">Total Articles</span>
+        <div class="col-md-3 mx-0">
+            <a asp-controller="Blog" asp-action="All">
+                <div class="card-counter danger">
+                    <i class="fa fa-database"></i>
+                    <span class="count-numbers">@Model.TotalArticles</span>
+                    <span class="count-name">Total Articles</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-md-3 mx-0">
+            <div class="card-counter alert">
+                <i class="fa fa-shopping-basket"></i>
+                <span class="count-numbers">@Model.TotalItemsInTheShop</span>
+                <span class="count-name">Total Items</span>
             </div>
         </div>
     </div>
