@@ -23,6 +23,7 @@ namespace GelatoGuide.Infrastructure
                 City = "Русе",
                 Country = "България",
                 Location = "42.69102786793613, 23.32575909830204",
+                Address = "ул. „Граф Игнатиев“ 23, 1000 Център",
                 DateCreated = new DateTime(2021, 7, 18, 23, 55, 13)
             };
 
@@ -39,6 +40,7 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.69830560910363, 23.318543084810848",
+                Address = "бул. „Тодор Александров“ 17, 1000 Център",
                 DateCreated = new DateTime(2021, 5, 5, 12, 03, 15)
             };
 
@@ -56,6 +58,7 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.692332330695784, 23.324327081063817",
+                Address = "пл. „Петко Р. Славейков“ 9, 1000 Център",
                 DateCreated = new DateTime(2021, 7, 23, 11, 10, 45)
             };
 
@@ -72,6 +75,7 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.68720493140862, 23.31817401112721",
+                Address = "бул. „Витоша“ 84, 1463 Център",
                 DateCreated = new DateTime(2021, 7, 30, 23, 57, 49)
             };
 
@@ -90,6 +94,7 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.694245115089146, 23.340427248848375",
+                Address = "ул. Ангел Кънчев 11, 1000 Център",
                 DateCreated = new DateTime(2021, 7, 29, 9, 48, 26)
             };
 
@@ -105,6 +110,7 @@ namespace GelatoGuide.Infrastructure
                 InstagramUrl = "https://www.instagram.com/p/COSXn1XjVvJ/",
                 City = "Ниш",
                 Country = "Сърбия",
+                Address = "ж-к Хиподрума 108г, 1612 Хиподрума",
                 DateCreated = new DateTime(2021, 7, 18, 23, 55, 13)
             };
         }

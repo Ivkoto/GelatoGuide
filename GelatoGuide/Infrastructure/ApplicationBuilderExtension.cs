@@ -13,7 +13,7 @@ namespace GelatoGuide.Infrastructure
 {
     public static class ApplicationBuilderExtension
     {
-        private static TestData testSeedData = new TestData();
+        private static readonly TestData testSeedData = new TestData();
 
         public static IApplicationBuilder PrepareDatabase(
             this IApplicationBuilder app)

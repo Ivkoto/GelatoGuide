@@ -50,7 +50,7 @@ namespace GelatoGuide.Services.Places
                 .Places
                 .Select(place => new PlaceServiceModel()
                 {
-                    //Id = place.Id,
+                    Id = place.Id,
                     Name = place.Name,
                     WebsiteLink = place.WebsiteLink,
                     SinceYear = place.SinceYear,
@@ -76,6 +76,8 @@ namespace GelatoGuide.Services.Places
         public void UpdatePlace(PlaceServiceModel model)
         {
             var place = this.PlaceById(model.Id);
+
+            //TODO make validation if place == null
 
             place.Name = model.Name;
             place.Description = model.Description;

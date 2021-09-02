@@ -95,10 +95,11 @@ namespace GelatoGuide.Controllers
 
         public IActionResult Edit(string id)
         {
+            //todo do not return database entity (Article) directly, switch with ModelView
             var article = this.blogService.ArticleById(id);
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            if (article.UserId == userId || this.User.IsInRole("Admin"))
+            if (article.UserId == userId || this.User.IsAdmin())
             {
                 return View(new ArticleFormModel()
                 {
