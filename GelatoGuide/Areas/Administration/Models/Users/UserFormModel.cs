@@ -29,8 +29,8 @@ namespace GelatoGuide.Areas.Administration.Models.Users
         [Display(Name = "Username")]
         public string FullName { get; init; }
 
-        [Display(Name = "Phone Number")]
-        public string PhoneNumber { get; init; }
+        [Display(Name = "Phone Number")] 
+        public string PhoneNumber { get; init; } = "000000";
 
         [Required]
         [StringLength(PasswordMaxLength, MinimumLength = PasswordMinLength, 
@@ -40,12 +40,15 @@ namespace GelatoGuide.Areas.Administration.Models.Users
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!this.PhoneNumber.All(char.IsDigit))
+            if (this.PhoneNumber != null)
             {
-                yield return new ValidationResult
-                (
-                    $"The {nameof(this.PhoneNumber)} must contains only digits."
-                );
+                if (!this.PhoneNumber.All(char.IsDigit))
+                {
+                    yield return new ValidationResult
+                    (
+                        $"The {nameof(this.PhoneNumber)} must contains only digits."
+                    );
+                }
             }
         }
     }

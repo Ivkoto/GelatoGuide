@@ -1,4 +1,4 @@
-﻿@model GelatoGuide.Areas.Administration.Models.Home.StatisticViewModel
+﻿@model StatisticViewModel
 
 @{
     ViewBag.Title = "Admin page";
@@ -99,13 +99,11 @@
             </a>
         </div>
         <div class="col-md-3 mx-0">
-            <a asp-controller="Shop" asp-action="All">
-                <div class="card-counter alert">
-                    <i class="fa fa-shopping-basket"></i>
-                    <span class="count-numbers">@Model.TotalItemsInTheShop</span>
-                    <span class="count-name">Total Items</span>
-                </div>
-            </a>
+            <div class="card-counter alert">
+                <i class="fa fa-shopping-basket"></i>
+                <span class="count-numbers">@Model.TotalItemsInTheShop</span>
+                <span class="count-name">Total Items</span>
+            </div>
         </div>
     </div>
 </div>

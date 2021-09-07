@@ -59,7 +59,9 @@ namespace GelatoGuide
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IPlaceService, PlaceService>()
                 .AddTransient<IBlogService, BlogService>()
-                .AddTransient<IShopService, ShopService>()
+                .AddTransient<IShopService, ShopService>();
+
+            services
                 .AddTransient<IRoleService, RoleService>();
         }
 

@@ -1,4 +1,4 @@
-﻿using GelatoGuide.Areas.Administration.Models.Home;
+﻿using GelatoGuide.Areas.Administration.Views.Home.Models;
 using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Shop;

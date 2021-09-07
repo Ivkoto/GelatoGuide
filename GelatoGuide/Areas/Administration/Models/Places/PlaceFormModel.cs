@@ -8,7 +8,7 @@ namespace GelatoGuide.Areas.Administration.Models.Places
 {
     public class PlaceFormModel : IValidatableObject
     {
-        public string Id { get; set; }
+        public string Id { get; init;  }
 
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, 

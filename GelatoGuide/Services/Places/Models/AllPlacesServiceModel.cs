@@ -4,7 +4,7 @@ namespace GelatoGuide.Services.Places.Models
 {
     public class AllPlacesServiceModel
     {
-        public string Id { get; init; }
+        //public string Id { get; init; }
         public string SearchTerm { get; init; }
 
         public string Country { get; set; }
