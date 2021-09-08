@@ -5,7 +5,6 @@ using static GelatoGuide.Data.DataConstants.ShopItems;
 namespace GelatoGuide.Areas.Administration.Models.Shop
 {
     public class ShopItemFormModel : IValidatableObject
-
     {
 
         [Required]

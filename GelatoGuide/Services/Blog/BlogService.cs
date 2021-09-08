@@ -140,6 +140,23 @@ namespace GelatoGuide.Services.Blog
             return result;
         }
 
+        public IEnumerable<ArticleServiceModel> AdminArticles()
+            => this.data.Articles
+                .Select(a => new ArticleServiceModel()
+                {
+                    Id = a.Id,
+                    ArticleText = a.ArticleText,
+                    Image = a.Image,
+                    PostedByDate = a.PostedByDate,
+                    PostedByName = a.PostedByName,
+                    SourceName = a.SourceName,
+                    SourceUrl = a.SourceUrl,
+                    SubTitle = a.SubTitle,
+                    Title = a.Title,
+                    UserId = a.UserId
+                })
+                .ToList();
+
         public void Edit(string id, ArticleServiceModel model)
         {
             var curArticle = this.data.Articles.Find(id);
@@ -155,8 +172,9 @@ namespace GelatoGuide.Services.Blog
             this.data.SaveChanges();
         }
 
-        public void Delete(Article article)
+        public void Delete(string id)
         {
+            var article = this.ArticleById(id);
             this.data.Articles.Remove(article);
             this.data.SaveChanges();
         }
@@ -224,5 +242,8 @@ namespace GelatoGuide.Services.Blog
                     PostedByDate = a.PostedByDate
                 })
                 .ToList();
+
+        public bool IsArticleExist(string id)
+            => this.data.Articles.Any(a => a.Id == id);
     }
 }

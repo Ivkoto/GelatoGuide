@@ -22,6 +22,7 @@ namespace GelatoGuide.Models.Blog
 
         public DateTime PostedByDate { get; set; }
 
+        //ToDo why this class need a collection of articles???
         public IEnumerable<ArticleServiceModel> Articles;
     }
 }

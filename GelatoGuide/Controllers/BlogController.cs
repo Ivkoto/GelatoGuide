@@ -147,15 +147,13 @@ namespace GelatoGuide.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            var article = this.blogService.ArticleById(id);
-
-            if (article == null)
+            if (!this.blogService.IsArticleExist(id))
             {
                 this.ModelState.AddModelError("", "Статията не съществува!");
                 return View("All");
             }
 
-            this.blogService.Delete(article);
+            this.blogService.Delete(id);
 
             return RedirectToAction("All", "Blog");
         }

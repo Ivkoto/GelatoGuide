@@ -14,9 +14,11 @@ namespace GelatoGuide.Services.Blog
             string searchTerm, string postedByName, string postedByYear, 
             string postedByMonth, int articlesPerPage, int currentPage);
 
+        IEnumerable<ArticleServiceModel> AdminArticles();
+
         void Edit(string id, ArticleServiceModel model);
 
-        void Delete(Article article);
+        void Delete(string id);
 
         IEnumerable<string> AllPostedByNames();
 
@@ -31,5 +33,7 @@ namespace GelatoGuide.Services.Blog
         int TotalArticlesCount();
 
         IEnumerable<ArticleServiceModel> GetLastThreeArticles();
+
+        bool IsArticleExist(string id);
     }
 }
