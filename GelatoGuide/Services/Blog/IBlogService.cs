@@ -6,17 +6,15 @@ namespace GelatoGuide.Services.Blog
 {
     public interface IBlogService
     {
-        void CreateArticle(
-            string title, string subTitle, string image, string articleText,
-            string sourceName, string sourceUrl, string postedByName, string userId);
+        void CreateArticle(ArticleServiceModel model);
 
         AllArticlesServiceModel AllArticles(
             string searchTerm, string postedByName, string postedByYear, 
             string postedByMonth, int articlesPerPage, int currentPage);
 
-        IEnumerable<ArticleServiceModel> AdminArticles();
+        IEnumerable<ArticleServiceModel> AllArticlesAdmin();
 
-        void Edit(string id, ArticleServiceModel model);
+        void Update(string id, ArticleServiceModel model);
 
         void Delete(string id);
 
@@ -28,7 +26,7 @@ namespace GelatoGuide.Services.Blog
 
         IEnumerable<ArticleServiceModel> AllByUserId(string id);
 
-        Article ArticleById(string id);
+        ArticleServiceModel ArticleById(string id);
 
         int TotalArticlesCount();
 

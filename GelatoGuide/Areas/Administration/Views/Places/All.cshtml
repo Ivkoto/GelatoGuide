@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<PlacesViewModel>
 
 @{
-    ViewData["Title"] = "All added places";
+    ViewBag.Title = "All added places";
     var counter = 1;
 }
 
 <div class="container-fluid">
     <div class="row justify-content-end text-center mb-4">
         <div class="col-4">
-            <h3>@ViewData["Title"]</h3>
+            <h3>@ViewBag.Title</h3>
         </div>
         <div class="col-4">
             <a asp-controller="Places" asp-action="Create" class="btn btn-secondary">Create Place</a>

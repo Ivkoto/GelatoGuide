@@ -16,20 +16,20 @@ namespace GelatoGuide.Areas.Identity.Pages.Account
         private readonly SignInManager<User> signInManager;
         private readonly UserManager<User> userManager;
 
-        private readonly RoleManager<IdentityRole> roleManager;
+        //private readonly RoleManager<IdentityRole> roleManager;
         //private readonly ILogger<RegisterModel> _logger;
         //private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            RoleManager<IdentityRole> roleManager /*,
+            SignInManager<User> signInManager/*,
+            RoleManager<IdentityRole> roleManager ,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender*/)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
-            this.roleManager = roleManager;
+            //this.roleManager = roleManager;
             //_logger = logger;
             //_emailSender = emailSender;
         }
@@ -69,11 +69,11 @@ namespace GelatoGuide.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
-        {
-            ReturnUrl = returnUrl;
-            //ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-        }
+        //public async Task OnGetAsync(string returnUrl = null)
+        //{
+        //    ReturnUrl = returnUrl;
+        //    ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+        //}
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {

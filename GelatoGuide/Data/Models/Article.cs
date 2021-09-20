@@ -18,6 +18,7 @@ namespace GelatoGuide.Data.Models
         [MinLength(SubTitleMinLength)]
         public string SubTitle { get; set; }
 
+        [Url]
         public string Image { get; set; }
 
 

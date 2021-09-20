@@ -71,9 +71,19 @@ namespace GelatoGuide.Controllers
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 
-            blogService.CreateArticle(
-                article.Title, article.SubTitle, article.Image, article.ArticleText,
-                article.SourceName, article.SourceUrl, article.PostedByName, userId);
+            var articleModel = new ArticleServiceModel()
+            {
+                Title = article.Title,
+                SubTitle = article.SubTitle,
+                Image = article.Image,
+                ArticleText = article.ArticleText,
+                PostedByName = article.PostedByName,
+                SourceName = article.SourceName,
+                SourceUrl = article.SourceUrl,
+                UserId = userId
+            };
+
+            blogService.CreateArticle(articleModel);
 
             return RedirectToAction("All", "Blog");
         }
@@ -134,7 +144,7 @@ namespace GelatoGuide.Controllers
                 SourceUrl = model.SourceUrl
             };
 
-            this.blogService.Edit(id, serviceModel);
+            this.blogService.Update(id, serviceModel);
 
             if (this.User.IsAdmin())
             {
@@ -158,12 +168,12 @@ namespace GelatoGuide.Controllers
             return RedirectToAction("All", "Blog");
         }
 
-        private void Errors(IdentityResult result)
-        {
-            foreach (IdentityError error in result.Errors)
-            {
-                ModelState.AddModelError(string.Empty, error.Description);
-            }
-        }
+        //private void Errors(IdentityResult result)
+        //{
+        //    foreach (IdentityError error in result.Errors)
+        //    {
+        //        ModelState.AddModelError(string.Empty, error.Description);
+        //    }
+        //}
     }
 }

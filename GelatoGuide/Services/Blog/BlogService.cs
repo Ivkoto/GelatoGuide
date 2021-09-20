@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GelatoGuide.Services.Blog
 {
@@ -17,22 +18,20 @@ namespace GelatoGuide.Services.Blog
             => this.data = data;
 
 
-        public void CreateArticle(
-            string title, string subTitle, string image, string articleText,
-            string sourceName, string sourceUrl, string postedByName, string userId)
+        public void CreateArticle(ArticleServiceModel model)
         {
 
             this.data.Add(new Article()
             {
-                Title = title,
-                SubTitle = subTitle,
-                Image = image,
-                ArticleText = articleText,
-                PostedByName = postedByName,
-                SourceName = sourceName,
-                SourceUrl = sourceUrl,
+                Title = model.Title,
+                SubTitle = model.SubTitle,
+                Image = model.Image,
+                ArticleText = model.ArticleText,
+                PostedByName = model.PostedByName,
+                SourceName = model.SourceName,
+                SourceUrl = model.SourceUrl,
                 PostedByDate = DateTime.Now,
-                UserId = userId
+                UserId = model.UserId
             });
 
             this.data.SaveChanges();
@@ -140,7 +139,7 @@ namespace GelatoGuide.Services.Blog
             return result;
         }
 
-        public IEnumerable<ArticleServiceModel> AdminArticles()
+        public IEnumerable<ArticleServiceModel> AllArticlesAdmin()
             => this.data.Articles
                 .Select(a => new ArticleServiceModel()
                 {
@@ -157,7 +156,7 @@ namespace GelatoGuide.Services.Blog
                 })
                 .ToList();
 
-        public void Edit(string id, ArticleServiceModel model)
+        public void Update(string id, ArticleServiceModel model)
         {
             var curArticle = this.data.Articles.Find(id);
             
@@ -174,9 +173,13 @@ namespace GelatoGuide.Services.Blog
 
         public void Delete(string id)
         {
-            var article = this.ArticleById(id);
-            this.data.Articles.Remove(article);
-            this.data.SaveChanges();
+            var article = this.data.Articles.FirstOrDefault(a => a.Id == id);
+
+            if (article != null)
+            {
+                this.data.Articles.Remove(article);
+                this.data.SaveChanges();
+            }
         }
 
         public IEnumerable<string> AllPostedByNames()
@@ -213,13 +216,33 @@ namespace GelatoGuide.Services.Blog
                 })
                 .ToList();
 
-        public Article ArticleById(string id)
+        public ArticleServiceModel ArticleById(string id)
         {
-            var articles = this.data.Articles.ToList();
+            var article = this.data.Articles
+                .Where(a => a.Id == id)
+                .Select(a => new ArticleServiceModel()
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    SubTitle = a.SubTitle,
+                    ArticleText = a.ArticleText,
+                    SourceName = a.SourceName,
+                    SourceUrl = a.SourceUrl,
+                    PostedByName = a.PostedByName,
+                    PostedByDate = a.PostedByDate,
+                    Image = a.Image,
+                    UserId = a.UserId
+                })
+                .FirstOrDefault();
+                
 
-            var curArt = articles.First(a => a.Id == id);
+            //var articles = this.data.Articles.ToList();
 
-            return curArt;
+            //var curArt = articles.First(a => a.Id == id);
+
+            //return curArt;
+
+            return article;
         }
 
         public int TotalArticlesCount()
