@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+﻿using AutoMapper;
 using GelatoGuide.Areas.Administration.Models.Blog;
 using GelatoGuide.Infrastructure;
 using GelatoGuide.Services.Blog;
@@ -10,10 +10,12 @@ namespace GelatoGuide.Areas.Administration.Controllers
     public class BlogController : AdminController
     {
         private readonly IBlogService blogService;
+        private readonly IMapper mapper;
 
-        public BlogController(IBlogService blogService)
+        public BlogController(IBlogService blogService, IMapper mapper)
         {
             this.blogService = blogService;
+            this.mapper = mapper;
         }
 
         public IActionResult All()
@@ -34,19 +36,10 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return View(article);
             }
 
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = this.User.Id();
 
-            var articleModel = new ArticleServiceModel()
-            {
-                Title = article.Title,
-                SubTitle = article.SubTitle,
-                Image = article.Image,
-                ArticleText = article.ArticleText,
-                PostedByName = article.PostedByName,
-                SourceName = article.SourceName,
-                SourceUrl = article.SourceUrl,
-                UserId = userId
-            };
+            var articleModel = this.mapper.Map<ArticleServiceModel>(article);
+            articleModel.UserId = userId;
 
             blogService.CreateArticle(articleModel);
 
@@ -56,7 +49,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         public IActionResult Update(string id)
         {
             var article = this.blogService.ArticleById(id);
-            
+
             return View(new CreateArticleFormModel()
             {
                 Title = article.Title,

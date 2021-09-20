@@ -15,8 +15,7 @@ namespace GelatoGuide.Infrastructure
     {
         private static TestData testSeedData = new TestData();
 
-        public static IApplicationBuilder PrepareDatabase(
-            this IApplicationBuilder app)
+        public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
         {
             using var scopedServices = app.ApplicationServices.CreateScope();
             var services = scopedServices.ServiceProvider;
