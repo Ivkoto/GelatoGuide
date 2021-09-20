@@ -30,4 +30,9 @@
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GelatoGuide.Data\GelatoGuide.Data.csproj" />
+    <ProjectReference Include="..\GelatoGuide.Services\GelatoGuide.Services.csproj" />
+  </ItemGroup>
+
 </Project>

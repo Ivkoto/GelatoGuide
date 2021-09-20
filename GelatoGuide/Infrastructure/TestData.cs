@@ -23,7 +23,8 @@ namespace GelatoGuide.Infrastructure
                 City = "Русе",
                 Country = "България",
                 Location = "42.69102786793613, 23.32575909830204",
-                DateCreated = new DateTime(2021, 7, 18, 23, 55, 13)
+                DateCreated = new DateTime(2021, 7, 18, 23, 55, 13),
+                Address = "test place"
             };
 
             yield return new Place()
@@ -39,7 +40,8 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.69830560910363, 23.318543084810848",
-                DateCreated = new DateTime(2021, 5, 5, 12, 03, 15)
+                DateCreated = new DateTime(2021, 5, 5, 12, 03, 15),
+                Address = "test place"
             };
 
             yield return new Place()
@@ -56,7 +58,8 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.692332330695784, 23.324327081063817",
-                DateCreated = new DateTime(2021, 7, 23, 11, 10, 45)
+                DateCreated = new DateTime(2021, 7, 23, 11, 10, 45),
+                Address = "test place"
             };
 
             yield return new Place()
@@ -72,7 +75,8 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.68720493140862, 23.31817401112721",
-                DateCreated = new DateTime(2021, 7, 30, 23, 57, 49)
+                DateCreated = new DateTime(2021, 7, 30, 23, 57, 49),
+                Address = "test place"
             };
 
             yield return new Place()
@@ -90,7 +94,8 @@ namespace GelatoGuide.Infrastructure
                 City = "София",
                 Country = "България",
                 Location = "42.694245115089146, 23.340427248848375",
-                DateCreated = new DateTime(2021, 7, 29, 9, 48, 26)
+                DateCreated = new DateTime(2021, 7, 29, 9, 48, 26),
+                Address = "test place"
             };
 
             yield return new Place()
@@ -105,7 +110,8 @@ namespace GelatoGuide.Infrastructure
                 InstagramUrl = "https://www.instagram.com/p/COSXn1XjVvJ/",
                 City = "Ниш",
                 Country = "Сърбия",
-                DateCreated = new DateTime(2021, 7, 18, 23, 55, 13)
+                DateCreated = new DateTime(2021, 7, 18, 23, 55, 13),
+                Address = "test place"
             };
         }
 
