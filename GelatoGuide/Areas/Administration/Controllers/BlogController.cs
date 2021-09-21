@@ -103,5 +103,14 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
             return RedirectToAction("All", "Blog");
         }
+
+        public IActionResult Details(string id)
+        {
+            var article = this.blogService.ArticleById(id);
+
+            var articleDetails = this.mapper.Map<ArticleDetailsViewModel>(article);
+            
+            return View(articleDetails);
+        }
     }
 }

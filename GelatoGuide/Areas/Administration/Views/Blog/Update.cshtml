@@ -4,3 +4,11 @@
     ViewBag.Title = "Update Item";
 }
 
+@Html.ValidationSummary(true)
+
+<partial name="_BlogArticleFormPartial" model="@Model"/>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

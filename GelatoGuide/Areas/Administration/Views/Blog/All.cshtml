@@ -24,6 +24,7 @@
             <th scope="col">Posted By Date</th>
             <th scope="col"></th>
             <th scope="col"></th>
+            <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +36,11 @@
                 <td>@article.SourceName</td>
                 <td>@article.PostedByName</td>
                 <td>@article.PostedByDate</td>
+                <td>
+                    <a class="btn btn-sm text-info" asp-controller="Blog" asp-action="Details" asp-route-id="@article.Id">
+                        Details
+                    </a>
+                </td>
                 <td>
                     <a class="btn btn-sm text-primary" asp-controller="Blog" asp-action="Update" asp-route-id="@article.Id">
                         Update

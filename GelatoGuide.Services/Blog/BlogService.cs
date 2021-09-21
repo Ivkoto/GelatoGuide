@@ -5,8 +5,6 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace GelatoGuide.Services.Blog
 {
@@ -17,28 +15,8 @@ namespace GelatoGuide.Services.Blog
         public BlogService(GelatoGuideDbContext data)
             => this.data = data;
 
-
-        public void CreateArticle(ArticleServiceModel model)
-        {
-
-            this.data.Add(new Article()
-            {
-                Title = model.Title,
-                SubTitle = model.SubTitle,
-                Image = model.Image,
-                ArticleText = model.ArticleText,
-                PostedByName = model.PostedByName,
-                SourceName = model.SourceName,
-                SourceUrl = model.SourceUrl,
-                PostedByDate = DateTime.Now,
-                UserId = model.UserId
-            });
-
-            this.data.SaveChanges();
-        }
-
         public AllArticlesServiceModel AllArticles(
-            string searchTerm, string postedByName, string postedByYear, 
+            string searchTerm, string postedByName, string postedByYear,
             string postedByMonth, int articlesPerPage, int currentPage)
         {
             var articlesQuery = this.data.Articles.AsQueryable();
@@ -47,7 +25,7 @@ namespace GelatoGuide.Services.Blog
             {
                 return null;
             }
-            
+
             //filter query if any search text have been imputed
             if (!string.IsNullOrWhiteSpace(searchTerm))
             {
@@ -58,7 +36,7 @@ namespace GelatoGuide.Services.Blog
                     a.PostedByName.ToLower().Contains(searchTerm.ToLower()) ||
                     a.SourceName.ToLower().Contains(searchTerm.ToLower()));
             }
-                
+
             //filter query if author name have been selected
             if (!string.IsNullOrWhiteSpace(postedByName))
             {
@@ -91,7 +69,7 @@ namespace GelatoGuide.Services.Blog
             }
 
             //restrict viewing empty pages and non existing pages
-            var totalArticles = articlesQuery.Any()? articlesQuery.Count() : 0;
+            var totalArticles = articlesQuery.Any() ? articlesQuery.Count() : 0;
             var maxPageCount = (int)Math.Ceiling((double)totalArticles / articlesPerPage);
             if (currentPage > maxPageCount)
             {
@@ -139,6 +117,7 @@ namespace GelatoGuide.Services.Blog
             return result;
         }
 
+
         public IEnumerable<ArticleServiceModel> AllArticlesAdmin()
             => this.data.Articles
                 .Select(a => new ArticleServiceModel()
@@ -156,10 +135,95 @@ namespace GelatoGuide.Services.Blog
                 })
                 .ToList();
 
+
+        public IEnumerable<ArticleServiceModel> AllByUserId(string id)
+            => this.data.Articles
+                .Where(a => a.UserId == id)
+                .Select(a => new ArticleServiceModel()
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    SubTitle = a.SubTitle,
+                    PostedByName = a.PostedByName,
+                    PostedByDate = a.PostedByDate
+                })
+                .ToList();
+
+
+        public ArticleServiceModel ArticleById(string id)
+        {
+            var article = this.data.Articles
+                .Where(a => a.Id == id)
+                .Select(a => new ArticleServiceModel()
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    SubTitle = a.SubTitle,
+                    ArticleText = a.ArticleText,
+                    SourceName = a.SourceName,
+                    SourceUrl = a.SourceUrl,
+                    PostedByName = a.PostedByName,
+                    PostedByDate = a.PostedByDate,
+                    Image = a.Image,
+                    UserId = a.UserId,
+                    UserName = $"{a.User.FullName} ({a.User.UserName})"
+                })
+                .FirstOrDefault();
+
+
+            //var articles = this.data.Articles.ToList();
+
+            //var curArt = articles.First(a => a.Id == id);
+
+            //return curArt;
+
+            return article;
+        }
+
+
+        public IEnumerable<ArticleServiceModel> GetLastThreeArticles()
+            => this.data.Articles
+                .OrderByDescending(a => a.PostedByDate)
+                .Take(3)
+                .Select(a => new ArticleServiceModel()
+                {
+                    Id = a.Id,
+                    Title = a.Title,
+                    SubTitle = a.SubTitle,
+                    Image = a.Image,
+                    ArticleText = a.ArticleText,
+                    SourceName = a.SourceName,
+                    SourceUrl = a.SourceUrl,
+                    PostedByName = a.PostedByName,
+                    PostedByDate = a.PostedByDate
+                })
+                .ToList();
+
+                
+        public void CreateArticle(ArticleServiceModel model)
+        {
+
+            this.data.Add(new Article()
+            {
+                Title = model.Title,
+                SubTitle = model.SubTitle,
+                Image = model.Image,
+                ArticleText = model.ArticleText,
+                PostedByName = model.PostedByName,
+                SourceName = model.SourceName,
+                SourceUrl = model.SourceUrl,
+                PostedByDate = DateTime.Now,
+                UserId = model.UserId
+            });
+
+            this.data.SaveChanges();
+        }
+
+
         public void Update(string id, ArticleServiceModel model)
         {
             var curArticle = this.data.Articles.Find(id);
-            
+
             curArticle.Title = model.Title;
             curArticle.SubTitle = model.SubTitle;
             curArticle.Image = model.Image;
@@ -203,69 +267,11 @@ namespace GelatoGuide.Services.Blog
                 .Distinct()
                 .ToList();
 
-        public IEnumerable<ArticleServiceModel> AllByUserId(string id)
-            => this.data.Articles
-                .Where(a => a.UserId == id)
-                .Select(a => new ArticleServiceModel()
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    SubTitle = a.SubTitle,
-                    PostedByName = a.PostedByName,
-                    PostedByDate = a.PostedByDate
-                })
-                .ToList();
-
-        public ArticleServiceModel ArticleById(string id)
-        {
-            var article = this.data.Articles
-                .Where(a => a.Id == id)
-                .Select(a => new ArticleServiceModel()
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    SubTitle = a.SubTitle,
-                    ArticleText = a.ArticleText,
-                    SourceName = a.SourceName,
-                    SourceUrl = a.SourceUrl,
-                    PostedByName = a.PostedByName,
-                    PostedByDate = a.PostedByDate,
-                    Image = a.Image,
-                    UserId = a.UserId
-                })
-                .FirstOrDefault();
-                
-
-            //var articles = this.data.Articles.ToList();
-
-            //var curArt = articles.First(a => a.Id == id);
-
-            //return curArt;
-
-            return article;
-        }
-
+        
         public int TotalArticlesCount()
             => this.data.Articles.Count();
 
-        public IEnumerable<ArticleServiceModel> GetLastThreeArticles()
-            => this.data.Articles
-                .OrderByDescending(a => a.PostedByDate)
-                .Take(3)
-                .Select(a => new ArticleServiceModel()
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    SubTitle = a.SubTitle,
-                    Image = a.Image,
-                    ArticleText = a.ArticleText,
-                    SourceName = a.SourceName,
-                    SourceUrl = a.SourceUrl,
-                    PostedByName = a.PostedByName,
-                    PostedByDate = a.PostedByDate
-                })
-                .ToList();
-
+        
         public bool IsArticleExist(string id)
             => this.data.Articles.Any(a => a.Id == id);
     }

@@ -9,6 +9,8 @@ namespace GelatoGuide.Infrastructure
         public MappingProfile()
         {
             this.CreateMap<CreateArticleFormModel, ArticleServiceModel>();
+
+            this.CreateMap<ArticleServiceModel, ArticleDetailsViewModel>();
         }
     }
 }
