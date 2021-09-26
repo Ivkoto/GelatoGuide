@@ -4,7 +4,7 @@ namespace GelatoGuide.Services.Blog.Models
 {
     public class ArticleServiceModel
     {
-        public string Id { get; init; }
+        public string Id { get; set; }
         public string Title { get; set; }
 
         public string SubTitle { get; set; }

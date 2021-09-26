@@ -6,8 +6,7 @@ namespace GelatoGuide.Services.Places
 {
     public interface IPlaceService
     {
-        void CreatePlace(PlaceServiceModel place, string userId);
-
+        
         //Admin area
         IEnumerable<PlaceServiceModel> AllPlaces();
 
@@ -15,13 +14,17 @@ namespace GelatoGuide.Services.Places
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage);
 
-        Place PlaceById(string id);
+        void CreatePlace(PlaceServiceModel place, string userId);
 
         void UpdatePlace(PlaceServiceModel model);
+
         void DeletePlace(Place place);
+
+        Place PlaceById(string id);
 
         int TotalPlacesCount();
 
+        //for searching area
         IEnumerable<string> AllCities();
 
         IEnumerable<string> AllCountries();

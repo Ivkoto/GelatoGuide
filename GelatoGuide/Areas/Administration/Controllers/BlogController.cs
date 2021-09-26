@@ -50,39 +50,21 @@ namespace GelatoGuide.Areas.Administration.Controllers
         {
             var article = this.blogService.ArticleById(id);
 
-            return View(new CreateArticleFormModel()
-            {
-                Title = article.Title,
-                SubTitle = article.SubTitle,
-                ArticleText = article.ArticleText,
-                SourceName = article.SourceName,
-                PostedByName = article.PostedByName,
-                SourceUrl = article.SourceUrl,
-                Image = article.Image
-            });
+            var createModel = this.mapper.Map<CreateArticleFormModel>(article);
+
+            return View(createModel);
         }
 
         [HttpPost]
         public IActionResult Update(string id, CreateArticleFormModel model)
         {
-            //Todo add image section to the view and the form model
-
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            var serviceModel = new ArticleServiceModel()
-            {
-                Id = id,
-                Title = model.Title,
-                SubTitle = model.SubTitle,
-                ArticleText = model.ArticleText,
-                Image = model.Image,
-                PostedByName = model.PostedByName,
-                SourceName = model.SourceName,
-                SourceUrl = model.SourceUrl
-            };
+            var serviceModel = this.mapper.Map<ArticleServiceModel>(model);
+            serviceModel.Id = id;
 
             this.blogService.Update(id, serviceModel);
 

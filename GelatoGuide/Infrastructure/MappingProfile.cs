@@ -1,16 +1,18 @@
-﻿using AutoMapper;
-using GelatoGuide.Areas.Administration.Models.Blog;
-using GelatoGuide.Services.Blog.Models;
+﻿    using AutoMapper;
+    using GelatoGuide.Areas.Administration.Models.Blog;
+    using GelatoGuide.Services.Blog.Models;
 
-namespace GelatoGuide.Infrastructure
-{
-    public class MappingProfile : Profile
+    namespace GelatoGuide.Infrastructure
     {
-        public MappingProfile()
+        public class MappingProfile : Profile
         {
-            this.CreateMap<CreateArticleFormModel, ArticleServiceModel>();
+            public MappingProfile()
+            {
+                this.CreateMap<CreateArticleFormModel, ArticleServiceModel>();
 
-            this.CreateMap<ArticleServiceModel, ArticleDetailsViewModel>();
+                this.CreateMap<ArticleServiceModel, ArticleDetailsViewModel>();
+
+                this.CreateMap<ArticleServiceModel, CreateArticleFormModel>();
+            }
         }
     }
-}

@@ -8,7 +8,7 @@
                 <h3>@article.Title</h3>
                 <h4>@article.SubTitle</h4>
             </a>
-            <i>Побликувано от <strong>@article.PostedByName</strong> на <strong>@article.PostedByDate.ToShortDateString()</strong></i>
+            <i>Побликувано от <strong>@article.PostedByName</strong> на <strong>@article.PostedByDate.ToString("D")</strong></i>
             <br />
             @if (ViewBag.AllowArticleEdit == true)
             {

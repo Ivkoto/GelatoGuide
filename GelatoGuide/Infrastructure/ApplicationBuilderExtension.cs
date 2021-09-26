@@ -7,13 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using static GelatoGuide.WebConstants;
 
 namespace GelatoGuide.Infrastructure
 {
     public static class ApplicationBuilderExtension
     {
-        private static TestData testSeedData = new TestData();
+        private static readonly TestData testSeedData = new TestData();
 
         public static IApplicationBuilder PrepareDatabase(this IApplicationBuilder app)
         {
