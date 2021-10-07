@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using static GelatoGuide.WebConstants;
 
 namespace GelatoGuide.Services.Users
@@ -66,6 +67,13 @@ namespace GelatoGuide.Services.Users
 
         public async Task<User> UserById(string id)
             => await this.userManager.FindByIdAsync(id);
+
+        public async Task<string> Username(string id)
+        {
+            var user = await this.userManager.FindByIdAsync(id);
+
+            return $"{user.FullName} ({user.UserName})";
+        }
 
         public async Task<IdentityResult> CreateUser(UserServiceModel model)
         {

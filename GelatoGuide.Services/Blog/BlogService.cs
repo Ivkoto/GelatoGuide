@@ -5,15 +5,21 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 
 namespace GelatoGuide.Services.Blog
 {
     public class BlogService : IBlogService
     {
         private readonly GelatoGuideDbContext data;
+        private readonly IMapper mapper;
 
-        public BlogService(GelatoGuideDbContext data)
-            => this.data = data;
+        public BlogService(GelatoGuideDbContext data, IMapper mapper)
+        {
+            this.data = data;
+            this.mapper = mapper;
+        }
 
         public AllArticlesServiceModel AllArticles(
             string searchTerm, string postedByName, string postedByYear,
@@ -119,25 +125,15 @@ namespace GelatoGuide.Services.Blog
 
 
         public IEnumerable<ArticleServiceModel> AllArticlesAdmin()
-            => this.data.Articles
-                .Select(a => new ArticleServiceModel()
-                {
-                    Id = a.Id,
-                    ArticleText = a.ArticleText,
-                    Image = a.Image,
-                    PostedByDate = a.PostedByDate,
-                    PostedByName = a.PostedByName,
-                    SourceName = a.SourceName,
-                    SourceUrl = a.SourceUrl,
-                    SubTitle = a.SubTitle,
-                    Title = a.Title,
-                    UserId = a.UserId
-                })
-                .ToList();
+            =>
+                this.data.Articles
+                    .ProjectTo<ArticleServiceModel>(this.mapper.ConfigurationProvider)
+                    .ToList();
 
 
         public IEnumerable<ArticleServiceModel> AllByUserId(string id)
-            => this.data.Articles
+            => 
+                this.data.Articles
                 .Where(a => a.UserId == id)
                 .Select(a => new ArticleServiceModel()
                 {
@@ -151,38 +147,16 @@ namespace GelatoGuide.Services.Blog
 
 
         public ArticleServiceModel ArticleById(string id)
-        {
-            var article = this.data.Articles
-                .Where(a => a.Id == id)
-                .Select(a => new ArticleServiceModel()
-                {
-                    Id = a.Id,
-                    Title = a.Title,
-                    SubTitle = a.SubTitle,
-                    ArticleText = a.ArticleText,
-                    SourceName = a.SourceName,
-                    SourceUrl = a.SourceUrl,
-                    PostedByName = a.PostedByName,
-                    PostedByDate = a.PostedByDate,
-                    Image = a.Image,
-                    UserId = a.UserId,
-                    UserName = $"{a.User.FullName} ({a.User.UserName})"
-                })
-                .FirstOrDefault();
-
-
-            //var articles = this.data.Articles.ToList();
-
-            //var curArt = articles.First(a => a.Id == id);
-
-            //return curArt;
-
-            return article;
-        }
+            =>
+                this.data.Articles
+                    .Where(a => a.Id == id)
+                    .ProjectTo<ArticleServiceModel>(this.mapper.ConfigurationProvider)
+                    .FirstOrDefault();
 
 
         public IEnumerable<ArticleServiceModel> GetLastThreeArticles()
-            => this.data.Articles
+            =>
+                this.data.Articles
                 .OrderByDescending(a => a.PostedByDate)
                 .Take(3)
                 .Select(a => new ArticleServiceModel()
@@ -199,23 +173,14 @@ namespace GelatoGuide.Services.Blog
                 })
                 .ToList();
 
-                
+
         public void CreateArticle(ArticleServiceModel model)
         {
 
-            this.data.Add(new Article()
-            {
-                Title = model.Title,
-                SubTitle = model.SubTitle,
-                Image = model.Image,
-                ArticleText = model.ArticleText,
-                PostedByName = model.PostedByName,
-                SourceName = model.SourceName,
-                SourceUrl = model.SourceUrl,
-                PostedByDate = DateTime.Now,
-                UserId = model.UserId
-            });
+            var newArticle = this.mapper.Map<Article>(model);
+            newArticle.Id = Guid.NewGuid().ToString();
 
+            this.data.Add(newArticle);
             this.data.SaveChanges();
         }
 
@@ -267,11 +232,11 @@ namespace GelatoGuide.Services.Blog
                 .Distinct()
                 .ToList();
 
-        
+
         public int TotalArticlesCount()
             => this.data.Articles.Count();
 
-        
+
         public bool IsArticleExist(string id)
             => this.data.Articles.Any(a => a.Id == id);
     }

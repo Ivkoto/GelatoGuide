@@ -45,5 +45,7 @@ namespace GelatoGuide.Services.Places.Models
         public DateTime DateCreated { get; set; }
 
         public string UserId { get; set; }
+
+        public string Username { get; set; } = string.Empty;
     }
 }
