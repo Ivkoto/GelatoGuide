@@ -14,7 +14,7 @@ namespace GelatoGuide.Services.Places
             string searchTerm, string country, string city,
             int currentPage, int placesPerPage);
 
-        void CreatePlace(PlaceServiceModel place);
+        void CreatePlace(PlaceServiceModel place, string userId);
 
         void UpdatePlace(PlaceServiceModel model);
 
@@ -24,11 +24,9 @@ namespace GelatoGuide.Services.Places
 
         int TotalPlacesCount();
 
-        //searching area
+        //for searching area
         IEnumerable<string> AllCities();
 
         IEnumerable<string> AllCountries();
-
-        bool IsPlaceNameExist(string name);
     }
 }

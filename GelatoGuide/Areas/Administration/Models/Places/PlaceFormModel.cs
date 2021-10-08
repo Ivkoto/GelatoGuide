@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using GelatoGuide.Data.Models;
@@ -7,9 +6,9 @@ using static GelatoGuide.Data.DataConstants.Place;
 
 namespace GelatoGuide.Areas.Administration.Models.Places
 {
-    public class CreatePlaceFormModel : IValidatableObject
+    public class PlaceFormModel : IValidatableObject
     {
-        public string Id { get; init; }
+        public string Id { get; init;  }
 
         [Required]
         [StringLength(NameMaxLength, MinimumLength = NameMinLength, 

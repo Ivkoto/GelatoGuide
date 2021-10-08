@@ -1,27 +1,18 @@
-﻿using AutoMapper;
-using GelatoGuide.Areas.Administration.Models.Blog;
-using GelatoGuide.Areas.Administration.Models.Places;
-using GelatoGuide.Data.Models;
-using GelatoGuide.Services.Blog.Models;
-using GelatoGuide.Services.Places.Models;
+﻿    using AutoMapper;
+    using GelatoGuide.Areas.Administration.Models.Blog;
+    using GelatoGuide.Services.Blog.Models;
 
-namespace GelatoGuide.Infrastructure
-{
-    public class MappingProfile : Profile
+    namespace GelatoGuide.Infrastructure
     {
-        public MappingProfile()
+        public class MappingProfile : Profile
         {
-            this.CreateMap<CreateArticleFormModel, ArticleServiceModel>().ReverseMap();
+            public MappingProfile()
+            {
+                this.CreateMap<CreateArticleFormModel, ArticleServiceModel>();
 
-            this.CreateMap<Article, ArticleServiceModel>()
-                .ForMember(asm => asm.UserName, cfg => cfg.MapFrom(a => $"{a.User.FullName} ({a.User.UserName})"))
-                .ReverseMap();
+                this.CreateMap<ArticleServiceModel, ArticleDetailsViewModel>();
 
-            this.CreateMap<CreatePlaceFormModel, PlaceServiceModel>();
-
-            this.CreateMap<PlaceServiceModel, Place>().ReverseMap();
-
-            this.CreateMap<Place, CreatePlaceFormModel>();
+                this.CreateMap<ArticleServiceModel, CreateArticleFormModel>();
+            }
         }
     }
-}

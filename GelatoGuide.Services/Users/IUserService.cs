@@ -12,8 +12,6 @@ namespace GelatoGuide.Services.Users
 
         Task<User> UserById(string id);
 
-        Task<string>Username(string id);
-
         Task<IdentityResult> CreateUser(UserServiceModel model);
 
         string GetInitialAdminId();

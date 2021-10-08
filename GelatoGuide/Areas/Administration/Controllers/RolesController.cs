@@ -48,7 +48,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(CreateRoleFormModel model)
+        public IActionResult Update(RoleFormModel model)
         {
             if (!ModelState.IsValid)
             {

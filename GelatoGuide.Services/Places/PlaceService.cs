@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using GelatoGuide.Data;
+﻿using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
 using GelatoGuide.Services.Places.Models;
 using System;
@@ -11,22 +10,47 @@ namespace GelatoGuide.Services.Places
     public class PlaceService : IPlaceService
     {
         private readonly GelatoGuideDbContext data;
-        private readonly IMapper mapper;
 
-        public PlaceService(GelatoGuideDbContext data, IMapper mapper)
+        public PlaceService(GelatoGuideDbContext data)
+            => this.data = data;
+
+
+        public void CreatePlace(PlaceServiceModel place, string userId)
         {
-            this.data = data;
-            this.mapper = mapper;
-        }
+            this.data.Add(new Place()
+            {
+                Name = place.Name,
+                Description = place.Description,
+                MainImageUrl = place.MainImageUrl,
+                SinceYear = place.SinceYear,
+                LogoUrl = place.LogoUrl,
+                Images = place.Images,
+                TakeawayUrl = place.TakeawayUrl,
+                FoodpandaUrl = place.FoodpandaUrl,
+                GlovoUrl = place.GlovoUrl,
+                FacebookUrl = place.FacebookUrl,
+                InstagramUrl = place.InstagramUrl,
+                TwitterUrl = place.TwitterUrl,
+                WebsiteLink = place.WebsiteLink,
+                Country = place.Country,
+                City = place.City,
+                Address = place.Address,
+                Location = place.Location,
+                DateCreated = DateTime.Now,
+                UserId = userId
+            });
 
+            this.data.SaveChanges();
+        }
 
         //for Administration area
         public IEnumerable<PlaceServiceModel> AllPlaces()
             =>
-                this.data.Places
+            this.data
+                .Places
                 .Select(place => new PlaceServiceModel()
                 {
-                    Id = place.Id,
+                    //Id = place.Id,
                     Name = place.Name,
                     WebsiteLink = place.WebsiteLink,
                     SinceYear = place.SinceYear,
@@ -47,17 +71,6 @@ namespace GelatoGuide.Services.Places
             }
 
             return this.data.Places.First(p => p.Id == id);
-        }
-
-        public void CreatePlace(PlaceServiceModel place)
-        {
-            var curPlace = this.mapper.Map<Place>(place);
-
-            curPlace.Id = Guid.NewGuid().ToString();
-            curPlace.DateCreated = DateTime.Now;
-            
-            this.data.Add(curPlace);
-            this.data.SaveChanges();
         }
 
         public void UpdatePlace(PlaceServiceModel model)
@@ -216,9 +229,5 @@ namespace GelatoGuide.Services.Places
                 .Distinct()
                 .OrderBy(c => c)
                 .ToList();
-
-        public bool IsPlaceNameExist(string name)
-            => this.data.Places
-                .Any(p => p.Name == name);
     }
 }

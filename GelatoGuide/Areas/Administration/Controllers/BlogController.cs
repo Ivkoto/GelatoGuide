@@ -56,14 +56,14 @@ namespace GelatoGuide.Areas.Administration.Controllers
         }
 
         [HttpPost]
-        public IActionResult Update(string id, CreateArticleFormModel createModel)
+        public IActionResult Update(string id, CreateArticleFormModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(createModel);
+                return View(model);
             }
 
-            var serviceModel = this.mapper.Map<ArticleServiceModel>(createModel);
+            var serviceModel = this.mapper.Map<ArticleServiceModel>(model);
             serviceModel.Id = id;
 
             this.blogService.Update(id, serviceModel);
@@ -75,13 +75,10 @@ namespace GelatoGuide.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            var isArticleExist = this.blogService.IsArticleExist(id);
-
-            if (!isArticleExist)
+            if (!this.blogService.IsArticleExist(id))
             {
-                this.ModelState.AddModelError("", "Article do not exist!");
-                var articles = this.blogService.AllArticlesAdmin();
-                return View("All", articles);
+                this.ModelState.AddModelError("", "Статията не съществува!");
+                return View("All");
             }
 
             this.blogService.Delete(id);
@@ -93,7 +90,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         {
             var article = this.blogService.ArticleById(id);
 
-            var articleDetails = this.mapper.Map<ArticleServiceModel>(article);
+            var articleDetails = this.mapper.Map<ArticleDetailsViewModel>(article);
             
             return View(articleDetails);
         }

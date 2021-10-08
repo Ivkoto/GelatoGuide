@@ -8,7 +8,7 @@ namespace GelatoGuide.Data.Models
     public class Place
     {
         [Required]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+        public string Id { get; init; } = Guid.NewGuid().ToString();
 
         [Required]
         [MinLength(NameMinLength), MaxLength(NameMaxLength)]
