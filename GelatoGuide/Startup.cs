@@ -71,7 +71,10 @@ namespace GelatoGuide
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.PrepareDatabase();
+            if (env.IsDevelopment())
+            {
+                app.PrepareDatabase();
+            }
 
             if (env.IsDevelopment())
             {
