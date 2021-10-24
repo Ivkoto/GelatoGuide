@@ -10,12 +10,18 @@ namespace GelatoGuide.Data
             : base(options)
         {
         }
+        
+        public DbSet<Article> Articles { get; set; }
 
-        public DbSet<Place> Places { get; init; }
+        public DbSet<Customer> Customers { get; set; }
 
         public DbSet<Image> Images { get; set; }
 
-        public DbSet<Article> Articles { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Place> Places { get; init; }
+
+        public DbSet<ShippingAddress> ShippingAddresses { get; set; }
 
         public DbSet<ShopItem> ShopItems { get; set; }
 

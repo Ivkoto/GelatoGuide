@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static GelatoGuide.Data.DataConstants.Articles;
 
@@ -20,6 +21,8 @@ namespace GelatoGuide.Data.Models
 
         [Url]
         public string Image { get; set; }
+
+        public IEnumerable<Image> Images { get; set; }
 
 
         [MinLength(TextMinLength)]

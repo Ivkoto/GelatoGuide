@@ -4,11 +4,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GelatoGuide.Data.Models
 {
-    public class Buyer
+    public class Customer
     {
         public string Id { get; init; } = Guid.NewGuid().ToString();
 
         public string FirstName { get; set; }
+
+        public string MiddleName { get; set; }
 
         public string LastName { get; set; }
 
@@ -30,6 +32,6 @@ namespace GelatoGuide.Data.Models
 
         public IEnumerable<ShippingAddress> ShippingAddresses { get; set; }
 
-        public IEquatable<Order> Orders { get; set; }
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

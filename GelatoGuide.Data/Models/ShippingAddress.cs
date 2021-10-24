@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GelatoGuide.Data.Models
 {
@@ -16,8 +17,10 @@ namespace GelatoGuide.Data.Models
 
         public int PostCode { get; set; }
 
-        public string BuyerId { get; set; }
+        public string CustomerId { get; set; }
 
-        public Buyer Buyer { get; set; }
+        public Customer Customer { get; set; }
+
+        public IEnumerable<Order> Orders { get; set; }
     }
 }

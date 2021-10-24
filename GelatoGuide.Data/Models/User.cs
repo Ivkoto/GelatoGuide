@@ -13,5 +13,7 @@ namespace GelatoGuide.Data.Models
         public IEnumerable<Place> Places { get; init; } = new List<Place>();
 
         public IEnumerable<Article> Articles { get; set; } = new List<Article>();
+
+        public IEnumerable<Order> Orders { get; set; } = new List<Order>();
     }
 }
