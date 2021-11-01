@@ -37,17 +37,23 @@ namespace GelatoGuide.Services.Places
                 })
                 .ToList();
 
-        public Place PlaceById(string id)
+        public PlaceServiceModel PlaceById(string id)
         {
-            var idExist = this.data.Places.Any(p => p.Id == id);
+            var isIdExist = this.data.Places.Any(p => p.Id == id);
 
-            if (!idExist)
+            if (!isIdExist)
             {
                 return null;
             }
 
-            return this.data.Places.First(p => p.Id == id);
+            var curPlace = this.data.Places.First(p => p.Id == id);
+            var placeDetails = this.mapper.Map<PlaceServiceModel>(curPlace);
+
+            return placeDetails;
         }
+
+        public bool IsPlaceExist(string id)
+            => this.data.Places.Any(p => p.Id == id);
 
         public void CreatePlace(PlaceServiceModel place)
         {
@@ -62,7 +68,9 @@ namespace GelatoGuide.Services.Places
 
         public void UpdatePlace(PlaceServiceModel model)
         {
-            var place = this.PlaceById(model.Id);
+            var place = this.data.Places.FirstOrDefault(p => p.Id == model.Id);
+
+            if (place == null) return;
 
             place.Name = model.Name;
             place.Description = model.Description;
@@ -82,13 +90,19 @@ namespace GelatoGuide.Services.Places
             place.TwitterUrl = model.TwitterUrl;
             place.Images = model.Images;
 
+                
             this.data.SaveChanges();
         }
 
-        public void DeletePlace(Place place)
+        public void DeletePlace(string id)
         {
-            this.data.Places.Remove(place);
-            this.data.SaveChanges();
+            var curPlace = this.data.Places.First(p => p.Id == id);
+
+            if (curPlace != null)
+            {
+                this.data.Places.Remove(curPlace);
+                this.data.SaveChanges();
+            }
         }
 
         public AllPlacesServiceModel AllPlaces(

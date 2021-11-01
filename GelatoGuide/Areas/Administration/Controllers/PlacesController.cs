@@ -5,6 +5,7 @@ using GelatoGuide.Services.Places.Models;
 using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using GelatoGuide.Infrastructure;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
@@ -43,8 +44,8 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
                 return View(model);
             }
-
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
+            var userId = this.User.Id();
 
             var place = this.mapper.Map<PlaceServiceModel>(model);
             place.UserId = userId;
@@ -56,14 +57,14 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
         public IActionResult Update(string id)
         {
-            var place = this.placeService.PlaceById(id);
+            var placeDetails = this.placeService.PlaceById(id);
 
-            if (place == null)
+            if (placeDetails == null)
             {
                 return RedirectToAction("All", "Places");
             }
 
-            var model = this.mapper.Map<CreatePlaceFormModel>(place);
+            var model = this.mapper.Map<CreatePlaceFormModel>(placeDetails);
 
             return View(model);
         }
@@ -82,9 +83,9 @@ namespace GelatoGuide.Areas.Administration.Controllers
                 return View(model);
             }
 
-            var serviceModel = this.mapper.Map<PlaceServiceModel>(model);
+            var placeDetails = this.mapper.Map<PlaceServiceModel>(model);
 
-            this.placeService.UpdatePlace(serviceModel);
+            this.placeService.UpdatePlace(placeDetails);
 
             return RedirectToAction("All", "Places");
         }
@@ -92,34 +93,32 @@ namespace GelatoGuide.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            var place = this.placeService.PlaceById(id);
-
-            if (place == null)
+            
+            if (!this.placeService.IsPlaceExist(id))
             {
                 this.ModelState.AddModelError("", "Place not found!");
                 var places = this.placeService.AllPlaces();
                 return View("All", places);
             }
 
-            this.placeService.DeletePlace(place);
+            this.placeService.DeletePlace(id);
 
             return RedirectToAction("All", "Places");
         }
 
         public IActionResult Details(string id)
         {
-            var place = this.placeService.PlaceById(id);
+            var placeDetails = this.placeService.PlaceById(id);
 
-            if (place == null)
+            if (placeDetails == null)
             {
                 ModelState.AddModelError("", "Place not found!");
                 var places = this.placeService.AllPlaces();
                 return View("All", places);
             }
 
-            var username = this.userService.Username(place.UserId).Result;
-
-            var placeDetails = this.mapper.Map<PlaceServiceModel>(place);
+            var username = this.userService.Username(placeDetails.UserId).Result;
+            
             placeDetails.Username = username;
 
             return View(placeDetails);

@@ -1,4 +1,5 @@
 ﻿using System;
+using AutoMapper;
 using GelatoGuide.Models.Places;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Places.Models;
@@ -10,10 +11,12 @@ namespace GelatoGuide.Controllers
     public class PlacesController : Controller
     {
         private readonly IPlaceService placeService;
+        private readonly IMapper mapper;
 
-        public PlacesController(IPlaceService placeService)
+        public PlacesController(IPlaceService placeService, IMapper mapper)
         {
             this.placeService = placeService;
+            this.mapper = mapper;
         }
 
         public IActionResult All([FromQuery] AllPlacesServiceModel searchModel)
@@ -30,33 +33,16 @@ namespace GelatoGuide.Controllers
         
         public IActionResult Details(string id)
         {
-            var place = this.placeService.PlaceById(id);
+            var placeDetails = this.placeService.PlaceById(id);
 
-            if (place == null)
+            if (placeDetails == null)
             {
                 return StatusCode(400, "Bad Request!");
                 //TODO make bad request custom page
             }
 
-            var viewModel = new PlaceDetailsVewModel()
-            {
-                Name = place.Name,
-                Description = place.Description,
-                MainImageUrl = place.MainImageUrl,
-                SinceYear = place.SinceYear,
-                LogoUrl = place.LogoUrl,
-                WebsiteLink = place.WebsiteLink,
-                Country = place.Country,
-                City = place.City,
-                Address = place.Address,
-                Location = place.Location,
-                TakeawayUrl = place.TakeawayUrl,
-                FoodpandaUrl = place.FoodpandaUrl,
-                GlovoUrl = place.GlovoUrl,
-                FacebookUrl = place.FacebookUrl,
-                InstagramUrl = place.InstagramUrl,
-                TwitterUrl = place.TwitterUrl
-            };
+            var viewModel = this.mapper.Map<PlaceDetailsVewModel>(placeDetails);
+
 
             return View(viewModel);
         }

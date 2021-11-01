@@ -18,9 +18,11 @@ namespace GelatoGuide.Services.Places
 
         void UpdatePlace(PlaceServiceModel model);
 
-        void DeletePlace(Place place);
+        void DeletePlace(string Id);
 
-        Place PlaceById(string id);
+        PlaceServiceModel PlaceById(string id);
+
+        bool IsPlaceExist(string id);
 
         int TotalPlacesCount();
 

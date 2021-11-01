@@ -2,34 +2,28 @@
     Layout = "_Layout";
 
 }
-    
-<!-- Sidebar -->
-<div class="row">
-    <div class="col-2">
-        <div class="col-12 mt-5 rounded">
-            <ul style="list-style-type: none">
-                <li><a class="btn" style="color: black" asp-area="Administration" asp-controller="Users" asp-action="All">All Users</a></li>
-                <li><a class="btn" style="color: black" asp-area="Administration" asp-controller="Users" asp-action="Create">Create User</a></li>
-                <li><a class="btn" style="color: blueviolet" asp-area="Administration" asp-controller="Places" asp-action="All">All Place</a></li>
-                <li><a class="btn" style="color: blueviolet" asp-area="Administration" asp-controller="Places" asp-action="Create">Add Place</a></li>
-                <li><a class="btn" style="color: darkgreen" asp-area="Administration" asp-controller="Roles" asp-action="All">All Roles</a></li>
-                <li><a class="btn" style="color: darkgreen" asp-area="Administration" asp-controller="Roles" asp-action="Create">Create Role</a></li>
-                <li><a class="btn" style="color: #d19d75" asp-area="Administration" asp-controller="Shop" asp-action="All">All Shop Items</a></li>
-                <li><a class="btn" style="color: #d19d75" asp-area="Administration" asp-controller="Shop" asp-action="Create">Add Shop Item</a></li>
-                <li><a class="btn" style="color: #1ebfe3" asp-area="Administration" asp-controller="Blog" asp-action="All">All Articles</a></li>
-                <li><a class="btn" style="color: #1ebfe3" asp-area="Administration" asp-controller="Blog" asp-action="Create">Add Blog Article</a></li>
-            </ul>
-        </div>
+
+
+<div class="container">
+    <h2 class="text-center">Shortcuts</h2>
+    <div class="row col-12 rounded justify-content-md-center">
+        <a class="btn" style="color: black" asp-area="Administration" asp-controller="Users" asp-action="All">All Users</a>
+        <a class="btn" style="color: black" asp-area="Administration" asp-controller="Users" asp-action="Create">Create User</a>
+        <a class="btn" style="color: blueviolet" asp-area="Administration" asp-controller="Places" asp-action="All">All Place</a>
+        <a class="btn" style="color: blueviolet" asp-area="Administration" asp-controller="Places" asp-action="Create">Add Place</a>
+        <a class="btn" style="color: darkgreen" asp-area="Administration" asp-controller="Roles" asp-action="All">All Roles</a>
+        <a class="btn" style="color: darkgreen" asp-area="Administration" asp-controller="Roles" asp-action="Create">Create Role</a>
+        <a class="btn" style="color: #d19d75" asp-area="Administration" asp-controller="Shop" asp-action="All">All Shop Items</a>
+        <a class="btn" style="color: #d19d75" asp-area="Administration" asp-controller="Shop" asp-action="Create">Add Shop Item</a>
+        <a class="btn" style="color: #1ebfe3" asp-area="Administration" asp-controller="Blog" asp-action="All">All Articles</a>
+        <a class="btn" style="color: #1ebfe3" asp-area="Administration" asp-controller="Blog" asp-action="Create">Add Blog Article</a>
     </div>
-    <!-- Page Content -->
-    <div class="col-10">
-        <div class="container-fluid">
-            <main role="main" class="pb-3">
-                @RenderBody()
-            </main>
-        </div>
-    </div>
+    <main role="main" class="pb-3 pt-5">
+        @RenderBody()
+    </main>
 </div>
+
+
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>

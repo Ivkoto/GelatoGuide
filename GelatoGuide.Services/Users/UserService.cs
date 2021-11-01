@@ -70,6 +70,11 @@ namespace GelatoGuide.Services.Users
 
         public async Task<string> Username(string id)
         {
+            if (id == null)
+            {
+                return "No user stored for this place";
+            }
+
             var user = await this.userManager.FindByIdAsync(id);
 
             return $"{user.FullName} ({user.UserName})";

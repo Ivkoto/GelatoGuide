@@ -1,7 +1,7 @@
-﻿@model CreateArticleFormModel
+﻿
 
 @{
-    ViewBag.Title = "Create Article";
+    ViewBag.Title = "Create Order";
 }
 
 <div class="container-fluid">
@@ -11,12 +11,10 @@
             <div asp-validation-summary="All" class="text-danger"></div>
         </div>
         <div class="col-4">
-            <a asp-action="All" class="btn btn-secondary">All Articles</a>
+            <a asp-action="All" class="btn btn-secondary">All Orders</a>
         </div>
     </div>
-    <partial name="_BlogArticleFormPartial" model="@Model"/>
 </div>
-
 
 @section Scripts
 {
