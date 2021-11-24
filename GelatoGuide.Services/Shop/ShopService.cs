@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
 using GelatoGuide.Services.Shop.Models;
@@ -10,10 +12,12 @@ namespace GelatoGuide.Services.Shop
     {
 
         private readonly GelatoGuideDbContext data;
+        private readonly IMapper mapper;
 
-        public ShopService(GelatoGuideDbContext data)
+        public ShopService(GelatoGuideDbContext data, IMapper mapper)
         {
             this.data = data;
+            this.mapper = mapper;
         }
 
         public void CreateItem(ShopItemServiceModel model)
@@ -29,30 +33,28 @@ namespace GelatoGuide.Services.Shop
             this.data.SaveChanges();
         }
 
+        //public IEnumerable<ShopItemServiceModel> GetAllItems()
+        //    => this.data.ShopItems
+        //        .Select(shi => new ShopItemServiceModel()
+        //        {
+        //            Id = shi.Id,
+        //            Name = shi.Name,
+        //            Description = shi.Description,
+        //            MainImageUrl = shi.MainImageUrl,
+        //            Price = shi.Price
+
+        //        })
+        //        .ToList();
+
         public IEnumerable<ShopItemServiceModel> GetAllItems()
             => this.data.ShopItems
-                .Select(shi => new ShopItemServiceModel()
-                {
-                    Id = shi.Id,
-                    Name = shi.Name,
-                    Description = shi.Description,
-                    MainImageUrl = shi.MainImageUrl,
-                    Price = shi.Price
-
-                })
+                .ProjectTo<ShopItemServiceModel>(this.mapper.ConfigurationProvider)
                 .ToList();
 
         public ShopItemServiceModel GetItemById(string id)
             => this.data.ShopItems
                 .Where(shi => shi.Id == id)
-                .Select(shi => new ShopItemServiceModel()
-                {
-                    Id = shi.Id,
-                    Name = shi.Name,
-                    Description = shi.Description,
-                    MainImageUrl = shi.MainImageUrl,
-                    Price = shi.Price
-                })
+                .ProjectTo<ShopItemServiceModel>(this.mapper.ConfigurationProvider)
                 .FirstOrDefault();
 
         public int TotalItemsCount()
@@ -62,24 +64,26 @@ namespace GelatoGuide.Services.Shop
         {
             var currentItem = this.data.ShopItems.First(shi => shi.Id == model.Id);
 
-            //TODO validate if currentItem = null;
+            if (currentItem != null)
+            {
+                currentItem.Name = model.Name;
+                currentItem.Description = model.Description;
+                currentItem.MainImageUrl = model.MainImageUrl;
+                currentItem.Price = model.Price;
 
-            currentItem.Name = model.Name;
-            currentItem.Description = model.Description;
-            currentItem.MainImageUrl = model.MainImageUrl;
-            currentItem.Price = model.Price;
-
-            this.data.SaveChanges();
+                this.data.SaveChanges();
+            }
         }
 
         public void Delete(string id)
         {
             var currentItem = this.data.ShopItems.First(shi => shi.Id == id);
 
-            //ToDo validate and throw message if item do not exist
-
-            this.data.ShopItems.Remove(currentItem);
-            this.data.SaveChanges();
+            if (currentItem != null)
+            {
+                this.data.ShopItems.Remove(currentItem);
+                this.data.SaveChanges();
+            }
         }
     }
 }

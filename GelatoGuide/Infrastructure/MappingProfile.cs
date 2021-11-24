@@ -5,6 +5,7 @@ using GelatoGuide.Data.Models;
 using GelatoGuide.Models.Places;
 using GelatoGuide.Services.Blog.Models;
 using GelatoGuide.Services.Places.Models;
+using GelatoGuide.Services.Shop.Models;
 
 namespace GelatoGuide.Infrastructure
 {
@@ -25,6 +26,8 @@ namespace GelatoGuide.Infrastructure
             this.CreateMap<Place, CreatePlaceFormModel>();
 
             this.CreateMap<PlaceServiceModel, PlaceDetailsVewModel>();
+
+            this.CreateMap<ShopItem, ShopItemServiceModel>();
         }
     }
 }

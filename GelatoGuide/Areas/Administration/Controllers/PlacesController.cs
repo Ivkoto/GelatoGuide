@@ -1,11 +1,10 @@
 ﻿using AutoMapper;
 using GelatoGuide.Areas.Administration.Models.Places;
+using GelatoGuide.Infrastructure;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Places.Models;
 using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using GelatoGuide.Infrastructure;
 
 namespace GelatoGuide.Areas.Administration.Controllers
 {
@@ -44,7 +43,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
 
                 return View(model);
             }
-            
+
             var userId = this.User.Id();
 
             var place = this.mapper.Map<PlaceServiceModel>(model);
@@ -93,7 +92,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
         [HttpPost]
         public IActionResult Delete(string id)
         {
-            
+
             if (!this.placeService.IsPlaceExist(id))
             {
                 this.ModelState.AddModelError("", "Place not found!");
@@ -118,7 +117,7 @@ namespace GelatoGuide.Areas.Administration.Controllers
             }
 
             var username = this.userService.Username(placeDetails.UserId).Result;
-            
+
             placeDetails.Username = username;
 
             return View(placeDetails);

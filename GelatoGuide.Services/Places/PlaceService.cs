@@ -5,6 +5,7 @@ using GelatoGuide.Services.Places.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AutoMapper.QueryableExtensions;
 
 namespace GelatoGuide.Services.Places
 {
@@ -19,8 +20,7 @@ namespace GelatoGuide.Services.Places
             this.mapper = mapper;
         }
 
-
-        //for Administration area
+        
         public IEnumerable<PlaceServiceModel> AllPlaces()
             =>
                 this.data.Places
@@ -90,7 +90,6 @@ namespace GelatoGuide.Services.Places
             place.TwitterUrl = model.TwitterUrl;
             place.Images = model.Images;
 
-                
             this.data.SaveChanges();
         }
 
