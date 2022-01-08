@@ -55,7 +55,6 @@ namespace GelatoGuide.Infrastructure
                 new IdentityRole{Name = Roles.RegularName, NormalizedName = Roles.RegularName.ToUpper()},
                 new IdentityRole{Name = Roles.PremiumName, NormalizedName = Roles.PremiumName.ToUpper()},
                 new IdentityRole{Name = Roles.AdminName, NormalizedName = Roles.AdminName.ToUpper()}
-
             });
 
             data.SaveChanges();

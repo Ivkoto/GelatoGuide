@@ -179,6 +179,7 @@ namespace GelatoGuide.Services.Blog
 
             var newArticle = this.mapper.Map<Article>(model);
             newArticle.Id = Guid.NewGuid().ToString();
+            newArticle.PostedByDate = DateTime.Now;
 
             this.data.Add(newArticle);
             this.data.SaveChanges();
