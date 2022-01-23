@@ -2,6 +2,7 @@
 using GelatoGuide.Areas.Administration.Models.Blog;
 using GelatoGuide.Areas.Administration.Models.Places;
 using GelatoGuide.Data.Models;
+using GelatoGuide.Models.Blog;
 using GelatoGuide.Models.Places;
 using GelatoGuide.Services.Blog.Models;
 using GelatoGuide.Services.Places.Models;
@@ -19,6 +20,10 @@ namespace GelatoGuide.Infrastructure
                 .ForMember(asm => asm.UserName, cfg => cfg.MapFrom(a => $"{a.User.FullName} ({a.User.UserName})"))
                 .ReverseMap();
 
+            this.CreateMap<ArticleServiceModel, ArticleDetailsViewModel>();
+
+            this.CreateMap<ArticleFormModel, ArticleServiceModel>();
+
             this.CreateMap<CreatePlaceFormModel, PlaceServiceModel>().ReverseMap();
 
             this.CreateMap<PlaceServiceModel, Place>().ReverseMap();
@@ -28,6 +33,7 @@ namespace GelatoGuide.Infrastructure
             this.CreateMap<PlaceServiceModel, PlaceDetailsVewModel>();
 
             this.CreateMap<ShopItem, ShopItemServiceModel>();
+
         }
     }
 }
