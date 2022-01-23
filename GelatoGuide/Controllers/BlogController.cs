@@ -5,7 +5,7 @@ using GelatoGuide.Services.Blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
+using AutoMapper;
 using static GelatoGuide.Data.DataConstants;
 
 namespace GelatoGuide.Controllers
@@ -14,10 +14,12 @@ namespace GelatoGuide.Controllers
     public class BlogController : Controller
     {
         private readonly IBlogService blogService;
+        private readonly IMapper mapper;
 
-        public BlogController(IBlogService blogService)
+        public BlogController(IBlogService blogService, IMapper mapper)
         {
             this.blogService = blogService;
+            this.mapper = mapper;
         }
 
         public IActionResult All([FromQuery] AllArticlesServiceModel searchModel)
@@ -34,19 +36,9 @@ namespace GelatoGuide.Controllers
         {
             var article = this.blogService.ArticleById(id);
             var articles = this.blogService.GetLastThreeArticles();
-
-            var articleModel = new ArticleDetailsViewModel()
-            {
-                Title = article.Title,
-                SubTitle = article.SubTitle,
-                Image = article.Image,
-                ArticleText = article.ArticleText,
-                SourceName = article.SourceName,
-                SourceUrl = article.SourceUrl,
-                PostedByName = article.PostedByName,
-                PostedByDate = article.PostedByDate,
-                Articles = articles
-            };
+            
+            var articleModel = this.mapper.Map<ArticleDetailsViewModel>(article);
+            articleModel.Articles = articles;
 
             return View(articleModel);
         }
@@ -70,18 +62,9 @@ namespace GelatoGuide.Controllers
             }
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-
-            var articleModel = new ArticleServiceModel()
-            {
-                Title = article.Title,
-                SubTitle = article.SubTitle,
-                Image = article.Image,
-                ArticleText = article.ArticleText,
-                PostedByName = article.PostedByName,
-                SourceName = article.SourceName,
-                SourceUrl = article.SourceUrl,
-                UserId = userId
-            };
+            
+            var articleModel = this.mapper.Map<ArticleServiceModel>(article);
+            articleModel.UserId = userId;
 
             blogService.CreateArticle(articleModel);
 
