@@ -1,4 +1,4 @@
-﻿namespace GelatoGuide.Data
+﻿namespace GelatoGuide.Data.Constants
 {
     public class DataConstants
     {
@@ -13,14 +13,14 @@
             public const int UserNameMaxLength = 20;
 
             public const int PasswordMinLength = 6;
-            
+
             public const int PasswordMaxLength = 100;
         }
 
         public class Place
         {
             public const int NameMinLength = 2;
-        
+
             public const int NameMaxLength = 30;
 
             public const int DescriptionMinLength = 6;

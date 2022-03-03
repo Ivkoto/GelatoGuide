@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using GelatoGuide.Data;
+using GelatoGuide.Data.Enums;
 using GelatoGuide.Data.Models;
 
 namespace GelatoGuide.Areas.Administration.Models.Orders

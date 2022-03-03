@@ -4,7 +4,7 @@ using GelatoGuide.Models.Places;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Places.Models;
 using Microsoft.AspNetCore.Mvc;
-using static GelatoGuide.Data.DataConstants;
+using static GelatoGuide.Data.Constants.DataConstants;
 
 namespace GelatoGuide.Controllers
 {

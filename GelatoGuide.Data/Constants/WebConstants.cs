@@ -1,4 +1,4 @@
-﻿namespace GelatoGuide
+﻿namespace GelatoGuide.Data.Constants
 {
     public class WebConstants
     {

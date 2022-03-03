@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using AutoMapper;
-using static GelatoGuide.Data.DataConstants;
+using static GelatoGuide.Data.Constants.DataConstants;
 
 namespace GelatoGuide.Controllers
 {

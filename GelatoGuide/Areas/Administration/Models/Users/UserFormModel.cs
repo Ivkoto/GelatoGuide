@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using GelatoGuide.Data.Models;
-using static GelatoGuide.Data.DataConstants.User;
+using static GelatoGuide.Data.Constants.DataConstants.User;
 
 namespace GelatoGuide.Areas.Administration.Models.Users
 {

@@ -1,5 +1,5 @@
 ﻿using System.Security.Claims;
-using static GelatoGuide.WebConstants;
+using static GelatoGuide.Data.Constants.WebConstants;
 
 namespace GelatoGuide.Infrastructure
 {

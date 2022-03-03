@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using static GelatoGuide.Data.DataConstants.Articles;
+using static GelatoGuide.Data.Constants.DataConstants.Articles;
 
 namespace GelatoGuide.Areas.Administration.Models.Blog
 {

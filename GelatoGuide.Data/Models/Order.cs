@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using GelatoGuide.Data.Enums;
 
 namespace GelatoGuide.Data.Models
 {

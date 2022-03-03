@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
-using GelatoGuide.Data.Models;
+﻿using GelatoGuide.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Razor.TagHelpers;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace GelatoGuide.TagHelper
@@ -11,16 +11,16 @@ namespace GelatoGuide.TagHelper
     {
         private readonly UserManager<User> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
- 
+
         public RoleUsersTH(UserManager<User> userManager, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
- 
+
         [HtmlAttributeName("i-role")]
         public string Role { get; set; }
- 
+
         public override async Task ProcessAsync(TagHelperContext context, TagHelperOutput output)
         {
             var names = new List<string>();

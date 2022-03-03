@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using static GelatoGuide.Data.DataConstants.User;
-using static GelatoGuide.WebConstants.Roles;
+using static GelatoGuide.Data.Constants.DataConstants.User;
+using static GelatoGuide.Data.Constants.WebConstants.Roles;
 
 namespace GelatoGuide.Areas.Identity.Pages.Account
 {

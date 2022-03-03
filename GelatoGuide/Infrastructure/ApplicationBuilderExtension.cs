@@ -8,7 +8,7 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 
-using static GelatoGuide.WebConstants;
+using static GelatoGuide.Data.Constants.WebConstants;
 
 namespace GelatoGuide.Infrastructure
 {

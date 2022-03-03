@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using static GelatoGuide.Data.DataConstants.Articles;
+using static GelatoGuide.Data.Constants.DataConstants.Articles;
 
 namespace GelatoGuide.Data.Models
 {

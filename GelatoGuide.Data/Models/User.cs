@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
-using static GelatoGuide.Data.DataConstants.User;
+using static GelatoGuide.Data.Constants.DataConstants.User;
 
 namespace GelatoGuide.Data.Models
 {

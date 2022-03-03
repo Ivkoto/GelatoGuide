@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using GelatoGuide.Data.Models;
-using static GelatoGuide.Data.DataConstants.Place;
+using static GelatoGuide.Data.Constants.DataConstants.Place;
 
 namespace GelatoGuide.Areas.Administration.Models.Places
 {

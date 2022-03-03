@@ -62,9 +62,7 @@ namespace GelatoGuide
                 .AddTransient<IUserService, UserService>()
                 .AddTransient<IPlaceService, PlaceService>()
                 .AddTransient<IBlogService, BlogService>()
-                .AddTransient<IShopService, ShopService>();
-
-            services
+                .AddTransient<IShopService, ShopService>()
                 .AddTransient<IRoleService, RoleService>();
         }
 
@@ -74,14 +72,11 @@ namespace GelatoGuide
             if (env.IsDevelopment())
             {
                 app.PrepareDatabase();
-            }
-
-            if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
             }
-            else
+
+            if (env.IsProduction())
             {
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();

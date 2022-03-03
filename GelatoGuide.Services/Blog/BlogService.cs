@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using GelatoGuide.Data.Enums;
 
 namespace GelatoGuide.Services.Blog
 {

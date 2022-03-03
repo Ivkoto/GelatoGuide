@@ -1,4 +1,4 @@
-﻿namespace GelatoGuide.Data
+﻿namespace GelatoGuide.Data.Enums
 {
     public enum MonthsEnum
     {
