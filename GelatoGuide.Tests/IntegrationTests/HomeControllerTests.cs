@@ -4,6 +4,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace GelatoGuide.Tests.IntegrationTests
 {
@@ -67,6 +68,12 @@ namespace GelatoGuide.Tests.IntegrationTests
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             Assert.IsTrue(response.IsSuccessStatusCode);
             Assert.AreEqual("text/html; charset=utf-8", response.Content.Headers.ContentType?.ToString());
+        }
+
+        [ClassCleanup]
+        public static void Cleanup()
+        {
+            factory.Dispose();
         }
     }
 }
