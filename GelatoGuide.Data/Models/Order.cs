@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using GelatoGuide.Data.Enums;
+using Microsoft.EntityFrameworkCore;
 
 namespace GelatoGuide.Data.Models
 {
@@ -39,6 +40,7 @@ namespace GelatoGuide.Data.Models
 
         public OrderStatusEnum Status { get; set; }
 
+        [Precision(12, 2)]
         public decimal TotalPrice { get; set; }
     }
 }

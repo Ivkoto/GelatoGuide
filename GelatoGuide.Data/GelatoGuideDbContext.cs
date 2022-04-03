@@ -25,9 +25,19 @@ namespace GelatoGuide.Data
 
         public DbSet<ShopItem> ShopItems { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-            base.OnModelCreating(builder);
-        }
+        //protected override void OnModelCreating(ModelBuilder builder)
+        //{
+        //    builder.Entity<Order>(oe =>
+        //    {
+        //        oe.Property(o => o.TotalPrice)
+        //            .HasColumnType("decimal(12,2)");
+        //    });
+
+        //    builder.Entity<ShopItem>(se =>
+        //    {
+        //        se.Property(si => si.Price)
+        //            .HasColumnType("decimal(12,2)");
+        //    });
+        //}
     }
 }

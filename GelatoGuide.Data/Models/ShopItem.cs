@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
 using static GelatoGuide.Data.Constants.DataConstants.ShopItems;
 
 namespace GelatoGuide.Data.Models
@@ -17,6 +18,7 @@ namespace GelatoGuide.Data.Models
         public string Description { get; set; }
 
         [Required]
+        [Precision(12, 2)]
         public decimal Price { get; set; }
 
         public int Quantity { get; set; }
