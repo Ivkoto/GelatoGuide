@@ -1,18 +1,17 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 using System.Net;
 using System.Net.Http;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 
 namespace GelatoGuide.Tests.IntegrationTests
 {
     [TestClass]
     public class HomeControllerTests
     {
-        private static WebApplicationFactory<Startup> factory;
-        private static HttpClient client;
+        private static WebApplicationFactory<Startup>? factory;
+        private static HttpClient? client;
 
         [ClassInitialize]
         public static void Initialization(TestContext testContext)
@@ -25,7 +24,7 @@ namespace GelatoGuide.Tests.IntegrationTests
             };
 
             client = factory.CreateClient(clientOptions);
-            
+
         }
 
         [TestMethod]
@@ -35,7 +34,7 @@ namespace GelatoGuide.Tests.IntegrationTests
 
             //act
             var response = await client.GetAsync("Home/Index");
-            
+
             //arrange
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             Assert.IsTrue(response.IsSuccessStatusCode);
@@ -68,6 +67,20 @@ namespace GelatoGuide.Tests.IntegrationTests
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
             Assert.IsTrue(response.IsSuccessStatusCode);
             Assert.AreEqual("text/html; charset=utf-8", response.Content.Headers.ContentType?.ToString());
+        }
+
+        [TestMethod]
+        public async Task HomeAbout_ShouldThrowError()
+        {
+            //assert
+
+            //act
+            var response = await client.GetAsync("Home/About2");
+
+            //arrange
+            Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
+            Assert.IsFalse(response.IsSuccessStatusCode);
+            Assert.AreEqual("not found", response.ReasonPhrase?.ToLower());
         }
 
         [ClassCleanup]
