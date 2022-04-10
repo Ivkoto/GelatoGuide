@@ -1,20 +1,19 @@
-﻿using System.Collections.Generic;
-using GelatoGuide.Services.Shop.Models;
+﻿using GelatoGuide.Services.Shop.Models;
+using System.Collections.Generic;
 
-namespace GelatoGuide.Services.Shop
+namespace GelatoGuide.Services.Shop;
+
+public interface IShopService
 {
-    public interface IShopService
-    {
-        void CreateItem(ShopItemServiceModel model);
+    void CreateItem(ShopItemServiceModel model);
 
-        IEnumerable<ShopItemServiceModel> GetAllItems();
+    IEnumerable<ShopItemServiceModel> GetAllItems();
 
-        ShopItemServiceModel GetItemById(string id);
+    ShopItemServiceModel GetItemById(string id);
 
-        int TotalItemsCount();
+    int TotalItemsCount();
 
-        void UpdateItem(ShopItemServiceModel model);
+    void UpdateItem(ShopItemServiceModel model);
 
-        void Delete(string id);
-    }
+    void Delete(string id);
 }

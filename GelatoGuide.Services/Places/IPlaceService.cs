@@ -1,36 +1,34 @@
 ﻿using GelatoGuide.Services.Places.Models;
 using System.Collections.Generic;
-using GelatoGuide.Data.Models;
 
-namespace GelatoGuide.Services.Places
+namespace GelatoGuide.Services.Places;
+
+public interface IPlaceService
 {
-    public interface IPlaceService
-    {
-        
-        //Admin area
-        IEnumerable<PlaceServiceModel> AllPlaces();
 
-        AllPlacesServiceModel AllPlaces(
-            string searchTerm, string country, string city,
-            int currentPage, int placesPerPage);
+    //Admin area
+    IEnumerable<PlaceServiceModel> AllPlaces();
 
-        void CreatePlace(PlaceServiceModel place);
+    AllPlacesServiceModel AllPlaces(
+        string searchTerm, string country, string city,
+        int currentPage, int placesPerPage);
 
-        void UpdatePlace(PlaceServiceModel model);
+    void CreatePlace(PlaceServiceModel place);
 
-        void DeletePlace(string Id);
+    void UpdatePlace(PlaceServiceModel model);
 
-        PlaceServiceModel PlaceById(string id);
+    void DeletePlace(string Id);
 
-        bool IsPlaceExist(string id);
+    PlaceServiceModel PlaceById(string id);
 
-        int TotalPlacesCount();
+    bool IsPlaceExist(string id);
 
-        //searching area
-        IEnumerable<string> AllCities();
+    int TotalPlacesCount();
 
-        IEnumerable<string> AllCountries();
+    //searching area
+    IEnumerable<string> AllCities();
 
-        bool IsPlaceNameExist(string name);
-    }
+    IEnumerable<string> AllCountries();
+
+    bool IsPlaceNameExist(string name);
 }

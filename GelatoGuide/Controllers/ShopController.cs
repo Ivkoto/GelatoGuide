@@ -1,25 +1,24 @@
 ﻿using GelatoGuide.Services.Shop;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GelatoGuide.Controllers
+namespace GelatoGuide.Controllers;
+
+public class ShopController : Controller
 {
-    public class ShopController : Controller
+    private readonly IShopService shopService;
+
+    public ShopController(IShopService shopService)
     {
-        private readonly IShopService shopService;
-
-        public ShopController(IShopService shopService)
-        {
-            this.shopService = shopService;
-        }
-
-        public IActionResult Index()
-        {
-            var shopItems = this.shopService.GetAllItems();
-
-            return View(shopItems);
-        }
-
-        public IActionResult Details(string id)
-            => this.View();
+        this.shopService = shopService;
     }
+
+    public IActionResult Index()
+    {
+        var shopItems = this.shopService.GetAllItems();
+
+        return View(shopItems);
+    }
+
+    public IActionResult Details(string id)
+        => this.View();
 }
