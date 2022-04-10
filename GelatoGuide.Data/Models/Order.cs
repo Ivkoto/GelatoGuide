@@ -1,9 +1,10 @@
 ﻿using GelatoGuide.Data.Enums;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using GelatoGuide.Data.Enums;
-using Microsoft.EntityFrameworkCore;
+using GelatoGuide.Data.Constants;
+using GelatoGuide.Data.Models;
 
 public class Order
 {
@@ -15,7 +16,7 @@ public class Order
 
     public string UserId { get; set; }
 
-    public User User { get; set; }
+    public DataConstants.User User { get; set; }
 
     public string CustomerId { get; set; }
 
@@ -39,7 +40,6 @@ public class Order
 
     public OrderStatusEnum Status { get; set; }
 
-        [Precision(12, 2)]
-        public decimal TotalPrice { get; set; }
-    }
+    [Precision(12, 2)]
+    public decimal TotalPrice { get; set; }
 }
