@@ -4,23 +4,22 @@ using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace GelatoGuide.Services.Users
+namespace GelatoGuide.Services.Users;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        IEnumerable<UserServiceModel> AllUsers();
+    IEnumerable<UserServiceModel> AllUsers();
 
-        Task<User> UserById(string id);
+    Task<User> UserById(string id);
 
-        Task<string>Username(string id);
+    Task<string> Username(string id);
 
-        Task<IdentityResult> CreateUser(UserServiceModel model);
+    Task<IdentityResult> CreateUser(UserServiceModel model);
 
-        string GetInitialAdminId();
+    string GetInitialAdminId();
 
-        Task<IdentityResult> UpdateUser(UserServiceModel model);
+    Task<IdentityResult> UpdateUser(UserServiceModel model);
 
-        Task<IdentityResult> DeleteUser(User user);
-        int TotalUsersCount();
-    }
+    Task<IdentityResult> DeleteUser(User user);
+    int TotalUsersCount();
 }

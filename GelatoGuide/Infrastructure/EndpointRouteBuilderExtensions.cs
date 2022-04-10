@@ -1,14 +1,13 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
-namespace GelatoGuide.Infrastructure
+namespace GelatoGuide.Infrastructure;
+
+public static class EndpointRouteBuilderExtensions
 {
-    public static class EndpointRouteBuilderExtensions
+    public static void MapDefaultAreaRoute(this IEndpointRouteBuilder endpoints)
     {
-        public static void MapDefaultAreaRoute(this IEndpointRouteBuilder endpoints)
-        {
-            endpoints.MapControllerRoute(name: "area",
-                pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-        }
+        endpoints.MapControllerRoute(name: "area",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
     }
 }

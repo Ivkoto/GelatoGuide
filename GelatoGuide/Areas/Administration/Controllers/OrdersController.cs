@@ -2,41 +2,40 @@
 using GelatoGuide.Areas.Administration.Models.Orders;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GelatoGuide.Areas.Administration.Controllers
+namespace GelatoGuide.Areas.Administration.Controllers;
+
+public class OrdersController : AdminController
 {
-    public class OrdersController : AdminController
+    private readonly IMapper mapper;
+
+    public OrdersController(IMapper mapper)
     {
-        private readonly IMapper mapper;
+        this.mapper = mapper;
+    }
 
-        public OrdersController(IMapper mapper)
+
+    public ActionResult All()
+        => View();
+
+
+    //public ActionResult Details(int id)
+    //{
+    //    return View();
+    //}
+
+
+    public IActionResult Create()
+        => View();
+
+
+    [HttpPost]
+    public IActionResult Create(CreateOrderFormModel order)
+    {
+        if (!ModelState.IsValid)
         {
-            this.mapper = mapper;
+            return View(order);
         }
 
-
-        public ActionResult All()
-            => View();
-
-
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-
-        public IActionResult Create()
-            => View();
-
-
-        [HttpPost]
-        public IActionResult Create(CreateOrderFormModel order)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(order);
-            }
-            
-            return RedirectToAction("All", "Orders");
-        }
+        return RedirectToAction("All", "Orders");
     }
 }

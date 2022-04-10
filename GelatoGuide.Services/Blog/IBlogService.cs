@@ -1,37 +1,35 @@
 ﻿using GelatoGuide.Services.Blog.Models;
 using System.Collections.Generic;
-using GelatoGuide.Data.Models;
 
-namespace GelatoGuide.Services.Blog
+namespace GelatoGuide.Services.Blog;
+
+public interface IBlogService
 {
-    public interface IBlogService
-    {
-        AllArticlesServiceModel AllArticles(
-            string searchTerm, string postedByName, string postedByYear, 
-            string postedByMonth, int articlesPerPage, int currentPage);
+    AllArticlesServiceModel AllArticles(
+        string searchTerm, string postedByName, string postedByYear,
+        string postedByMonth, int articlesPerPage, int currentPage);
 
-        IEnumerable<ArticleServiceModel> AllArticlesAdmin();
+    IEnumerable<ArticleServiceModel> AllArticlesAdmin();
 
-        IEnumerable<ArticleServiceModel> AllByUserId(string id);
+    IEnumerable<ArticleServiceModel> AllByUserId(string id);
 
-        ArticleServiceModel ArticleById(string id);
+    ArticleServiceModel ArticleById(string id);
 
-        IEnumerable<ArticleServiceModel> GetLastThreeArticles();
+    IEnumerable<ArticleServiceModel> GetLastThreeArticles();
 
-        void CreateArticle(ArticleServiceModel model);
+    void CreateArticle(ArticleServiceModel model);
 
-        void Update(string id, ArticleServiceModel model);
+    void Update(string id, ArticleServiceModel model);
 
-        void Delete(string id);
+    void Delete(string id);
 
-        IEnumerable<string> AllPostedByNames();
+    IEnumerable<string> AllPostedByNames();
 
-        IEnumerable<string> AllYears();
+    IEnumerable<string> AllYears();
 
-        IEnumerable<string> AllMonths();
+    IEnumerable<string> AllMonths();
 
-        int TotalArticlesCount();
+    int TotalArticlesCount();
 
-        bool IsArticleExist(string id);
-    }
+    bool IsArticleExist(string id);
 }
