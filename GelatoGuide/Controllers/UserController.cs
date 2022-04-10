@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace GelatoGuide.Controllers
+namespace GelatoGuide.Controllers;
+
+public class UserController : Controller
 {
-    public class UserController : Controller
-    {
-        public IActionResult CreatePremium()
-            => View();
-    }
+    public IActionResult CreatePremium()
+        => View();
 }

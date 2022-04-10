@@ -1,19 +1,18 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Identity;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 using static GelatoGuide.Data.Constants.DataConstants.User;
 
-namespace GelatoGuide.Data.Models
+namespace GelatoGuide.Data.Models;
+
+public class User : IdentityUser
 {
-    public class User : IdentityUser
-    {
-        [MaxLength(FullNameMaxLength)]
-        public string FullName { get; set; }
+    [MaxLength(FullNameMaxLength)]
+    public string FullName { get; set; }
 
-        public IEnumerable<Place> Places { get; init; } = new List<Place>();
+    public IEnumerable<Place> Places { get; init; } = new List<Place>();
 
-        public IEnumerable<Article> Articles { get; set; } = new List<Article>();
+    public IEnumerable<Article> Articles { get; set; } = new List<Article>();
 
-        public IEnumerable<Order> Orders { get; set; } = new List<Order>();
-    }
+    public IEnumerable<Order> Orders { get; set; } = new List<Order>();
 }

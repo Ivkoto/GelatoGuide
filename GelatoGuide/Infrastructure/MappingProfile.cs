@@ -8,32 +8,31 @@ using GelatoGuide.Services.Blog.Models;
 using GelatoGuide.Services.Places.Models;
 using GelatoGuide.Services.Shop.Models;
 
-namespace GelatoGuide.Infrastructure
+namespace GelatoGuide.Infrastructure;
+
+public class MappingProfile : Profile
 {
-    public class MappingProfile : Profile
+    public MappingProfile()
     {
-        public MappingProfile()
-        {
-            this.CreateMap<CreateArticleFormModel, ArticleServiceModel>().ReverseMap();
+        this.CreateMap<CreateArticleFormModel, ArticleServiceModel>().ReverseMap();
 
-            this.CreateMap<Article, ArticleServiceModel>()
-                .ForMember(asm => asm.UserName, cfg => cfg.MapFrom(a => $"{a.User.FullName} ({a.User.UserName})"))
-                .ReverseMap();
+        this.CreateMap<Article, ArticleServiceModel>()
+            .ForMember(asm => asm.UserName, cfg => cfg.MapFrom(a => $"{a.User.FullName} ({a.User.UserName})"))
+            .ReverseMap();
 
-            this.CreateMap<ArticleServiceModel, ArticleDetailsViewModel>();
+        this.CreateMap<ArticleServiceModel, ArticleDetailsViewModel>();
 
-            this.CreateMap<ArticleFormModel, ArticleServiceModel>();
+        this.CreateMap<ArticleFormModel, ArticleServiceModel>();
 
-            this.CreateMap<CreatePlaceFormModel, PlaceServiceModel>().ReverseMap();
+        this.CreateMap<CreatePlaceFormModel, PlaceServiceModel>().ReverseMap();
 
-            this.CreateMap<PlaceServiceModel, Place>().ReverseMap();
+        this.CreateMap<PlaceServiceModel, Place>().ReverseMap();
 
-            this.CreateMap<Place, CreatePlaceFormModel>();
+        this.CreateMap<Place, CreatePlaceFormModel>();
 
-            this.CreateMap<PlaceServiceModel, PlaceDetailsVewModel>();
+        this.CreateMap<PlaceServiceModel, PlaceDetailsVewModel>();
 
-            this.CreateMap<ShopItem, ShopItemServiceModel>();
+        this.CreateMap<ShopItem, ShopItemServiceModel>();
 
-        }
     }
 }

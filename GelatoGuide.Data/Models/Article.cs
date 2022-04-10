@@ -3,44 +3,42 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using static GelatoGuide.Data.Constants.DataConstants.Articles;
 
-namespace GelatoGuide.Data.Models
+namespace GelatoGuide.Data.Models;
+
+public class Article
 {
-    public class Article
-    {
-        [Required]
-        public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Required]
+    public string Id { get; set; } = Guid.NewGuid().ToString();
 
 
-        [Required]
-        [MinLength(TitleMinLength)]
-        public string Title { get; set; }
+    [Required]
+    [MinLength(TitleMinLength)]
+    public string Title { get; set; }
 
 
-        [MinLength(SubTitleMinLength)]
-        public string SubTitle { get; set; }
+    [MinLength(SubTitleMinLength)]
+    public string SubTitle { get; set; }
 
-        [Url]
-        public string Image { get; set; }
+    [Url]
+    public string Image { get; set; }
 
-        public IEnumerable<Image> Images { get; set; }
-
-
-        [MinLength(TextMinLength)]
-        public string ArticleText { get; set; }
-
-        public string SourceName { get; set; }
-
-        public string SourceUrl { get; set; }
+    public IEnumerable<Image> Images { get; set; }
 
 
-        [MinLength(PostedByNameMinLength)]
-        public string PostedByName { get; set; }
+    [MinLength(TextMinLength)]
+    public string ArticleText { get; set; }
 
-        public DateTime PostedByDate { get; set; }
+    public string SourceName { get; set; }
 
-        public string UserId { get; init; }
+    public string SourceUrl { get; set; }
 
-        public User User { get; init; }
 
-    }
+    [MinLength(PostedByNameMinLength)]
+    public string PostedByName { get; set; }
+
+    public DateTime PostedByDate { get; set; }
+
+    public string UserId { get; init; }
+
+    public User User { get; init; }
 }

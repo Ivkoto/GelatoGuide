@@ -1,17 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
-namespace GelatoGuide.Controllers
+namespace GelatoGuide.Controllers;
+
+public class MapController : Controller
 {
-    public class MapController : Controller
-    {
-        private readonly IConfiguration config;
+    private readonly IConfiguration config;
 
-        public MapController(IConfiguration config)
-            => this.config = config;
+    public MapController(IConfiguration config)
+        => this.config = config;
 
 
-        public IActionResult Map()
-            => View();
-    }
+    public IActionResult Map()
+        => View();
 }
