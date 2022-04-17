@@ -25,18 +25,11 @@ public class GelatoGuideDbContext : IdentityDbContext<User>
 
     public DbSet<ShopItem> ShopItems { get; set; }
 
-    //protected override void OnModelCreating(ModelBuilder builder)
-    //{
-    //    builder.Entity<Order>(oe =>
-    //    {
-    //        oe.Property(o => o.TotalPrice)
-    //            .HasColumnType("decimal(12,2)");
-    //    });
-
-    //    builder.Entity<ShopItem>(se =>
-    //    {
-    //        se.Property(si => si.Price)
-    //            .HasColumnType("decimal(12,2)");
-    //    });
-    //}
+    protected override void OnModelCreating(ModelBuilder builder)
+    {
+        builder.Entity<User>(u =>
+        {
+            u.HasKey(eu => eu.Id);
+        });
+    }
 }
