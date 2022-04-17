@@ -27,9 +27,6 @@ public class GelatoGuideDbContext : IdentityDbContext<User>
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.Entity<User>(u =>
-        {
-            u.HasKey(eu => eu.Id);
-        });
+        base.OnModelCreating(builder);
     }
 }
