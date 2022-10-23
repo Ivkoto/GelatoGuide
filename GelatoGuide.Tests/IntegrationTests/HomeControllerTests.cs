@@ -10,8 +10,8 @@ namespace GelatoGuide.Tests.IntegrationTests;
 [TestClass]
 public class HomeControllerTests
 {
-    private static WebApplicationFactory<Startup>? factory;
-    private static HttpClient? client;
+    private static WebApplicationFactory<Startup> factory;
+    private static HttpClient client;
 
     [ClassInitialize]
     public static void Initialization(TestContext testContext)
@@ -24,7 +24,6 @@ public class HomeControllerTests
         };
 
         client = factory.CreateClient(clientOptions);
-
     }
 
     [TestMethod]
