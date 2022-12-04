@@ -1,11 +1,11 @@
-﻿using GelatoGuide.Areas.Administration.Controllers;
+﻿using System.Threading.Tasks;
+using GelatoGuide.Areas.Administration.Controllers;
 using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Places;
 using GelatoGuide.Services.Shop;
 using GelatoGuide.Services.Users;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System.Threading.Tasks;
 
 namespace GelatoGuide.Tests.UnitTests;
 

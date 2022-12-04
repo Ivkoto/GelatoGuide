@@ -1,5 +1,5 @@
-﻿using GelatoGuide.Services.Blog.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GelatoGuide.Services.Blog.Models;
 
 namespace GelatoGuide.Services.Blog;
 

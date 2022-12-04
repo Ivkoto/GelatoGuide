@@ -1,8 +1,8 @@
-﻿using GelatoGuide.Areas.Administration.Models.Roles;
+﻿using System.ComponentModel.DataAnnotations;
+using GelatoGuide.Areas.Administration.Models.Roles;
 using GelatoGuide.Services.Roles;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
 
 namespace GelatoGuide.Areas.Administration.Controllers;
 

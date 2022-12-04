@@ -1,11 +1,11 @@
-﻿using GelatoGuide.Areas.Administration.Models.Admin;
-using GelatoGuide.Data;
-using GelatoGuide.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GelatoGuide.Areas.Administration.Models.Admin;
+using GelatoGuide.Data;
+using GelatoGuide.Data.Models;
+using Microsoft.AspNetCore.Identity;
 using static GelatoGuide.Data.Constants.WebConstants;
 
 namespace GelatoGuide.Services.Users;

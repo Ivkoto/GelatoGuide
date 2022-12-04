@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Enums;
 using GelatoGuide.Data.Models;
 using GelatoGuide.Services.Blog.Models;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
 
 namespace GelatoGuide.Services.Blog;
 

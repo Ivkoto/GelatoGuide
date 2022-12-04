@@ -1,9 +1,9 @@
-﻿using GelatoGuide.Data.Enums;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using GelatoGuide.Data.Enums;
 using GelatoGuide.Data.Models;
+using Microsoft.EntityFrameworkCore;
 
 public class Order
 {

@@ -1,5 +1,5 @@
-﻿using GelatoGuide.Services.Shop.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GelatoGuide.Services.Shop.Models;
 
 namespace GelatoGuide.Services.Shop;
 

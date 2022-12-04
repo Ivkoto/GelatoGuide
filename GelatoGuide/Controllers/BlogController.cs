@@ -1,11 +1,11 @@
-﻿using GelatoGuide.Infrastructure;
+﻿using System.Security.Claims;
+using AutoMapper;
+using GelatoGuide.Infrastructure;
 using GelatoGuide.Models.Blog;
 using GelatoGuide.Services.Blog;
 using GelatoGuide.Services.Blog.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-using AutoMapper;
 using static GelatoGuide.Data.Constants.DataConstants;
 
 namespace GelatoGuide.Controllers
@@ -36,7 +36,7 @@ namespace GelatoGuide.Controllers
         {
             var article = this.blogService.ArticleById(id);
             var articles = this.blogService.GetLastThreeArticles();
-            
+
             var articleModel = this.mapper.Map<ArticleDetailsViewModel>(article);
             articleModel.Articles = articles;
 
@@ -62,7 +62,7 @@ namespace GelatoGuide.Controllers
             }
 
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            
+
             var articleModel = this.mapper.Map<ArticleServiceModel>(article);
             articleModel.UserId = userId;
 

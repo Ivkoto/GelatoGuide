@@ -1,7 +1,7 @@
-﻿using GelatoGuide.Services.Roles.Models;
-using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using GelatoGuide.Services.Roles.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace GelatoGuide.Services.Roles;
 

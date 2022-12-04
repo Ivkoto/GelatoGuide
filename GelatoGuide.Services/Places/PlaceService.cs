@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
 using GelatoGuide.Services.Places.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace GelatoGuide.Services.Places;
 
@@ -18,7 +18,6 @@ public class PlaceService : IPlaceService
         this.data = data;
         this.mapper = mapper;
     }
-
 
     public IEnumerable<PlaceServiceModel> AllPlaces()
         =>

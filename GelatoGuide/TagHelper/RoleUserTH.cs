@@ -1,8 +1,8 @@
-﻿using GelatoGuide.Data.Models;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using GelatoGuide.Data.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Razor.TagHelpers;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace GelatoGuide.TagHelper;
 

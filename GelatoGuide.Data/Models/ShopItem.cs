@@ -17,9 +17,9 @@ public class ShopItem
     [MinLength(DescriptionMinLength)]
     public string Description { get; set; }
 
-        [Required]
-        [Precision(12, 2)]
-        public decimal Price { get; set; }
+    [Required]
+    [Precision(12, 2)]
+    public decimal Price { get; set; }
 
     public int Quantity { get; set; }
 
