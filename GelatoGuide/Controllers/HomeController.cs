@@ -1,6 +1,6 @@
-﻿using GelatoGuide.Models;
+﻿using System.Diagnostics;
+using GelatoGuide.Models;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
 
 namespace GelatoGuide.Controllers;
 public class HomeController : Controller

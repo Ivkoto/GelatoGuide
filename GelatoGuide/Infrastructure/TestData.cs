@@ -1,6 +1,6 @@
-﻿using GelatoGuide.Data.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using GelatoGuide.Data.Models;
 
 namespace GelatoGuide.Infrastructure;
 

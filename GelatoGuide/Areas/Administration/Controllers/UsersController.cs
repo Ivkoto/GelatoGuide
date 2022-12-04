@@ -1,9 +1,9 @@
-﻿using GelatoGuide.Areas.Administration.Models.Admin;
+﻿using System.Collections.Generic;
+using GelatoGuide.Areas.Administration.Models.Admin;
 using GelatoGuide.Areas.Administration.Models.Users;
 using GelatoGuide.Services.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 
 namespace GelatoGuide.Areas.Administration.Controllers;
 

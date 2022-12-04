@@ -1,13 +1,12 @@
-﻿using GelatoGuide.Data;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-
 using static GelatoGuide.Data.Constants.WebConstants;
 
 namespace GelatoGuide.Infrastructure;

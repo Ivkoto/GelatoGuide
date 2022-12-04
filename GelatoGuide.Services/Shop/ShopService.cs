@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using GelatoGuide.Data;
 using GelatoGuide.Data.Models;
 using GelatoGuide.Services.Shop.Models;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace GelatoGuide.Services.Shop;
 
@@ -32,19 +32,6 @@ public class ShopService : IShopService
 
         this.data.SaveChanges();
     }
-
-    //public IEnumerable<ShopItemServiceModel> GetAllItems()
-    //    => this.data.ShopItems
-    //        .Select(shi => new ShopItemServiceModel()
-    //        {
-    //            Id = shi.Id,
-    //            Name = shi.Name,
-    //            Description = shi.Description,
-    //            MainImageUrl = shi.MainImageUrl,
-    //            Price = shi.Price
-
-    //        })
-    //        .ToList();
 
     public IEnumerable<ShopItemServiceModel> GetAllItems()
         => this.data.ShopItems
