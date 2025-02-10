@@ -3,6 +3,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace GelatoGuide.Tests.IntegrationTests;
@@ -10,13 +11,13 @@ namespace GelatoGuide.Tests.IntegrationTests;
 [TestClass]
 public class HomeControllerTests
 {
-    private static WebApplicationFactory<Startup> factory;
+    private static WebApplicationFactory<Program> factory;
     private static HttpClient client;
 
     [ClassInitialize]
     public static void Initialization(TestContext testContext)
     {
-        factory = new WebApplicationFactory<Startup>();
+        factory = new WebApplicationFactory<Program>();
 
         var clientOptions = new WebApplicationFactoryClientOptions
         {
